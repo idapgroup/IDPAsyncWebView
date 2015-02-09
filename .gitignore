@@ -8,7 +8,7 @@
 #
 # For updates, see: http://stackoverflow.com/questions/49478/git-ignore-file-for-xcode-projects
 #########################
- 
+
 #####
 # OS X temporary files that should never be committed
  
@@ -16,7 +16,12 @@
 *.swp
 *.lock
 profile
- 
+
+#####
+# CocoaPods
+
+!Podfile.lock
+!Manifest.lock
  
 ####
 # Xcode temporary files that should never be committed
@@ -109,9 +114,3 @@ xcuserdata
 # We're using source-control, so this is a "feature" that we do not want!
  
 *.moved-aside
- 
- 
-####
-# UNKNOWN: recommended by others, but I can't discover what these files are
-#
-# ...none. Everything is now explained.
