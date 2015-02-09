@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E37DFBA0-850F-48C9-8D2C-46DD74073260</string>
+	<key>IDESourceControlProjectName</key>
+	<string>IDPMailView</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3042DDE311EB53D563D6447368D3D6A334DCA093</key>
+		<string>https://github.com/artemch/IDPMailView.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>IDPMailView.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3042DDE311EB53D563D6447368D3D6A334DCA093</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/artemch/IDPMailView.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3042DDE311EB53D563D6447368D3D6A334DCA093</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3042DDE311EB53D563D6447368D3D6A334DCA093</string>
+			<key>IDESourceControlWCCName</key>
+			<string>IDPMailView</string>
+		</dict>
+	</array>
+</dict>
+</plist>
