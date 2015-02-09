@@ -21,6 +21,7 @@
 		6926C1911A89047C00FEA821 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6926C1851A89047C00FEA821 /* LICENSE */; };
 		6926C1921A89047C00FEA821 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 6926C1861A89047C00FEA821 /* README.md */; };
 		6926C1931A89047C00FEA821 /* NSNib+IDPExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926C18A1A89047C00FEA821 /* NSNib+IDPExtension.m */; };
+		6926C19A1A8917F100FEA821 /* IDPTableCacheObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926C1991A8917F100FEA821 /* IDPTableCacheObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,9 @@
 		6926C1881A89047C00FEA821 /* AppKitKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppKitKit.h; sourceTree = "<group>"; };
 		6926C1891A89047C00FEA821 /* NSNib+IDPExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNib+IDPExtension.h"; sourceTree = "<group>"; };
 		6926C18A1A89047C00FEA821 /* NSNib+IDPExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNib+IDPExtension.m"; sourceTree = "<group>"; };
+		6926C1981A8917F100FEA821 /* IDPTableCacheObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPTableCacheObject.h; sourceTree = "<group>"; };
+		6926C1991A8917F100FEA821 /* IDPTableCacheObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPTableCacheObject.m; sourceTree = "<group>"; };
+		6926C19B1A89184900FEA821 /* IDPTableCacheObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPTableCacheObjectProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +144,7 @@
 		6926C1651A88FC6300FEA821 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				6926C1971A8917DA00FEA821 /* IDPTableChacheObject */,
 				6926C1831A89047C00FEA821 /* IDPKit */,
 				6926C17A1A88FFED00FEA821 /* IDPBaseTableCell */,
 				6926C16E1A88FCCF00FEA821 /* IDPTestViewController */,
@@ -214,6 +219,16 @@
 				6926C18A1A89047C00FEA821 /* NSNib+IDPExtension.m */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		6926C1971A8917DA00FEA821 /* IDPTableChacheObject */ = {
+			isa = PBXGroup;
+			children = (
+				6926C1981A8917F100FEA821 /* IDPTableCacheObject.h */,
+				6926C1991A8917F100FEA821 /* IDPTableCacheObject.m */,
+				6926C19B1A89184900FEA821 /* IDPTableCacheObjectProtocol.h */,
+			);
+			path = IDPTableChacheObject;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,6 +336,7 @@
 				6926C1691A88FC7800FEA821 /* IDPMailTableView.m in Sources */,
 				6926C1421A88F91800FEA821 /* main.m in Sources */,
 				6926C1801A89002500FEA821 /* IDPMailViewCell.m in Sources */,
+				6926C19A1A8917F100FEA821 /* IDPTableCacheObject.m in Sources */,
 				6926C1791A88FD1B00FEA821 /* IDPTestView.m in Sources */,
 				6926C1711A88FCCF00FEA821 /* IDPTestViewController.m in Sources */,
 				6926C1401A88F91800FEA821 /* AppDelegate.m in Sources */,

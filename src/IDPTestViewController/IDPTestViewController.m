@@ -45,4 +45,8 @@
 #pragma mark -
 #pragma mark NSTableViewDelegate
 
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
+    return 50;
+}
+
 @end
