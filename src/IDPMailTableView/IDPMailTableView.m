@@ -72,6 +72,13 @@ static CGFloat kTestHeight = 200;
 }
 
 #pragma mark -
+#pragma mark Public methods
+
+- (void)reloadData {
+    [self.tableView reloadData];
+}
+
+#pragma mark -
 #pragma mark Private methods
 
 - (void)startScrolling:(NSNotification *)notification {

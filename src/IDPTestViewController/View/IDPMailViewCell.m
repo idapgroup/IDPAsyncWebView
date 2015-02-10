@@ -7,13 +7,19 @@
 //
 
 #import "IDPMailViewCell.h"
+#import "IDPMailMessageModel.h"
 
 @implementation IDPMailViewCell
 
-- (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
-    
-    // Drawing code here.
+#pragma mark -
+#pragma mark Public methods
+
+- (void)fillFromObject:(id)object {
+    if ([object isKindOfClass:[IDPMailMessageModel class]]) {
+        IDPMailMessageModel *mailMessage = (IDPMailMessageModel *)object;
+        self.senderTextField.stringValue = [mailMessage senderString];
+        self.subjectTextField.stringValue = mailMessage.subject;
+    }
 }
 
 @end

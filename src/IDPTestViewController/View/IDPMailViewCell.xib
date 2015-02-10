@@ -9,12 +9,23 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <tableCellView identifier="IDPMailViewCell" id="HwT-46-asb" customClass="IDPMailViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="364" height="23"/>
+            <rect key="frame" x="0.0" y="0.0" width="364" height="55"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fPB-ZY-vYU">
-                    <rect key="frame" x="1" y="3" width="362" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="yDT-Er-BsX">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Uar-Kf-jnV">
+                    <rect key="frame" x="1" y="35" width="362" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="NUI-71-2Fo"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="CEB-uk-eiB">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zrO-4i-Bew">
+                    <rect key="frame" x="3" y="10" width="360" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="SD6-No-jo6">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -22,15 +33,19 @@
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="fPB-ZY-vYU" secondAttribute="trailing" constant="3" id="FE8-5Z-jQp"/>
-                <constraint firstAttribute="bottom" secondItem="fPB-ZY-vYU" secondAttribute="bottom" constant="3" id="Ol3-39-xHP"/>
-                <constraint firstItem="fPB-ZY-vYU" firstAttribute="leading" secondItem="HwT-46-asb" secondAttribute="leading" constant="3" id="dk6-a2-AkW"/>
-                <constraint firstItem="fPB-ZY-vYU" firstAttribute="top" secondItem="HwT-46-asb" secondAttribute="top" constant="3" id="rfZ-f8-5OB"/>
+                <constraint firstAttribute="trailing" secondItem="zrO-4i-Bew" secondAttribute="trailing" constant="3" id="31g-m1-lOe"/>
+                <constraint firstItem="zrO-4i-Bew" firstAttribute="top" secondItem="Uar-Kf-jnV" secondAttribute="bottom" constant="8" id="EZY-Jq-qaI"/>
+                <constraint firstItem="zrO-4i-Bew" firstAttribute="leading" secondItem="HwT-46-asb" secondAttribute="leading" constant="5" id="JgN-4t-ibO"/>
+                <constraint firstItem="Uar-Kf-jnV" firstAttribute="top" secondItem="HwT-46-asb" secondAttribute="top" constant="3" id="TCA-1V-aXL"/>
+                <constraint firstAttribute="bottom" secondItem="zrO-4i-Bew" secondAttribute="bottom" constant="10" id="VoM-Cc-x9C"/>
+                <constraint firstItem="Uar-Kf-jnV" firstAttribute="leading" secondItem="HwT-46-asb" secondAttribute="leading" constant="3" id="jDf-cZ-Fmc"/>
+                <constraint firstAttribute="trailing" secondItem="Uar-Kf-jnV" secondAttribute="trailing" constant="3" id="u7j-FB-Yu2"/>
             </constraints>
             <connections>
-                <outlet property="textField" destination="fPB-ZY-vYU" id="60d-em-W0R"/>
+                <outlet property="senderTextField" destination="Uar-Kf-jnV" id="o5Y-vh-6eg"/>
+                <outlet property="subjectTextField" destination="zrO-4i-Bew" id="7nZ-ap-R0n"/>
             </connections>
-            <point key="canvasLocation" x="556" y="338.5"/>
+            <point key="canvasLocation" x="556" y="359"/>
         </tableCellView>
     </objects>
 </document>

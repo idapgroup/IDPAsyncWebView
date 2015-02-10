@@ -10,6 +10,8 @@
 #import "IDPMailListView.h"
 #import "IDPMailListTableCellView.h"
 #import "NSNib+IDPExtension.h"
+#import "IDPConstants.h"
+#import "IDPMailHistoryChainModel.h"
 
 @interface IDPMailListViewController ()
 
@@ -22,10 +24,15 @@
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSTableViewSelectionDidChangeNotification object:self.myView.tableView];
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     NSString *identifier = NSStringFromClass([IDPMailListTableCellView class]);
     [self.myView.tableView registerNib:[[NSNib alloc] initWithNibNamed:identifier bundle:nil] forIdentifier:identifier];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableViewCellDidSelected:) name:NSTableViewSelectionDidChangeNotification object:self.myView.tableView];
 }
 
 #pragma mark -
@@ -43,6 +50,8 @@
     _mailObjects = mailObjects;
     if (isChange && _mailObjects != nil) {
         [self reloadData];
+        [self.myView.tableView scrollRowToVisible:0];
+        [self.myView.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
     }
 }
 
@@ -72,6 +81,14 @@
     [cell fillFromObject:[self.mailObjects objectAtIndex:row]];
     
     return cell;
+}
+
+- (void)tableViewCellDidSelected:(NSNotification *)notification {
+    NSTableView *tableView = notification.object;
+    if (tableView == self.myView.tableView) {
+        IDPMailHistoryChainModel *model = [self.mailObjects objectAtIndex:tableView.selectedRow];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_SELECTED_NEW_MAIL object:model];
+    }
 }
 
 @end

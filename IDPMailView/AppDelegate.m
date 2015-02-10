@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "IDPMailMessageModel.h"
 #import "IDPMailHistoryChainModel.h"
 
 static NSInteger kMailInChain = 10;
@@ -37,15 +36,17 @@ static NSInteger  kMailCount = 20;
 #pragma mark Private methods
 
 - (void)generateTestData {
+    self.testMailObjects = [NSMutableArray array];
     for (NSInteger index = 0; index < kMailCount; index++) {
         IDPMailHistoryChainModel *chainModel = [IDPMailHistoryChainModel new];
         for (NSInteger kIndex = 0; kIndex < kMailInChain; kIndex++) {
             IDPMailMessageModel *model = [IDPMailMessageModel new];
-            model.subject = @"Test subject";
+            model.subject = [NSString stringWithFormat:@"Test subject %ld-%ld", (long)index, (long)kIndex];
             model.recipients = @[@"test.test@recipient.com"];
             model.sender = @[@"test.test@sender.com"];
             model.date = [NSDate date];
-            model.text = @"Test text";
+            model.text = [NSString stringWithFormat:@"Test text %ld-%ld", (long)index, (long)kIndex];
+            [chainModel addNewMailMessage:model];
         }
         [self.testMailObjects addObject:chainModel];
     }

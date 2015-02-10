@@ -10,4 +10,7 @@
 
 @interface IDPMailViewCell : IDPBaseTableCell
 
+@property (nonatomic, strong) IBOutlet NSTextField  *senderTextField;
+@property (nonatomic, strong) IBOutlet NSTextField  *subjectTextField;
+
 @end

@@ -37,4 +37,6 @@
  */
 @property (nonatomic, strong) NSArray   *dataSourceObjects;;
 
+- (void)reloadData;
+
 @end

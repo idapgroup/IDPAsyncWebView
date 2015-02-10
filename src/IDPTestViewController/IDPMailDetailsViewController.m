@@ -11,6 +11,8 @@
 #import "IDPMailViewCell.h"
 #import "NSNib+IDPExtension.h"
 #import "IDPTableCacheObject.h"
+#import "IDPConstants.h"
+#import "IDPMailHistoryChainModel.h"
 
 static NSInteger const kRows = 1000;
 static CGFloat   const kCellDefaultHeight = 50;
@@ -29,17 +31,29 @@ static CGFloat   const kCellDefaultHeight = 50;
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self baseInit];
+    }
+    return self;
+}
+
+- (void)baseInit {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedNewMail:) name:NOTIFICATION_CENTER_DID_SELECTED_NEW_MAIL object:nil];
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     NSString *identifier = NSStringFromClass([IDPMailViewCell class]);
     self.objects = [NSMutableArray array];
     [self.myView.tableView registerNib:[[NSNib alloc] initWithNibNamed:identifier bundle:nil] forIdentifier:identifier];
-    for (NSInteger index = 0; index < kRows; index++) {
-        IDPTableCacheObject *object = [IDPTableCacheObject new];
-        object.cellHeight = kCellDefaultHeight;
-        [self.objects addObject:object];
-    }
-    self.myView.dataSourceObjects = self.objects;
 }
 
 #pragma mark -
@@ -50,6 +64,21 @@ static CGFloat   const kCellDefaultHeight = 50;
         return (IDPMailTableView *)self.view;
     }
     return nil;
+}
+
+#pragma mark -
+#pragma mark Private methods
+
+- (void)didSelectedNewMail:(NSNotification *)notification {
+    IDPMailHistoryChainModel *model = notification.object;
+    for (IDPMailMessageModel *mailMessage in [[model.mailMessages reverseObjectEnumerator] allObjects]) {
+        IDPTableCacheObject *object = [IDPTableCacheObject new];
+        object.cellHeight = kCellDefaultHeight;
+        object.model = mailMessage;
+        [self.objects addObject:object];
+    }
+    self.myView.dataSourceObjects = self.objects;
+    [self.myView reloadData];
 }
 
 #pragma mark -
@@ -66,10 +95,6 @@ static CGFloat   const kCellDefaultHeight = 50;
     }
     IDPTableCacheObject *cachedObject = [self.objects objectAtIndex:row];
     [cell fillFromObject:cachedObject.model];
-    
-#warning TEMP
-    cell.textField.stringValue = [NSString stringWithFormat:@"Text %ld", (long)row];
-    
     return cell;
 }
 

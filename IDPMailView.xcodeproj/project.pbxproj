@@ -80,6 +80,7 @@
 		69BC27891A8A4FC800F30FC0 /* IDPMailListTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPMailListTableCellView.h; sourceTree = "<group>"; };
 		69BC278A1A8A4FC800F30FC0 /* IDPMailListTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPMailListTableCellView.m; sourceTree = "<group>"; };
 		69BC278C1A8A4FD400F30FC0 /* IDPMailListTableCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDPMailListTableCellView.xib; sourceTree = "<group>"; };
+		69BC27901A8A5FC700F30FC0 /* IDPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPConstants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +161,7 @@
 		6926C1651A88FC6300FEA821 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				69BC278E1A8A5FB400F30FC0 /* Constants */,
 				69BC27811A8A4DDF00F30FC0 /* IDPMailListViewController */,
 				69BC277D1A8A49FD00F30FC0 /* IDPMailHistoryChainModel */,
 				69BC27791A8A48C200F30FC0 /* IDPMailMessageModel */,
@@ -296,6 +298,14 @@
 				69BC278C1A8A4FD400F30FC0 /* IDPMailListTableCellView.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		69BC278E1A8A5FB400F30FC0 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				69BC27901A8A5FC700F30FC0 /* IDPConstants.h */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
