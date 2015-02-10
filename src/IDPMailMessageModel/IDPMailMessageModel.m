@@ -18,7 +18,7 @@
 }
 
 - (NSString *)recipientsString {
-    return [self.recipients componentsJoinedByString:@","]
+    return [self.recipients componentsJoinedByString:@","];
 }
 
 @end

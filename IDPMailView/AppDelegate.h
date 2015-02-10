@@ -7,9 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "IDPMailListViewController.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
+@property (nonatomic, strong) IBOutlet IDPMailListViewController *mailListViewController;
 
 @end
 

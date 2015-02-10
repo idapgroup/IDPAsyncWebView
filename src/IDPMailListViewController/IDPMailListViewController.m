@@ -38,6 +38,14 @@
     return nil;
 }
 
+- (void)setMailObjects:(NSArray *)mailObjects {
+    BOOL isChange = _mailObjects != mailObjects;
+    _mailObjects = mailObjects;
+    if (isChange && _mailObjects != nil) {
+        [self reloadData];
+    }
+}
+
 #pragma mark -
 #pragma mark Public methods
 
