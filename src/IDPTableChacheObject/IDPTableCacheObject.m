@@ -10,4 +10,16 @@
 
 @implementation IDPTableCacheObject
 
+#pragma mark -
+#pragma mark Initializations and Deallocations
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.dirty = YES;
+    }
+    return self;
+}
+
 @end

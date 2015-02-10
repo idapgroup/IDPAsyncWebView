@@ -7,11 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IDPTableCacheObjectProtocol.h"
+#import "IDPCellHeightCalculator.h"
 
 @interface IDPTableCacheObject : NSObject
 
-@property (nonatomic, strong) id<IDPTableCacheObjectProtocol> object;
-@property (nonatomic, assign) CGFloat   cellHeight;
+@property (nonatomic, strong) id                        model;
+@property (nonatomic, strong) IDPCellHeightCalculator   *cellHeightCalculator;
+@property (nonatomic, assign) CGFloat                   cellHeight;
+/**
+ By default set to YES.
+ */
+@property (nonatomic, assign, getter = isDirty) BOOL    dirty;
 
 @end

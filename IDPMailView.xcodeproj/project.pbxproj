@@ -22,6 +22,7 @@
 		6926C1921A89047C00FEA821 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 6926C1861A89047C00FEA821 /* README.md */; };
 		6926C1931A89047C00FEA821 /* NSNib+IDPExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926C18A1A89047C00FEA821 /* NSNib+IDPExtension.m */; };
 		6926C19A1A8917F100FEA821 /* IDPTableCacheObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926C1991A8917F100FEA821 /* IDPTableCacheObject.m */; };
+		69BC27781A89EF2400F30FC0 /* IDPCellHeightCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC27771A89EF2400F30FC0 /* IDPCellHeightCalculator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +64,8 @@
 		6926C18A1A89047C00FEA821 /* NSNib+IDPExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNib+IDPExtension.m"; sourceTree = "<group>"; };
 		6926C1981A8917F100FEA821 /* IDPTableCacheObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPTableCacheObject.h; sourceTree = "<group>"; };
 		6926C1991A8917F100FEA821 /* IDPTableCacheObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPTableCacheObject.m; sourceTree = "<group>"; };
-		6926C19B1A89184900FEA821 /* IDPTableCacheObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPTableCacheObjectProtocol.h; sourceTree = "<group>"; };
+		69BC27761A89EF2400F30FC0 /* IDPCellHeightCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPCellHeightCalculator.h; sourceTree = "<group>"; };
+		69BC27771A89EF2400F30FC0 /* IDPCellHeightCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPCellHeightCalculator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 		6926C1651A88FC6300FEA821 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				69BC27751A89EF1D00F30FC0 /* IDPCellHeightCalculator */,
 				6926C1971A8917DA00FEA821 /* IDPTableChacheObject */,
 				6926C1831A89047C00FEA821 /* IDPKit */,
 				6926C17A1A88FFED00FEA821 /* IDPBaseTableCell */,
@@ -226,9 +229,17 @@
 			children = (
 				6926C1981A8917F100FEA821 /* IDPTableCacheObject.h */,
 				6926C1991A8917F100FEA821 /* IDPTableCacheObject.m */,
-				6926C19B1A89184900FEA821 /* IDPTableCacheObjectProtocol.h */,
 			);
 			path = IDPTableChacheObject;
+			sourceTree = "<group>";
+		};
+		69BC27751A89EF1D00F30FC0 /* IDPCellHeightCalculator */ = {
+			isa = PBXGroup;
+			children = (
+				69BC27761A89EF2400F30FC0 /* IDPCellHeightCalculator.h */,
+				69BC27771A89EF2400F30FC0 /* IDPCellHeightCalculator.m */,
+			);
+			path = IDPCellHeightCalculator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,6 +347,7 @@
 				6926C1691A88FC7800FEA821 /* IDPMailTableView.m in Sources */,
 				6926C1421A88F91800FEA821 /* main.m in Sources */,
 				6926C1801A89002500FEA821 /* IDPMailViewCell.m in Sources */,
+				69BC27781A89EF2400F30FC0 /* IDPCellHeightCalculator.m in Sources */,
 				6926C19A1A8917F100FEA821 /* IDPTableCacheObject.m in Sources */,
 				6926C1791A88FD1B00FEA821 /* IDPTestView.m in Sources */,
 				6926C1711A88FCCF00FEA821 /* IDPTestViewController.m in Sources */,
