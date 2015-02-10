@@ -19,6 +19,10 @@
         IDPMailMessageModel *mailMessage = (IDPMailMessageModel *)object;
         self.senderTextField.stringValue = [mailMessage senderString];
         self.subjectTextField.stringValue = mailMessage.subject;
+        
+        self.readMark.wantsLayer = YES;
+        self.readMark.layer.backgroundColor = mailMessage.isRead ? [[NSColor greenColor] CGColor] : [[NSColor blueColor] CGColor];
+        self.readMark.layer.cornerRadius = CGRectGetWidth(self.readMark.frame)/2;
     }
 }
 

@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong) IBOutlet NSTextField  *senderTextField;
 @property (nonatomic, strong) IBOutlet NSTextField  *subjectTextField;
+@property (nonatomic, strong) IBOutlet NSView       *readMark;
 
 @end

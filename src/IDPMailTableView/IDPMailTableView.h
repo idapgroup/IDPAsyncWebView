@@ -38,5 +38,6 @@
 @property (nonatomic, strong) NSArray   *dataSourceObjects;;
 
 - (void)reloadData;
+- (void)scrollRowToVisible:(NSInteger)index;
 
 @end

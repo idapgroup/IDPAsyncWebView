@@ -13,7 +13,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Uar-Kf-jnV">
-                    <rect key="frame" x="1" y="35" width="362" height="17"/>
+                    <rect key="frame" x="21" y="35" width="342" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="NUI-71-2Fo"/>
                     </constraints>
@@ -31,21 +31,31 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="vo7-2K-eK1">
+                    <rect key="frame" x="5" y="38" width="10" height="10"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="10" id="VHB-ah-MNs"/>
+                        <constraint firstAttribute="height" constant="10" id="Yo0-ey-8TI"/>
+                    </constraints>
+                </customView>
             </subviews>
             <constraints>
+                <constraint firstItem="Uar-Kf-jnV" firstAttribute="leading" secondItem="vo7-2K-eK1" secondAttribute="trailing" constant="8" id="1Md-dw-5Ig"/>
                 <constraint firstAttribute="trailing" secondItem="zrO-4i-Bew" secondAttribute="trailing" constant="3" id="31g-m1-lOe"/>
                 <constraint firstItem="zrO-4i-Bew" firstAttribute="top" secondItem="Uar-Kf-jnV" secondAttribute="bottom" constant="8" id="EZY-Jq-qaI"/>
                 <constraint firstItem="zrO-4i-Bew" firstAttribute="leading" secondItem="HwT-46-asb" secondAttribute="leading" constant="5" id="JgN-4t-ibO"/>
                 <constraint firstItem="Uar-Kf-jnV" firstAttribute="top" secondItem="HwT-46-asb" secondAttribute="top" constant="3" id="TCA-1V-aXL"/>
                 <constraint firstAttribute="bottom" secondItem="zrO-4i-Bew" secondAttribute="bottom" constant="10" id="VoM-Cc-x9C"/>
-                <constraint firstItem="Uar-Kf-jnV" firstAttribute="leading" secondItem="HwT-46-asb" secondAttribute="leading" constant="3" id="jDf-cZ-Fmc"/>
+                <constraint firstItem="vo7-2K-eK1" firstAttribute="top" secondItem="HwT-46-asb" secondAttribute="top" constant="7" id="enX-6G-fx5"/>
                 <constraint firstAttribute="trailing" secondItem="Uar-Kf-jnV" secondAttribute="trailing" constant="3" id="u7j-FB-Yu2"/>
+                <constraint firstItem="vo7-2K-eK1" firstAttribute="leading" secondItem="HwT-46-asb" secondAttribute="leading" constant="5" id="z0d-jy-lKN"/>
             </constraints>
             <connections>
+                <outlet property="readMark" destination="vo7-2K-eK1" id="oq5-E6-J6t"/>
                 <outlet property="senderTextField" destination="Uar-Kf-jnV" id="o5Y-vh-6eg"/>
                 <outlet property="subjectTextField" destination="zrO-4i-Bew" id="7nZ-ap-R0n"/>
             </connections>
-            <point key="canvasLocation" x="556" y="359"/>
+            <point key="canvasLocation" x="556" y="358.5"/>
         </tableCellView>
     </objects>
 </document>

@@ -78,6 +78,10 @@ static CGFloat kTestHeight = 200;
     [self.tableView reloadData];
 }
 
+- (void)scrollRowToVisible:(NSInteger)index {
+    [self.tableView scrollRowToVisible:index];
+}
+
 #pragma mark -
 #pragma mark Private methods
 
