@@ -86,7 +86,8 @@ static CGFloat kTestHeight = 200;
     if (object == self.scrollView) {
         self.pausedObjectHeightLoading = NO;
         for (NSNumber *row in self.pausedObjectHeightLoadingArray) {
-            CGFloat dif = 150;
+            IDPTableCacheObject *object = [self.dataSourceObjects objectAtIndex:row.integerValue];
+            CGFloat dif = object.diffCellheight;
             NSScrollView *scrollView = [self.tableView enclosingScrollView];
             CGRect visibleRect = scrollView.contentView.visibleRect;
             NSRange range = [self.tableView rowsInRect:visibleRect];
@@ -129,6 +130,7 @@ static CGFloat kTestHeight = 200;
             object.dirty = NO;
             object.cellHeight = kTestHeight;
             CGFloat dif = object.cellHeight - prevValue;
+            object.diffCellheight = dif;
             NSScrollView *scrollView = [weakSelf.tableView enclosingScrollView];
             CGRect visibleRect = scrollView.contentView.visibleRect;
             NSRange range = [weakSelf.tableView rowsInRect:visibleRect];

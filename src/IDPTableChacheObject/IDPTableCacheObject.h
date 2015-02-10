@@ -13,7 +13,8 @@
 
 @property (nonatomic, strong) id                        model;
 @property (nonatomic, strong) IDPCellHeightCalculator   *cellHeightCalculator;
-@property (atomic, assign) CGFloat                   cellHeight;
+@property (atomic, assign) CGFloat                      cellHeight;
+@property (atomic, assign) CGFloat                      diffCellheight;
 /**
  By default set to YES.
  */
