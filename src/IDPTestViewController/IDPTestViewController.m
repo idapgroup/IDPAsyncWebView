@@ -12,7 +12,7 @@
 #import "NSNib+IDPExtension.h"
 #import "IDPTableCacheObject.h"
 
-static NSInteger const kRows = 2000;
+static NSInteger const kRows = 1000;
 static CGFloat   const kCellDefaultHeight = 50;
 
 @interface IDPTestViewController ()
@@ -60,7 +60,7 @@ static CGFloat   const kCellDefaultHeight = 50;
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     NSString *identifier = NSStringFromClass([IDPMailViewCell class]);
-    IDPMailViewCell *cell = [tableView makeViewWithIdentifier:identifier owner:self];
+    IDPMailViewCell *cell = [tableView makeViewWithIdentifier:identifier owner:nil];
     if (!cell) {
         cell = [NSNib objectOfClass:NSClassFromString(identifier)];
     }

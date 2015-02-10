@@ -13,10 +13,10 @@
 
 @property (nonatomic, strong) id                        model;
 @property (nonatomic, strong) IDPCellHeightCalculator   *cellHeightCalculator;
-@property (nonatomic, assign) CGFloat                   cellHeight;
+@property (atomic, assign) CGFloat                   cellHeight;
 /**
  By default set to YES.
  */
-@property (nonatomic, assign, getter = isDirty) BOOL    dirty;
+@property (atomic, assign, getter = isDirty) BOOL    dirty;
 
 @end

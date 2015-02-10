@@ -9,13 +9,16 @@
 #import "IDPMailTableView.h"
 #import "IDPTableCacheObject.h"
 
-static NSString *const kOperationQueueName = @"IDPTableViewCellHeightQueue";
-
 static CGFloat kTestHeight = 200;
 
 @interface IDPMailTableView ()
 
-@property (nonatomic, strong) NSOperationQueue  *operationQueue;
+@property (nonatomic, strong) IDPTableCacheObject *loadedObject;
+@property (atomic, strong) NSMutableArray         *objectInQueusToLoad;
+
+@property (atomic, assign, getter = isPausedObjectHeightLoading) BOOL pausedObjectHeightLoading;
+
+@property (nonatomic, strong) NSMutableArray    *pausedObjectHeightLoadingArray;
 
 @end
 
@@ -25,27 +28,131 @@ static CGFloat kTestHeight = 200;
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self removeNotificationObservers];
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    self.operationQueue = [NSOperationQueue new];
-    self.operationQueue.name = kOperationQueueName;
-    self.operationQueue.maxConcurrentOperationCount = 1;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startScrolling) name:NSScrollViewWillStartLiveScrollNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endScrolling) name:NSScrollViewDidEndLiveScrollNotification object:nil];
+- (instancetype)initWithFrame:(NSRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self baseInit];
+    }
+    return self;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self baseInit];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self baseInit];
+    }
+    return self;
+}
+
+- (void)baseInit {
+    [self addNotificationObsevers];
+    self.pausedObjectHeightLoadingArray = [NSMutableArray array];
+    self.objectInQueusToLoad = [NSMutableArray array];
+}
+
+#pragma mark -
+#pragma mark Accessor methods
+
+- (void)setDataSourceObjects:(NSArray *)dataSourceObjects {
+    _dataSourceObjects = dataSourceObjects;
+    self.objectInQueusToLoad = [NSMutableArray arrayWithArray:_dataSourceObjects];
 }
 
 #pragma mark -
 #pragma mark Private methods
 
-- (void)startScrolling {
-    self.operationQueue.suspended = YES;
+- (void)startScrolling:(NSNotification *)notification {
+    id object = notification.object;
+    if (object == self.scrollView) {
+        self.pausedObjectHeightLoading = YES;
+    }
 }
 
-- (void)endScrolling {
-    self.operationQueue.suspended = NO;
+- (void)endScrolling:(NSNotification *)notification {
+    id object = notification.object;
+    if (object == self.scrollView) {
+        self.pausedObjectHeightLoading = NO;
+        for (NSNumber *row in self.pausedObjectHeightLoadingArray) {
+            CGFloat dif = 150;
+            NSScrollView *scrollView = [self.tableView enclosingScrollView];
+            CGRect visibleRect = scrollView.contentView.visibleRect;
+            NSRange range = [self.tableView rowsInRect:visibleRect];
+            NSInteger visibleRow = range.location;
+            NSPoint origin = [scrollView documentVisibleRect].origin;
+            
+            [NSAnimationContext beginGrouping];
+            [[NSAnimationContext currentContext] setDuration:0.0];
+            [self.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:[row integerValue]]];
+            if (visibleRow > row.integerValue) {
+                origin.y += dif;
+                [[scrollView documentView] scrollPoint:origin];
+            }
+            [NSAnimationContext endGrouping];
+        }
+        [self.pausedObjectHeightLoadingArray removeAllObjects];
+        [self loadHeightOfNextObjectInQueue];
+    }
+}
+
+- (void)addNotificationObsevers {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startScrolling:) name:NSScrollViewWillStartLiveScrollNotification object:self.scrollView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endScrolling:) name:NSScrollViewDidEndLiveScrollNotification object:self.scrollView];
+}
+
+- (void)removeNotificationObservers {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSScrollViewWillStartLiveScrollNotification object:self.scrollView];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSScrollViewDidEndLiveScrollNotification object:self.scrollView];
+}
+
+- (void)loadHeightOfNextObjectInQueue {
+    self.loadedObject = [self.objectInQueusToLoad firstObject];
+    if (self.loadedObject) {
+        IDPTableCacheObject *object = self.loadedObject;
+        [self.objectInQueusToLoad removeObjectAtIndex:0];
+        __weak IDPMailTableView *weakSelf = self;
+        NSInteger row = [self.dataSourceObjects indexOfObject:object];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            CGFloat prevValue = object.cellHeight;
+            object.dirty = NO;
+            object.cellHeight = kTestHeight;
+            CGFloat dif = object.cellHeight - prevValue;
+            NSScrollView *scrollView = [weakSelf.tableView enclosingScrollView];
+            CGRect visibleRect = scrollView.contentView.visibleRect;
+            NSRange range = [weakSelf.tableView rowsInRect:visibleRect];
+            NSInteger visibleRow = range.location;
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                if (!weakSelf.isPausedObjectHeightLoading) {
+                    NSPoint origin = [scrollView documentVisibleRect].origin;
+                    [NSAnimationContext beginGrouping];
+                    [[NSAnimationContext currentContext] setDuration:0.0];
+                    [weakSelf.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+                    if (visibleRow > row) {
+                        origin.y += dif;
+                        [[scrollView documentView] scrollPoint:origin];
+                    }
+                    [NSAnimationContext endGrouping];
+                    weakSelf.loadedObject = nil;
+                    [weakSelf loadHeightOfNextObjectInQueue];
+                } else {
+                    weakSelf.loadedObject = nil;
+                    [weakSelf.pausedObjectHeightLoadingArray addObject:@(row)];
+                }
+            });
+        });
+    }
 }
 
 #pragma mark -
@@ -63,30 +170,14 @@ static CGFloat kTestHeight = 200;
 }
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
-    __block IDPTableCacheObject *object = [self.dataSourceObjects objectAtIndex:row];
+    IDPTableCacheObject *object = [self.dataSourceObjects objectAtIndex:row];
     CGFloat height = object.cellHeight;
+    
     if (object.isDirty) {
-        [self.operationQueue addOperationWithBlock:^{
-            CGFloat prevValue = object.cellHeight;
-            CGFloat dif = object.cellHeight - prevValue;
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                object.dirty = NO;
-                object.cellHeight = kTestHeight;
-                [NSAnimationContext beginGrouping];
-                [[NSAnimationContext currentContext] setDuration:0.0];
-                NSScrollView *scrollView = [tableView enclosingScrollView];
-                CGRect visibleRect = scrollView.contentView.visibleRect;
-                NSRange range = [tableView rowsInRect:visibleRect];
-                NSInteger visibleRow = range.location;
-                if (visibleRow > row) {
-                    NSPoint origin = [scrollView documentVisibleRect].origin;
-                    origin.y += dif;
-                    [[scrollView documentView] scrollPoint:origin];
-                }
-                [tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
-                [NSAnimationContext endGrouping];
-            }];
-        }];
+        if (!self.loadedObject) {
+            self.loadedObject = object;
+            [self loadHeightOfNextObjectInQueue];
+        }
     }
     return height;
 }
