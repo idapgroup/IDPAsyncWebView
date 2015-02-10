@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <tableCellView identifier="IDPMailListTableCellView" id="Ihr-Nc-YVO" customClass="IDPMailListTableCellView">
+            <rect key="frame" x="0.0" y="0.0" width="255" height="53"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lBx-km-cmy">
+                    <rect key="frame" x="1" y="33" width="253" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="dTD-IG-qem"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="ErH-G8-SW4">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hxq-Z7-9Sc">
+                    <rect key="frame" x="3" y="8" width="251" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="MT7-PG-ZVB">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Hxq-Z7-9Sc" firstAttribute="leading" secondItem="Ihr-Nc-YVO" secondAttribute="leading" constant="5" id="5ZA-Mo-DcC"/>
+                <constraint firstItem="Hxq-Z7-9Sc" firstAttribute="top" secondItem="lBx-km-cmy" secondAttribute="bottom" constant="8" id="Axg-XX-Zaw"/>
+                <constraint firstAttribute="bottom" secondItem="Hxq-Z7-9Sc" secondAttribute="bottom" constant="8" id="MLt-a9-Ig3"/>
+                <constraint firstAttribute="trailing" secondItem="lBx-km-cmy" secondAttribute="trailing" constant="3" id="PsE-Zr-V1L"/>
+                <constraint firstItem="lBx-km-cmy" firstAttribute="leading" secondItem="Ihr-Nc-YVO" secondAttribute="leading" constant="3" id="eTz-Ai-SdE"/>
+                <constraint firstItem="lBx-km-cmy" firstAttribute="top" secondItem="Ihr-Nc-YVO" secondAttribute="top" constant="3" id="fS7-cW-TfT"/>
+                <constraint firstAttribute="trailing" secondItem="Hxq-Z7-9Sc" secondAttribute="trailing" constant="3" id="zoA-Fk-NMx"/>
+            </constraints>
+            <connections>
+                <outlet property="fromTextField" destination="lBx-km-cmy" id="iiS-Jt-115"/>
+                <outlet property="subjectTextField" destination="Hxq-Z7-9Sc" id="uiN-wU-mIs"/>
+            </connections>
+            <point key="canvasLocation" x="519.5" y="441.5"/>
+        </tableCellView>
+    </objects>
+</document>

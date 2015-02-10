@@ -9,6 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import "IDPMailTableView.h"
 
-@interface IDPTestViewController : NSViewController <IDPMailTableViewDataSource, IDPMailTableViewDelegate>
+@interface IDPMailDetailsViewController : NSViewController <IDPMailTableViewDataSource, IDPMailTableViewDelegate>
 
 @end

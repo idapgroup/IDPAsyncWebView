@@ -10,6 +10,15 @@
 
 @implementation IDPMailMessageModel
 
+#pragma mark -
+#pragma mark Public methods
 
+- (NSString *)senderString {
+    return [self.sender componentsJoinedByString:@","];
+}
+
+- (NSString *)recipientsString {
+    return [self.recipients componentsJoinedByString:@","]
+}
 
 @end

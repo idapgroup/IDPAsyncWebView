@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 IDAP Group. All rights reserved.
 //
 
-#import "IDPTestViewController.h"
-#import "IDPTestView.h"
+#import "IDPMailDetailsViewController.h"
+#import "IDPMailTableView.h"
 #import "IDPMailViewCell.h"
 #import "NSNib+IDPExtension.h"
 #import "IDPTableCacheObject.h"
@@ -15,16 +15,16 @@
 static NSInteger const kRows = 1000;
 static CGFloat   const kCellDefaultHeight = 50;
 
-@interface IDPTestViewController ()
+@interface IDPMailDetailsViewController ()
 
-@property (nonatomic, strong, readonly) IDPTestView *myView;
+@property (nonatomic, strong, readonly) IDPMailTableView *myView;
 
 @property (nonatomic, strong) NSMutableArray    *objects;
 
 
 @end
 
-@implementation IDPTestViewController
+@implementation IDPMailDetailsViewController
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -33,21 +33,21 @@ static CGFloat   const kCellDefaultHeight = 50;
     [super awakeFromNib];
     NSString *identifier = NSStringFromClass([IDPMailViewCell class]);
     self.objects = [NSMutableArray array];
-    [self.myView.mailTableView.tableView registerNib:[[NSNib alloc] initWithNibNamed:identifier bundle:nil] forIdentifier:identifier];
+    [self.myView.tableView registerNib:[[NSNib alloc] initWithNibNamed:identifier bundle:nil] forIdentifier:identifier];
     for (NSInteger index = 0; index < kRows; index++) {
         IDPTableCacheObject *object = [IDPTableCacheObject new];
         object.cellHeight = kCellDefaultHeight;
         [self.objects addObject:object];
     }
-    self.myView.mailTableView.dataSourceObjects = self.objects;
+    self.myView.dataSourceObjects = self.objects;
 }
 
 #pragma mark -
 #pragma mark Accessor methods
 
-- (IDPTestView *)myView {
-    if ([self.view isKindOfClass:[IDPTestView class]]) {
-        return (IDPTestView *)self.view;
+- (IDPMailTableView *)myView {
+    if ([self.view isKindOfClass:[IDPMailTableView class]]) {
+        return (IDPMailTableView *)self.view;
     }
     return nil;
 }
