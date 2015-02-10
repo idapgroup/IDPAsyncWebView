@@ -9,6 +9,52 @@
 #import "IDPMailTableView.h"
 #import "IDPTableCacheObject.h"
 
+#pragma mark -
+#pragma mark Proxying
+
+static BOOL isInterceptedSelector(SEL sel) {
+    return ( sel == @selector(numberOfRowsInTableView:) || sel == @selector(tableView:heightOfRow:));
+}
+
+@interface IDPTableViewProxy : NSProxy
+
+@property (nonatomic, weak) id                  target;
+@property (nonatomic, weak) IDPMailTableView    *interceptor;
+
+- (instancetype)initWithTarget:(id<NSObject>)target interceptor:(IDPMailTableView *)interceptor;
+
+@end
+
+@implementation IDPTableViewProxy
+
+- (instancetype)initWithTarget:(id<NSObject>)target interceptor:(IDPMailTableView *)interceptor {
+    if (!self) {
+        return nil;
+    }
+    
+    self.target = target;
+    self.interceptor = interceptor;
+    
+    return self;
+}
+
+- (BOOL)respondsToSelector:(SEL)aSelector {
+    return (isInterceptedSelector(aSelector) || [self.target respondsToSelector:aSelector]);
+}
+
+- (id)forwardingTargetForSelector:(SEL)aSelector {
+    if (isInterceptedSelector(aSelector)) {
+        return self.interceptor;
+    }
+    
+    return [self.target respondsToSelector:aSelector] ? self.target : nil;
+}
+
+@end
+
+#pragma mark -
+#pragma mark IDPMailTableView
+
 static CGFloat kTestHeight = 200;
 
 @interface IDPMailTableView ()
@@ -19,6 +65,9 @@ static CGFloat kTestHeight = 200;
 @property (atomic, assign, getter = isPausedObjectHeightLoading) BOOL pausedObjectHeightLoading;
 
 @property (nonatomic, strong) NSMutableArray    *pausedObjectHeightLoadingArray;
+
+@property (nonatomic, strong) IDPTableViewProxy    *proxyDataSource;
+@property (nonatomic, strong) IDPTableViewProxy    *proxyDelegate;
 
 @end
 
@@ -61,10 +110,44 @@ static CGFloat kTestHeight = 200;
     [self addNotificationObsevers];
     self.pausedObjectHeightLoadingArray = [NSMutableArray array];
     self.objectInQueusToLoad = [NSMutableArray array];
+    self.proxyDataSource = [[IDPTableViewProxy alloc] initWithTarget:nil interceptor:self];
+    self.proxyDelegate = [[IDPTableViewProxy alloc] initWithTarget:nil interceptor:self];
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    self.tableView.dataSource = (id<NSTableViewDataSource>)self.proxyDataSource;
+    self.tableView.delegate = (id<NSTableViewDelegate>)self.proxyDelegate;
 }
 
 #pragma mark -
 #pragma mark Accessor methods
+
+- (void)setDataSource:(id<IDPMailTableViewDataSource>)dataSource {
+    if (_dataSource == dataSource) {
+        return;
+    }
+    _dataSource = dataSource;
+    if (_dataSource == nil) {
+        self.proxyDataSource = nil;
+    } else {
+        self.proxyDataSource.target = dataSource;
+    }
+    self.tableView.dataSource = (id<NSTableViewDataSource>)self.proxyDataSource;
+}
+
+- (void)setDelegate:(id<IDPMailTableViewDelegate>)delegate {
+    if (_delegate == delegate) {
+        return;
+    }
+    _delegate = delegate;
+    if (_delegate == nil) {
+        self.proxyDelegate = nil;
+    } else {
+        self.proxyDelegate.target = delegate;
+    }
+    self.tableView.delegate = (id<NSTableViewDelegate>)self.proxyDelegate;
+}
 
 - (void)setDataSourceObjects:(NSArray *)dataSourceObjects {
     _dataSourceObjects = dataSourceObjects;
@@ -177,10 +260,6 @@ static CGFloat kTestHeight = 200;
 
 #pragma mark -
 #pragma mark NSTableViewDelegate
-
-- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    return [self.delegate tableView:tableView viewForTableColumn:tableColumn row:row];
-}
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
     IDPTableCacheObject *object = [self.dataSourceObjects objectAtIndex:row];
