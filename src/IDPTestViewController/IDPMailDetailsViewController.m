@@ -14,8 +14,7 @@
 #import "IDPConstants.h"
 #import "IDPMailHistoryChainModel.h"
 
-static NSInteger const kRows = 1000;
-static CGFloat   const kCellDefaultHeight = 50;
+static CGFloat   const kCellDefaultHeight = 60;
 
 @interface IDPMailDetailsViewController ()
 
