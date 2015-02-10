@@ -10,10 +10,11 @@
 
 @implementation IDPBaseTableCell
 
-- (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
+#pragma mark -
+#pragma mark Public methods
+
+- (void)fillFromObject:(id)object {
     
-    // Drawing code here.
 }
 
 @end

@@ -730,8 +730,8 @@
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
-                                                <outlet property="dataSource" destination="cfK-wA-dDo" id="iTl-sN-T3U"/>
-                                                <outlet property="delegate" destination="cfK-wA-dDo" id="V94-ph-SV9"/>
+                                                <outlet property="dataSource" destination="dZA-Uh-1CY" id="rIN-Vf-bC9"/>
+                                                <outlet property="delegate" destination="dZA-Uh-1CY" id="I9c-U9-ncP"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
@@ -754,6 +754,8 @@
                             <constraint firstItem="4zo-8E-RxU" firstAttribute="leading" secondItem="dZA-Uh-1CY" secondAttribute="leading" id="sXS-EJ-Yhw"/>
                         </constraints>
                         <connections>
+                            <outlet property="dataSource" destination="cfK-wA-dDo" id="2Hl-fH-QEg"/>
+                            <outlet property="delegate" destination="cfK-wA-dDo" id="2B8-W3-7F5"/>
                             <outlet property="scrollView" destination="4zo-8E-RxU" id="0IS-rQ-fbN"/>
                             <outlet property="tableView" destination="9ul-rE-1Zc" id="1Cm-mQ-WNe"/>
                         </connections>

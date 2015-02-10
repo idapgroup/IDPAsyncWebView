@@ -10,4 +10,6 @@
 
 @interface IDPBaseTableCell : NSTableCellView
 
+- (void)fillFromObject:(id)object;
+
 @end
