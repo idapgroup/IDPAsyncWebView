@@ -8,7 +8,33 @@
 
 #import "IDPMailMessageModel.h"
 
+@interface IDPMailMessageModel ()
+
+@property (nonatomic, copy)   NSString  *formattedDate;
+
+@end
+
 @implementation IDPMailMessageModel
+
+#pragma mark -
+#pragma mark Accessor methods
+
+- (void)setDate:(NSDate *)date {
+    if (_date == date) {
+        return;
+    }
+    _date = date;
+    _formattedDate = nil;
+}
+
+- (NSString *)formattedDate {
+    if (!_formattedDate) {
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"MMMM dd, YYYY hh:mm"];
+        _formattedDate = [dateFormatter stringFromDate:self.date];
+    }
+    return _formattedDate;
+}
 
 #pragma mark -
 #pragma mark Public methods

@@ -14,8 +14,9 @@
 #import "IDPConstants.h"
 #import "IDPMailHistoryChainModel.h"
 #import "IDPWebViewCellHeightCalculator.h"
+#import "NSView+IDPExtension.h"
 
-static CGFloat   const kCellDefaultHeight = 140;
+static CGFloat   const kCellDefaultHeight = 190;
 
 @interface IDPMailDetailsViewController ()
 
@@ -52,7 +53,8 @@ static CGFloat   const kCellDefaultHeight = 140;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.cellHeightCalculator.cellHeight = 32;
+    self.myView.tableView.backgroundColor = [NSColor grayColor];
+    self.cellHeightCalculator.cellHeight = 97;
     self.cellHeightCalculator.size = NSMakeSize(NSWidth(self.myView.frame), kCellDefaultHeight);
     self.myView.cellHeightCalculator = self.cellHeightCalculator;
     NSString *identifier = NSStringFromClass([IDPMailViewCell class]);

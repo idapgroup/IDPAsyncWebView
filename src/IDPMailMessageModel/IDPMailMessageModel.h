@@ -16,6 +16,7 @@
 @property (nonatomic, assign, getter = isRead) BOOL read;
 @property (nonatomic, strong) NSDate    *date;
 @property (nonatomic, copy)   NSString  *content;
+@property (nonatomic, copy, readonly)   NSString  *formattedDate;
 
 - (NSString *)senderString;
 - (NSString *)recipientsString;
