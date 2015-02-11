@@ -277,6 +277,7 @@ static CGFloat const kDefaultAnimationDuration = 0;
                 } else {
                     weakSelf.loadedObject = nil;
                     [weakSelf.pausedObjectHeightLoadingArray addObject:@(row)];
+                    [weakSelf loadCellHeightInBackground];
                 }
             }];
         } 
