@@ -210,7 +210,7 @@ static CGFloat kTestHeight = 200;
             [NSAnimationContext endGrouping];
         }
         [self.pausedObjectHeightLoadingArray removeAllObjects];
-        [self loadCellHeightInBackground];
+        [self reorderCellsLoadingSequence];
     }
 }
 
