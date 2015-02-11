@@ -52,6 +52,7 @@ static CGFloat   const kCellDefaultHeight = 140;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.cellHeightCalculator.size = NSMakeSize(NSWidth(self.myView.frame), kCellDefaultHeight);
     self.myView.cellHeightCalculator = self.cellHeightCalculator;
     NSString *identifier = NSStringFromClass([IDPMailViewCell class]);
     self.objects = [NSMutableArray array];
