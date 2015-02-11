@@ -13,6 +13,7 @@
 #import "IDPTableCacheObject.h"
 #import "IDPConstants.h"
 #import "IDPMailHistoryChainModel.h"
+#import "IDPCellHeightCalculator.h"
 
 static CGFloat   const kCellDefaultHeight = 60;
 
@@ -76,6 +77,7 @@ static CGFloat   const kCellDefaultHeight = 60;
         IDPTableCacheObject *object = [IDPTableCacheObject new];
         object.cellHeight = kCellDefaultHeight;
         object.model = mailMessage;
+        object.cellHeightCalculator = [IDPCellHeightCalculator new];
         [self.objects addObject:object];
     }
     self.myView.dataSourceObjects = self.objects;
