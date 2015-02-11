@@ -196,15 +196,13 @@ static CGFloat const kDefaultAnimationDuration = 0;
 }
 
 - (void)willScrollWheel:(NSNotification *)notification {
-    if (notification.object == self.scrollView) {
-//        NSLog(@"willScrollWheel:");
-        self.pausedObjectHeightLoading = YES;
-    }
+//    if (notification.object == self.scrollView) {
+//        self.pausedObjectHeightLoading = YES;
+//    }
 }
 
 - (void)didScrollWheel:(NSNotification *)notification {
-//    NSLog(@"didScrollWheel:");
-    [self updateCellsHeightAfterStopScrolling:notification];
+//    [self updateCellsHeightAfterStopScrolling:notification];
 }
 
 - (void)startScrolling:(NSNotification *)notification {
