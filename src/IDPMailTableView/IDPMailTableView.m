@@ -70,6 +70,8 @@ static CGFloat kTestHeight = 200;
 @property (nonatomic, strong) IDPTableViewProxy    *proxyDataSource;
 @property (nonatomic, strong) IDPTableViewProxy    *proxyDelegate;
 
+@property (nonatomic, assign) NSInteger currentActiveCellIndex;
+
 @end
 
 @implementation IDPMailTableView
@@ -160,11 +162,13 @@ static CGFloat kTestHeight = 200;
 #pragma mark Public methods
 
 - (void)reloadData {
+    self.currentActiveCellIndex = 0;
     [self.tableView reloadData];
     [self reorderCellsLoadingSequence];
 }
 
 - (void)scrollRowToVisible:(NSInteger)index {
+    self.currentActiveCellIndex = index;
     [self.tableView scrollRowToVisible:index];
     [self reorderCellsLoadingSequence];
 }
@@ -193,7 +197,8 @@ static CGFloat kTestHeight = 200;
 
 - (void)endScrolling:(NSNotification *)notification {
     id object = notification.object;
-    NSInteger visibleRow = [[[self.tableView visibleRows] firstObject] integerValue];
+    [self updateActiveCellIndex];
+    NSInteger visibleRow = self.currentActiveCellIndex;
     if (object == self.scrollView) {
         self.pausedObjectHeightLoading = NO;
         for (NSNumber *row in self.pausedObjectHeightLoadingArray) {
@@ -201,7 +206,7 @@ static CGFloat kTestHeight = 200;
             [NSAnimationContext beginGrouping];
             [[NSAnimationContext currentContext] setDuration:0.0];
             [self.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:[row integerValue]]];
-            if (visibleRow > row.integerValue) {
+            if (visibleRow >= row.integerValue) {
                 NSPoint origin = [self.scrollView documentVisibleRect].origin;
                 CGFloat dif = object.diffCellheight;
                 origin.y += dif;
@@ -229,12 +234,12 @@ static CGFloat kTestHeight = 200;
             object.diffCellheight = dif;
             dispatch_sync(dispatch_get_main_queue(), ^{
                 if (!weakSelf.isPausedObjectHeightLoading) {
-                    NSInteger visibleRow = [[[weakSelf.tableView visibleRows] firstObject] integerValue];
-                    NSPoint origin = [weakSelf.scrollView documentVisibleRect].origin;
+                    NSInteger visibleRow = self.currentActiveCellIndex;
                     [NSAnimationContext beginGrouping];
                     [[NSAnimationContext currentContext] setDuration:0.0];
                     [weakSelf.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
-                    if (visibleRow > row) {
+                    if (visibleRow >= row) {
+                        NSPoint origin = [weakSelf.scrollView documentVisibleRect].origin;
                         origin.y += dif;
                         [[weakSelf.scrollView documentView] scrollPoint:origin];
                     }
@@ -260,6 +265,19 @@ static CGFloat kTestHeight = 200;
         }
     }
     [self loadCellHeightInBackground];
+}
+
+- (void)updateActiveCellIndex {
+    NSArray *visibleRows = [self.tableView visibleRows];
+    NSInteger visibleRow = [[visibleRows firstObject] integerValue];
+    NSView *cell = [self.tableView viewAtColumn:0 row:visibleRow makeIfNecessary:NO];
+    NSRect frame = cell.frame;
+    frame = [self.tableView convertRect:frame fromView:cell];
+    NSPoint origin = [self.scrollView documentVisibleRect].origin;
+    if (frame.origin.y < origin.y) {
+        visibleRow+=1;
+    }
+    self.currentActiveCellIndex = visibleRow;
 }
 
 #pragma mark -
