@@ -22,6 +22,7 @@
 		6926C1931A89047C00FEA821 /* NSNib+IDPExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926C18A1A89047C00FEA821 /* NSNib+IDPExtension.m */; };
 		6926C19A1A8917F100FEA821 /* IDPTableCacheObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926C1991A8917F100FEA821 /* IDPTableCacheObject.m */; };
 		69B7B2611A8B437B00B3FFD2 /* NSTableView+IDPExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B7B2601A8B437B00B3FFD2 /* NSTableView+IDPExtension.m */; };
+		69B7B2641A8B609900B3FFD2 /* IDPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B7B2631A8B609900B3FFD2 /* IDPScrollView.m */; };
 		69BC27781A89EF2400F30FC0 /* IDPCellHeightCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC27771A89EF2400F30FC0 /* IDPCellHeightCalculator.m */; };
 		69BC277C1A8A48CF00F30FC0 /* IDPMailMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC277B1A8A48CF00F30FC0 /* IDPMailMessageModel.m */; };
 		69BC27801A8A4A0300F30FC0 /* IDPMailHistoryChainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC277F1A8A4A0300F30FC0 /* IDPMailHistoryChainModel.m */; };
@@ -70,6 +71,8 @@
 		6926C1991A8917F100FEA821 /* IDPTableCacheObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPTableCacheObject.m; sourceTree = "<group>"; };
 		69B7B25F1A8B437B00B3FFD2 /* NSTableView+IDPExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTableView+IDPExtension.h"; sourceTree = "<group>"; };
 		69B7B2601A8B437B00B3FFD2 /* NSTableView+IDPExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTableView+IDPExtension.m"; sourceTree = "<group>"; };
+		69B7B2621A8B609900B3FFD2 /* IDPScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPScrollView.h; sourceTree = "<group>"; };
+		69B7B2631A8B609900B3FFD2 /* IDPScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPScrollView.m; sourceTree = "<group>"; };
 		69BC27761A89EF2400F30FC0 /* IDPCellHeightCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPCellHeightCalculator.h; sourceTree = "<group>"; };
 		69BC27771A89EF2400F30FC0 /* IDPCellHeightCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPCellHeightCalculator.m; sourceTree = "<group>"; };
 		69BC277A1A8A48CF00F30FC0 /* IDPMailMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPMailMessageModel.h; sourceTree = "<group>"; };
@@ -183,6 +186,8 @@
 			children = (
 				6926C1671A88FC7800FEA821 /* IDPMailTableView.h */,
 				6926C1681A88FC7800FEA821 /* IDPMailTableView.m */,
+				69B7B2621A8B609900B3FFD2 /* IDPScrollView.h */,
+				69B7B2631A8B609900B3FFD2 /* IDPScrollView.m */,
 			);
 			path = IDPMailTableView;
 			sourceTree = "<group>";
@@ -424,6 +429,7 @@
 				69BC27851A8A4DED00F30FC0 /* IDPMailListViewController.m in Sources */,
 				69BC27781A89EF2400F30FC0 /* IDPCellHeightCalculator.m in Sources */,
 				6926C19A1A8917F100FEA821 /* IDPTableCacheObject.m in Sources */,
+				69B7B2641A8B609900B3FFD2 /* IDPScrollView.m in Sources */,
 				6926C1711A88FCCF00FEA821 /* IDPMailDetailsViewController.m in Sources */,
 				6926C1401A88F91800FEA821 /* AppDelegate.m in Sources */,
 				6926C1921A89047C00FEA821 /* README.md in Sources */,

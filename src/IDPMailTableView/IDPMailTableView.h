@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "IDPScrollView.h"
 
 @class IDPTableCacheObject;
 
@@ -21,7 +22,7 @@
 @interface IDPMailTableView : NSView <NSTableViewDataSource, NSTableViewDelegate>
 
 @property (nonatomic, strong) IBOutlet NSTableView  *tableView;
-@property (nonatomic, strong) IBOutlet NSScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet IDPScrollView *scrollView;
 
 /**
  Set this delegate instead of tableView delegate.

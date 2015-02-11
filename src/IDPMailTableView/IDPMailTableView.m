@@ -182,12 +182,29 @@ static CGFloat const kDefaultAnimationDuration = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startScrolling:) name:NSScrollViewWillStartLiveScrollNotification object:self.scrollView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endScrolling:) name:NSScrollViewDidEndLiveScrollNotification object:self.scrollView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableViewCellDidSelected:) name:NSTableViewSelectionDidChangeNotification object:self.tableView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willScrollWheel:) name:IDPNOTIFICATION_CENTER_WILL_SCROLL_WHEEL object:self.scrollView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didScrollWheel:) name:IDPNOTIFICATION_CENTER_DID_SCROLL_WHEEL object:self.scrollView];
+    
 }
 
 - (void)removeNotificationObservers {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSScrollViewWillStartLiveScrollNotification object:self.scrollView];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSScrollViewDidEndLiveScrollNotification object:self.scrollView];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSTableViewSelectionDidChangeNotification object:self.tableView];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IDPNOTIFICATION_CENTER_WILL_SCROLL_WHEEL object:self.scrollView];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IDPNOTIFICATION_CENTER_DID_SCROLL_WHEEL object:self.scrollView];
+}
+
+- (void)willScrollWheel:(NSNotification *)notification {
+    if (notification.object == self.scrollView) {
+//        NSLog(@"willScrollWheel:");
+        self.pausedObjectHeightLoading = YES;
+    }
+}
+
+- (void)didScrollWheel:(NSNotification *)notification {
+//    NSLog(@"didScrollWheel:");
+    [self updateCellsHeightAfterStopScrolling:notification];
 }
 
 - (void)startScrolling:(NSNotification *)notification {
@@ -198,6 +215,10 @@ static CGFloat const kDefaultAnimationDuration = 0;
 }
 
 - (void)endScrolling:(NSNotification *)notification {
+    [self updateCellsHeightAfterStopScrolling:notification];
+}
+
+- (void)updateCellsHeightAfterStopScrolling:(NSNotification *)notification {
     id object = notification.object;
     [self updateActiveCellIndex];
     NSInteger visibleRow = self.currentActiveCellIndex;
