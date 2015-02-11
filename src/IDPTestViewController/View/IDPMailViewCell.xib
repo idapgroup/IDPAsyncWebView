@@ -50,6 +50,7 @@
             <connections>
                 <outlet property="content" destination="ys1-9u-z60" id="CQl-oX-yCT"/>
                 <outlet property="readMark" destination="vo7-2K-eK1" id="oq5-E6-J6t"/>
+                <outlet property="senderTextField" destination="Uar-Kf-jnV" id="pKy-li-FPc"/>
             </connections>
             <point key="canvasLocation" x="556" y="400.5"/>
         </tableCellView>

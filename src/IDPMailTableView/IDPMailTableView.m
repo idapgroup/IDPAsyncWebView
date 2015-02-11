@@ -236,7 +236,7 @@ static CGFloat const kDefaultAnimationDuration = 0;
             [NSAnimationContext beginGrouping];
             [[NSAnimationContext currentContext] setDuration:kDefaultAnimationDuration];
             [self.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:[row integerValue]]];
-            if (visibleRow >= row.integerValue) {
+            if (visibleRow > row.integerValue) {
                 NSPoint origin = [self.scrollView documentVisibleRect].origin;
                 CGFloat dif = object.diffCellheight;
                 origin.y += dif;
@@ -266,7 +266,7 @@ static CGFloat const kDefaultAnimationDuration = 0;
                     [NSAnimationContext beginGrouping];
                     [[NSAnimationContext currentContext] setDuration:kDefaultAnimationDuration];
                     [weakSelf.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
-                    if (visibleRow >= row) {
+                    if (visibleRow > row) {
                         NSPoint origin = [weakSelf.scrollView documentVisibleRect].origin;
                         origin.y += object.diffCellheight;
                         [[weakSelf.scrollView documentView] scrollPoint:origin];
@@ -277,7 +277,6 @@ static CGFloat const kDefaultAnimationDuration = 0;
                 } else {
                     weakSelf.loadedObject = nil;
                     [weakSelf.pausedObjectHeightLoadingArray addObject:@(row)];
-                    [weakSelf loadCellHeightInBackground];
                 }
             }];
         } 

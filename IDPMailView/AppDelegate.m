@@ -44,7 +44,7 @@ static NSInteger  kMailCount = 20;
             IDPMailMessageModel *model = [IDPMailMessageModel new];
             model.subject = [NSString stringWithFormat:@"Test subject %ld-%ld", (long)index, (long)kIndex];
             model.recipients = @[@"test.test@recipient.com"];
-            model.sender = @[@"test.test@sender.com"];
+            model.sender = @[[NSString stringWithFormat:@"test.test@sender.com %ld-%ld",(long)index,(long)kIndex]];
             model.date = [NSDate date];
             model.content = contentString;
             [chainModel addNewMailMessage:model];
