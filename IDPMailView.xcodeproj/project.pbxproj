@@ -23,6 +23,9 @@
 		6926C19A1A8917F100FEA821 /* IDPTableCacheObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926C1991A8917F100FEA821 /* IDPTableCacheObject.m */; };
 		69B7B2611A8B437B00B3FFD2 /* NSTableView+IDPExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B7B2601A8B437B00B3FFD2 /* NSTableView+IDPExtension.m */; };
 		69B7B2641A8B609900B3FFD2 /* IDPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B7B2631A8B609900B3FFD2 /* IDPScrollView.m */; };
+		69B7B2671A8B810800B3FFD2 /* testEmailFile.html in Resources */ = {isa = PBXBuildFile; fileRef = 69B7B2661A8B810800B3FFD2 /* testEmailFile.html */; };
+		69B7B2691A8B828100B3FFD2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69B7B2681A8B828100B3FFD2 /* WebKit.framework */; };
+		69B7B26C1A8B8B3E00B3FFD2 /* IDPWebViewCellHeightCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B7B26B1A8B8B3E00B3FFD2 /* IDPWebViewCellHeightCalculator.m */; };
 		69BC27781A89EF2400F30FC0 /* IDPCellHeightCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC27771A89EF2400F30FC0 /* IDPCellHeightCalculator.m */; };
 		69BC277C1A8A48CF00F30FC0 /* IDPMailMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC277B1A8A48CF00F30FC0 /* IDPMailMessageModel.m */; };
 		69BC27801A8A4A0300F30FC0 /* IDPMailHistoryChainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC277F1A8A4A0300F30FC0 /* IDPMailHistoryChainModel.m */; };
@@ -73,6 +76,10 @@
 		69B7B2601A8B437B00B3FFD2 /* NSTableView+IDPExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTableView+IDPExtension.m"; sourceTree = "<group>"; };
 		69B7B2621A8B609900B3FFD2 /* IDPScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPScrollView.h; sourceTree = "<group>"; };
 		69B7B2631A8B609900B3FFD2 /* IDPScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPScrollView.m; sourceTree = "<group>"; };
+		69B7B2661A8B810800B3FFD2 /* testEmailFile.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = testEmailFile.html; sourceTree = "<group>"; };
+		69B7B2681A8B828100B3FFD2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		69B7B26A1A8B8B3E00B3FFD2 /* IDPWebViewCellHeightCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPWebViewCellHeightCalculator.h; sourceTree = "<group>"; };
+		69B7B26B1A8B8B3E00B3FFD2 /* IDPWebViewCellHeightCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPWebViewCellHeightCalculator.m; sourceTree = "<group>"; };
 		69BC27761A89EF2400F30FC0 /* IDPCellHeightCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPCellHeightCalculator.h; sourceTree = "<group>"; };
 		69BC27771A89EF2400F30FC0 /* IDPCellHeightCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPCellHeightCalculator.m; sourceTree = "<group>"; };
 		69BC277A1A8A48CF00F30FC0 /* IDPMailMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPMailMessageModel.h; sourceTree = "<group>"; };
@@ -94,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69B7B2691A8B828100B3FFD2 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +118,8 @@
 		6926C1301A88F91800FEA821 = {
 			isa = PBXGroup;
 			children = (
+				69B7B2681A8B828100B3FFD2 /* WebKit.framework */,
+				69B7B2651A8B810800B3FFD2 /* resources */,
 				6926C1651A88FC6300FEA821 /* src */,
 				6926C13B1A88F91800FEA821 /* IDPMailView */,
 				6926C14F1A88F91800FEA821 /* IDPMailViewTests */,
@@ -261,11 +271,21 @@
 			path = IDPTableChacheObject;
 			sourceTree = "<group>";
 		};
+		69B7B2651A8B810800B3FFD2 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				69B7B2661A8B810800B3FFD2 /* testEmailFile.html */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
 		69BC27751A89EF1D00F30FC0 /* IDPCellHeightCalculator */ = {
 			isa = PBXGroup;
 			children = (
 				69BC27761A89EF2400F30FC0 /* IDPCellHeightCalculator.h */,
 				69BC27771A89EF2400F30FC0 /* IDPCellHeightCalculator.m */,
+				69B7B26A1A8B8B3E00B3FFD2 /* IDPWebViewCellHeightCalculator.h */,
+				69B7B26B1A8B8B3E00B3FFD2 /* IDPWebViewCellHeightCalculator.m */,
 			);
 			path = IDPCellHeightCalculator;
 			sourceTree = "<group>";
@@ -401,6 +421,7 @@
 				69BC278D1A8A4FD400F30FC0 /* IDPMailListTableCellView.xib in Resources */,
 				6926C1441A88F91800FEA821 /* Images.xcassets in Resources */,
 				6926C1821A89004D00FEA821 /* IDPMailViewCell.xib in Resources */,
+				69B7B2671A8B810800B3FFD2 /* testEmailFile.html in Resources */,
 				6926C1911A89047C00FEA821 /* LICENSE in Resources */,
 				6926C1471A88F91800FEA821 /* MainMenu.xib in Resources */,
 			);
@@ -436,6 +457,7 @@
 				69BC277C1A8A48CF00F30FC0 /* IDPMailMessageModel.m in Sources */,
 				69BC278B1A8A4FC800F30FC0 /* IDPMailListTableCellView.m in Sources */,
 				69B7B2611A8B437B00B3FFD2 /* NSTableView+IDPExtension.m in Sources */,
+				69B7B26C1A8B8B3E00B3FFD2 /* IDPWebViewCellHeightCalculator.m in Sources */,
 				6926C17D1A89000900FEA821 /* IDPBaseTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -18,7 +18,7 @@
     if ([object isKindOfClass:[IDPMailMessageModel class]]) {
         IDPMailMessageModel *mailMessage = (IDPMailMessageModel *)object;
         self.senderTextField.stringValue = [mailMessage senderString];
-        self.subjectTextField.stringValue = mailMessage.subject;
+        [[self.content mainFrame] loadHTMLString:mailMessage.content baseURL:nil];
         
         self.readMark.wantsLayer = YES;
         self.readMark.layer.backgroundColor = mailMessage.isRead ? [[NSColor greenColor] CGColor] : [[NSColor blueColor] CGColor];

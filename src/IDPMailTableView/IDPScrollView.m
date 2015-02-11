@@ -15,7 +15,6 @@
 
 - (void)scrollWheel:(NSEvent *)theEvent {
     CGFloat deltaY = fabs(theEvent.deltaY);
-    NSLog(@"%f", deltaY);
     [[NSNotificationCenter defaultCenter] postNotificationName:IDPNOTIFICATION_CENTER_WILL_SCROLL_WHEEL object:self];
     [super scrollWheel:theEvent];
     [[NSNotificationCenter defaultCenter] postNotificationName:IDPNOTIFICATION_CENTER_DID_SCROLL_WHEEL object:self];

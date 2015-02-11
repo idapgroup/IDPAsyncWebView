@@ -7,11 +7,12 @@
 //
 
 #import "IDPBaseTableCell.h"
+#import <WebKit/WebKit.h>
 
 @interface IDPMailViewCell : IDPBaseTableCell
 
 @property (nonatomic, strong) IBOutlet NSTextField  *senderTextField;
-@property (nonatomic, strong) IBOutlet NSTextField  *subjectTextField;
+@property (nonatomic, strong) IBOutlet WebView      *content;
 @property (nonatomic, strong) IBOutlet NSView       *readMark;
 
 @end

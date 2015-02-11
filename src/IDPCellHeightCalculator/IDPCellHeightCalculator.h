@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class IDPCellHeightCalculator;
+@class IDPTableCacheObject;
 
 typedef void(^IDPCellHeightCalculatorCallback)(IDPCellHeightCalculator *calculator, CGFloat newHeight);
 
@@ -19,10 +20,12 @@ typedef void(^IDPCellHeightCalculatorCallback)(IDPCellHeightCalculator *calculat
  */
 @property (nonatomic, copy) IDPCellHeightCalculatorCallback callback;
 
+@property (nonatomic, strong) IDPTableCacheObject   *object;
+
 /**
- Override this method in inherited object.
- Warning this method call in background thread.
+ Override this method in inherited object. Call super.
  */
-- (void)calculateCellHeightWithCallback:(IDPCellHeightCalculatorCallback)callback;
+- (void)calculateCellHeighForObject:(IDPTableCacheObject *)object
+                           callback:(IDPCellHeightCalculatorCallback)callback;
 
 @end

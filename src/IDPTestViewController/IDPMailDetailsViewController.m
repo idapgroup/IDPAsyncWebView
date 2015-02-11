@@ -13,16 +13,16 @@
 #import "IDPTableCacheObject.h"
 #import "IDPConstants.h"
 #import "IDPMailHistoryChainModel.h"
-#import "IDPCellHeightCalculator.h"
+#import "IDPWebViewCellHeightCalculator.h"
 
-static CGFloat   const kCellDefaultHeight = 60;
+static CGFloat   const kCellDefaultHeight = 140;
 
 @interface IDPMailDetailsViewController ()
 
 @property (nonatomic, strong, readonly) IDPMailTableView *myView;
 
 @property (nonatomic, strong) NSMutableArray    *objects;
-
+@property (nonatomic, strong) IDPWebViewCellHeightCalculator   *cellHeightCalculator;
 
 @end
 
@@ -46,11 +46,13 @@ static CGFloat   const kCellDefaultHeight = 60;
 }
 
 - (void)baseInit {
+    self.cellHeightCalculator = [IDPWebViewCellHeightCalculator new];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedNewMail:) name:NOTIFICATION_CENTER_DID_SELECTED_NEW_MAIL object:nil];
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.myView.cellHeightCalculator = self.cellHeightCalculator;
     NSString *identifier = NSStringFromClass([IDPMailViewCell class]);
     self.objects = [NSMutableArray array];
     [self.myView.tableView registerNib:[[NSNib alloc] initWithNibNamed:identifier bundle:nil] forIdentifier:identifier];
@@ -77,7 +79,6 @@ static CGFloat   const kCellDefaultHeight = 60;
         IDPTableCacheObject *object = [IDPTableCacheObject new];
         object.cellHeight = kCellDefaultHeight;
         object.model = mailMessage;
-        object.cellHeightCalculator = [IDPCellHeightCalculator new];
         [self.objects addObject:object];
     }
     self.myView.dataSourceObjects = self.objects;

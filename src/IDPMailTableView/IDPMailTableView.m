@@ -175,6 +175,15 @@ static CGFloat const kDefaultAnimationDuration = 0;
     [self reorderCellsLoadingSequence];
 }
 
+- (void)updateCellHeight:(CGFloat)cellHeight forRow:(NSInteger)row {
+    IDPTableCacheObject *object = self.loadedObject;
+    CGFloat prevValue = object.cellHeight;
+    object.dirty = NO;
+    object.cellHeight = cellHeight;
+    CGFloat dif = object.cellHeight - prevValue;
+    object.diffCellheight = dif;
+}
+
 #pragma mark -
 #pragma mark Private methods
 
@@ -241,40 +250,36 @@ static CGFloat const kDefaultAnimationDuration = 0;
 }
 
 - (void)loadCellHeightInBackground {
-    self.loadedObject = [self.objecstInQueueToLoadHeight firstObject];
-    if (self.loadedObject) {
-        IDPTableCacheObject *object = self.loadedObject;
-        [self.objecstInQueueToLoadHeight removeObjectAtIndex:0];
-        __weak IDPMailTableView *weakSelf = self;
-        NSInteger row = [self.dataSourceObjects indexOfObject:object];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [object.cellHeightCalculator calculateCellHeightWithCallback:^(IDPCellHeightCalculator *calculator, CGFloat newHeight) {
-                CGFloat prevValue = object.cellHeight;
-                object.dirty = NO;
+    if (!self.loadedObject) {
+        self.loadedObject = [self.objecstInQueueToLoadHeight firstObject];
+        if (self.loadedObject) {
+            IDPTableCacheObject *object = self.loadedObject;
+            [self.objecstInQueueToLoadHeight removeObjectAtIndex:0];
+            __weak IDPMailTableView *weakSelf = self;
+            NSInteger row = [self.dataSourceObjects indexOfObject:object];
+            
+            [self.cellHeightCalculator calculateCellHeighForObject:object callback:^(IDPCellHeightCalculator *calculator, CGFloat newHeight) {
+                object.diffCellheight = newHeight - object.cellHeight;
                 object.cellHeight = newHeight;
-                CGFloat dif = object.cellHeight - prevValue;
-                object.diffCellheight = dif;
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    if (!weakSelf.isPausedObjectHeightLoading) {
-                        NSInteger visibleRow = self.currentActiveCellIndex;
-                        [NSAnimationContext beginGrouping];
-                        [[NSAnimationContext currentContext] setDuration:kDefaultAnimationDuration];
-                        [weakSelf.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
-                        if (visibleRow >= row) {
-                            NSPoint origin = [weakSelf.scrollView documentVisibleRect].origin;
-                            origin.y += dif;
-                            [[weakSelf.scrollView documentView] scrollPoint:origin];
-                        }
-                        [NSAnimationContext endGrouping];
-                        weakSelf.loadedObject = nil;
-                        [weakSelf loadCellHeightInBackground];
-                    } else {
-                        weakSelf.loadedObject = nil;
-                        [weakSelf.pausedObjectHeightLoadingArray addObject:@(row)];
+                if (!weakSelf.isPausedObjectHeightLoading) {
+                    NSInteger visibleRow = self.currentActiveCellIndex;
+                    [NSAnimationContext beginGrouping];
+                    [[NSAnimationContext currentContext] setDuration:kDefaultAnimationDuration];
+                    [weakSelf.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+                    if (visibleRow >= row) {
+                        NSPoint origin = [weakSelf.scrollView documentVisibleRect].origin;
+                        origin.y += object.diffCellheight;
+                        [[weakSelf.scrollView documentView] scrollPoint:origin];
                     }
-                });
+                    [NSAnimationContext endGrouping];
+                    weakSelf.loadedObject = nil;
+                    [weakSelf loadCellHeightInBackground];
+                } else {
+                    weakSelf.loadedObject = nil;
+                    [weakSelf.pausedObjectHeightLoadingArray addObject:@(row)];
+                }
             }];
-        });
+        } 
     }
 }
 

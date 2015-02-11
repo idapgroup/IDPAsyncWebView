@@ -8,8 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import "IDPScrollView.h"
+#import "IDPCellHeightCalculator.h"
 
 @class IDPTableCacheObject;
+@class IDPMailTableView;
 
 @protocol IDPMailTableViewDelegate <NSTableViewDelegate>
 
@@ -38,7 +40,11 @@
  */
 @property (nonatomic, strong) NSArray   *dataSourceObjects;;
 
+@property (nonatomic, strong) IDPCellHeightCalculator   *cellHeightCalculator;
+
 - (void)reloadData;
 - (void)scrollRowToVisible:(NSInteger)index;
+
+- (void)updateCellHeight:(CGFloat)cellHeight forRow:(NSInteger)row;
 
 @end

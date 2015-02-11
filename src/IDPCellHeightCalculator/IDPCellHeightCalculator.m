@@ -8,8 +8,6 @@
 
 #import "IDPCellHeightCalculator.h"
 
-static CGFloat const kTestHeight = 200;
-
 @interface IDPCellHeightCalculator ()
 
 @end
@@ -19,8 +17,10 @@ static CGFloat const kTestHeight = 200;
 #pragma mark -
 #pragma mark Public methods
 
-- (void)calculateCellHeightWithCallback:(IDPCellHeightCalculatorCallback)callback {
-    callback(self, kTestHeight);
+- (void)calculateCellHeighForObject:(IDPTableCacheObject *)object
+                           callback:(IDPCellHeightCalculatorCallback)callback {
+    self.object = object;
+    self.callback = callback;
 }
 
 @end
