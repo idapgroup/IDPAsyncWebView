@@ -233,16 +233,7 @@ static CGFloat const kDefaultAnimationDuration = 0;
         self.pausedObjectHeightLoading = NO;
         for (NSNumber *row in self.pausedObjectHeightLoadingArray) {
             IDPTableCacheObject *object = [self.dataSourceObjects objectAtIndex:row.integerValue];
-            [NSAnimationContext beginGrouping];
-            [[NSAnimationContext currentContext] setDuration:kDefaultAnimationDuration];
-            [self.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:[row integerValue]]];
-            if (visibleRow > row.integerValue) {
-                NSPoint origin = [self.scrollView documentVisibleRect].origin;
-                CGFloat dif = object.diffCellheight;
-                origin.y += dif;
-                [[self.scrollView documentView] scrollPoint:origin];
-            }
-            [NSAnimationContext endGrouping];
+            [self updateCellHeightForRow:row.integerValue visibleRow:visibleRow object:object];
         }
         [self.pausedObjectHeightLoadingArray removeAllObjects];
         [self reorderCellsLoadingSequence];
@@ -263,15 +254,7 @@ static CGFloat const kDefaultAnimationDuration = 0;
                 object.cellHeight = newHeight;
                 if (!weakSelf.isPausedObjectHeightLoading) {
                     NSInteger visibleRow = self.currentActiveCellIndex;
-                    [NSAnimationContext beginGrouping];
-                    [[NSAnimationContext currentContext] setDuration:kDefaultAnimationDuration];
-                    [weakSelf.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
-                    if (visibleRow > row) {
-                        NSPoint origin = [weakSelf.scrollView documentVisibleRect].origin;
-                        origin.y += object.diffCellheight;
-                        [[weakSelf.scrollView documentView] scrollPoint:origin];
-                    }
-                    [NSAnimationContext endGrouping];
+                    [self updateCellHeightForRow:row visibleRow:visibleRow object:object];
                     weakSelf.loadedObject = nil;
                     [weakSelf loadCellHeightInBackground];
                 } else {
@@ -281,6 +264,18 @@ static CGFloat const kDefaultAnimationDuration = 0;
             }];
         } 
     }
+}
+
+- (void)updateCellHeightForRow:(NSInteger)row visibleRow:(NSInteger)visibleRow object:(IDPTableCacheObject *)object {
+    [NSAnimationContext beginGrouping];
+    [[NSAnimationContext currentContext] setDuration:kDefaultAnimationDuration];
+    [self.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+    if (visibleRow > row) {
+        NSPoint origin = [self.scrollView documentVisibleRect].origin;
+        origin.y += object.diffCellheight;
+        [[self.scrollView documentView] scrollPoint:origin];
+    }
+    [NSAnimationContext endGrouping];
 }
 
 - (void)reorderCellsLoadingSequence {
