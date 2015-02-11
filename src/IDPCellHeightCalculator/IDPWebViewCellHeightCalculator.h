@@ -11,7 +11,7 @@
 @interface IDPWebViewCellHeightCalculator : IDPCellHeightCalculator
 
 /**
- Conten width and height
+ Content width and height
  */
 @property (nonatomic, assign) NSSize size;
 

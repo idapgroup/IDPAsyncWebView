@@ -23,4 +23,9 @@
     self.callback = callback;
 }
 
+- (void)cancel {
+    self.object = nil;
+    self.callback = nil;
+}
+
 @end

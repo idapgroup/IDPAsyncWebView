@@ -22,10 +22,18 @@ typedef void(^IDPCellHeightCalculatorCallback)(IDPCellHeightCalculator *calculat
 
 @property (nonatomic, strong) IDPTableCacheObject   *object;
 
+@property (nonatomic, assign) CGFloat cellWidth;
+/**
+ Cell height except cell content height.
+ */
+@property (nonatomic, assign) CGFloat cellHeight;
+
 /**
  Override this method in inherited object. Call super.
  */
 - (void)calculateCellHeighForObject:(IDPTableCacheObject *)object
                            callback:(IDPCellHeightCalculatorCallback)callback;
+
+- (void)cancel;
 
 @end

@@ -47,4 +47,6 @@
 
 - (void)updateCellHeight:(CGFloat)cellHeight forRow:(NSInteger)row;
 
+- (void)resetAllData;
+
 @end

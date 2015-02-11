@@ -184,6 +184,12 @@ static CGFloat const kDefaultAnimationDuration = 0;
     object.diffCellheight = dif;
 }
 
+- (void)resetAllData {
+    [self.cellHeightCalculator cancel];
+    self.currentActiveCellIndex = 0;
+    self.loadedObject = nil;
+}
+
 #pragma mark -
 #pragma mark Private methods
 
@@ -253,8 +259,8 @@ static CGFloat const kDefaultAnimationDuration = 0;
                 object.diffCellheight = newHeight - object.cellHeight;
                 object.cellHeight = newHeight;
                 if (!weakSelf.isPausedObjectHeightLoading) {
-                    NSInteger visibleRow = self.currentActiveCellIndex;
-                    [self updateCellHeightForRow:row visibleRow:visibleRow object:object];
+                    NSInteger visibleRow = weakSelf.currentActiveCellIndex;
+                    [weakSelf updateCellHeightForRow:row visibleRow:visibleRow object:object];
                     weakSelf.loadedObject = nil;
                     [weakSelf loadCellHeightInBackground];
                 } else {

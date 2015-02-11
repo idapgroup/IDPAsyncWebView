@@ -59,8 +59,12 @@ static CGFloat const kDefaultWidth = 50;
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)webFrame {
     if([webFrame isEqual:[self.webView mainFrame]]) {
-        NSRect webFrameRect = [[[[sender mainFrame] frameView] documentView] frame];
-        self.callback(self,NSHeight(webFrameRect));
+        NSRect frame = [[[[sender mainFrame] frameView] documentView] frame];
+        CGFloat height = NSHeight(frame);
+        height += self.cellHeight;
+        if (self.callback) {
+            self.callback(self,height);
+        }
     }
 }
 
