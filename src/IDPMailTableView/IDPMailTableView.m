@@ -56,7 +56,11 @@ static BOOL isInterceptedSelector(SEL sel) {
 #pragma mark -
 #pragma mark IDPMailTableView
 
-static CGFloat kTestHeight = 200;
+static NSInteger const kColumnIndex = 0;
+static NSInteger const kDefaultActiveCell = 0;
+static CGFloat const kDefaultAnimationDuration = 0;
+
+static CGFloat const kTestHeight = 200;
 
 @interface IDPMailTableView ()
 
@@ -162,7 +166,7 @@ static CGFloat kTestHeight = 200;
 #pragma mark Public methods
 
 - (void)reloadData {
-    self.currentActiveCellIndex = 0;
+    self.currentActiveCellIndex = kDefaultActiveCell;
     [self.tableView reloadData];
     [self reorderCellsLoadingSequence];
 }
@@ -204,7 +208,7 @@ static CGFloat kTestHeight = 200;
         for (NSNumber *row in self.pausedObjectHeightLoadingArray) {
             IDPTableCacheObject *object = [self.dataSourceObjects objectAtIndex:row.integerValue];
             [NSAnimationContext beginGrouping];
-            [[NSAnimationContext currentContext] setDuration:0.0];
+            [[NSAnimationContext currentContext] setDuration:kDefaultAnimationDuration];
             [self.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:[row integerValue]]];
             if (visibleRow >= row.integerValue) {
                 NSPoint origin = [self.scrollView documentVisibleRect].origin;
@@ -236,7 +240,7 @@ static CGFloat kTestHeight = 200;
                 if (!weakSelf.isPausedObjectHeightLoading) {
                     NSInteger visibleRow = self.currentActiveCellIndex;
                     [NSAnimationContext beginGrouping];
-                    [[NSAnimationContext currentContext] setDuration:0.0];
+                    [[NSAnimationContext currentContext] setDuration:kDefaultAnimationDuration];
                     [weakSelf.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
                     if (visibleRow >= row) {
                         NSPoint origin = [weakSelf.scrollView documentVisibleRect].origin;
@@ -270,12 +274,12 @@ static CGFloat kTestHeight = 200;
 - (void)updateActiveCellIndex {
     NSArray *visibleRows = [self.tableView visibleRows];
     NSInteger visibleRow = [[visibleRows firstObject] integerValue];
-    NSView *cell = [self.tableView viewAtColumn:0 row:visibleRow makeIfNecessary:NO];
+    NSView *cell = [self.tableView viewAtColumn:kColumnIndex row:visibleRow makeIfNecessary:NO];
     NSRect frame = cell.frame;
     frame = [self.tableView convertRect:frame fromView:cell];
     NSPoint origin = [self.scrollView documentVisibleRect].origin;
     if (frame.origin.y < origin.y) {
-        visibleRow+=1;
+        visibleRow = visibleRows.count > 1 ? visibleRow + 1 : visibleRow;
     }
     self.currentActiveCellIndex = visibleRow;
 }
