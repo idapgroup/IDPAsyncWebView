@@ -59,6 +59,7 @@ static BOOL isInterceptedSelector(SEL sel) {
 static NSInteger const kColumnIndex = 0;
 static NSInteger const kDefaultActiveCell = 0;
 static CGFloat const kDefaultAnimationDuration = 0;
+static CGFloat const kIDPResizeDelta = 15;
 
 @interface IDPMailTableView ()
 
@@ -75,6 +76,9 @@ static CGFloat const kDefaultAnimationDuration = 0;
 @property (nonatomic, assign) NSInteger currentActiveCellIndex;
 
 @property (nonatomic, assign, getter = isRecalculateHeight) BOOL recalculateHeight;
+@property (nonatomic, assign, getter = isLiveResizingStart) BOOL liveResizingStart;
+
+@property (nonatomic, assign) CGFloat prevViewWidth;
 
 @end
 
@@ -115,6 +119,7 @@ static CGFloat const kDefaultAnimationDuration = 0;
 
 - (void)baseInit {
     [self addNotificationObsevers];
+    self.prevViewWidth = NSWidth(self.frame);
     self.pausedObjectHeightLoadingArray = [NSMutableArray array];
     self.objecstInQueueToLoadHeight = [NSMutableArray array];
     self.proxyDataSource = [[IDPTableViewProxy alloc] initWithTarget:nil interceptor:self];
@@ -166,6 +171,7 @@ static CGFloat const kDefaultAnimationDuration = 0;
 #pragma mark Public methods
 
 - (void)reloadData {
+    self.prevViewWidth = NSWidth(self.frame);
     self.currentActiveCellIndex = kDefaultActiveCell;
     [self.tableView reloadData];
     [self updateCalculatorContentWidth];
@@ -188,6 +194,7 @@ static CGFloat const kDefaultAnimationDuration = 0;
 }
 
 - (void)resetAllData {
+    self.prevViewWidth = NSWidth(self.frame);
     [self.cellHeightCalculator cancel];
     self.currentActiveCellIndex = 0;
     self.loadedObject = nil;
@@ -196,11 +203,13 @@ static CGFloat const kDefaultAnimationDuration = 0;
 
 - (void)viewWillStartLiveResize {
     [super viewWillStartLiveResize];
+    self.liveResizingStart = YES;
     [self checksIsStopCellHeightCalculation];
 }
 
 - (void)viewDidEndLiveResize {
     [super viewDidEndLiveResize];
+    self.liveResizingStart = NO;
     if (self.isRecalculateHeight) {
         self.objecstInQueueToLoadHeight = [NSMutableArray arrayWithArray:self.dataSourceObjects];
         [self updateCalculatorContentWidth];
@@ -221,6 +230,8 @@ static CGFloat const kDefaultAnimationDuration = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startScrolling:) name:IDPNOTIFICATION_CENTER_START_SCROLL_KEY object:self.scrollView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endScrolling:) name:IDPNOTIFICATION_CENTER_END_SCROLL_KEY object:self.scrollView];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(frameDidChange:) name:NSViewFrameDidChangeNotification object:self];
+    
 }
 
 - (void)removeNotificationObservers {
@@ -231,6 +242,18 @@ static CGFloat const kDefaultAnimationDuration = 0;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IDPNOTIFICATION_CENTER_END_SCROLL_WHEEL object:self.scrollView];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IDPNOTIFICATION_CENTER_START_SCROLL_KEY object:self.scrollView];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IDPNOTIFICATION_CENTER_END_SCROLL_KEY object:self.scrollView];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSViewFrameDidChangeNotification object:self];
+}
+
+- (void)frameDidChange:(NSNotification *)notification {
+    if (notification.object == self && self.isLiveResizingStart && self.isRecalculateHeight) {
+        CGFloat width = NSWidth(self.frame);
+        CGFloat delta = fabs(self.prevViewWidth - width);
+        if (delta >= kIDPResizeDelta) {
+            self.prevViewWidth = width;
+            [self updateOnlyVisiblesCells];
+        }
+    }
 }
 
 - (void)startScrolling:(NSNotification *)notification {
@@ -338,6 +361,22 @@ static CGFloat const kDefaultAnimationDuration = 0;
 
 - (void)updateCalculatorContentWidth {
     [self.delegate mailTableView:self updateCellHeightCalculatorContentWidth:self.cellHeightCalculator];
+}
+
+- (void)updateOnlyVisiblesCells {
+    [self.cellHeightCalculator cancel];
+    self.objecstInQueueToLoadHeight = nil;
+    self.loadedObject = nil;
+    NSArray *visibleRows = [self.tableView visibleRows];
+    NSMutableArray *visibleObjects = [NSMutableArray array];
+    for (NSNumber *row in [visibleRows reverseObjectEnumerator]) {
+        IDPTableCacheObject *object = [self.dataSourceObjects objectAtIndex:row.integerValue];
+        object.dirty = YES;
+        [visibleObjects addObject:object];
+    }
+    self.objecstInQueueToLoadHeight = visibleObjects;
+    [self updateCalculatorContentWidth];
+    [self loadCellHeightInBackground];
 }
 
 #pragma mark -

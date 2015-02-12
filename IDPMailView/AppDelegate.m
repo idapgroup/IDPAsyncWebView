@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "IDPMailHistoryChainModel.h"
 
-static NSInteger kMailInChain = 2000;
+static NSInteger kMailInChain = 100;
 static NSInteger  kMailCount = 20;
 
 @interface AppDelegate ()
@@ -37,8 +37,8 @@ static NSInteger  kMailCount = 20;
 
 - (void)generateTestData {
     self.testMailObjects = [NSMutableArray array];
-    NSString *fileName = @"test";
-//    NSString *fileName = @"testEmailFile";
+//    NSString *fileName = @"test";
+    NSString *fileName = @"testEmailFile";
     NSString *contentString = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:fileName ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
     for (NSInteger index = 0; index < kMailCount; index++) {
         IDPMailHistoryChainModel *chainModel = [IDPMailHistoryChainModel new];
