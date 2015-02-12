@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "IDPMailHistoryChainModel.h"
 
-static NSInteger kMailInChain = 100;
+static NSInteger kMailInChain = 2000;
 static NSInteger  kMailCount = 20;
 
 @interface AppDelegate ()
