@@ -59,6 +59,7 @@ static BOOL isInterceptedSelector(SEL sel) {
 static NSInteger const kColumnIndex = 0;
 static NSInteger const kDefaultActiveCell = 0;
 static CGFloat const kDefaultAnimationDuration = 0;
+static CGFloat const kIDPResizeDelta = 10;
 
 @interface IDPMailTableView ()
 
@@ -76,6 +77,8 @@ static CGFloat const kDefaultAnimationDuration = 0;
 
 @property (nonatomic, assign, getter = isRecalculateHeight) BOOL recalculateHeight;
 @property (nonatomic, assign, getter = isLiveResizingStart) BOOL liveResizingStart;
+
+@property (nonatomic, assign) CGFloat prevViewWidth;
 
 @end
 
@@ -116,6 +119,7 @@ static CGFloat const kDefaultAnimationDuration = 0;
 
 - (void)baseInit {
     [self addNotificationObsevers];
+    self.prevViewWidth = NSWidth(self.frame);
     self.pausedObjectHeightLoadingArray = [NSMutableArray array];
     self.objecstInQueueToLoadHeight = [NSMutableArray array];
     self.proxyDataSource = [[IDPTableViewProxy alloc] initWithTarget:nil interceptor:self];
@@ -167,6 +171,7 @@ static CGFloat const kDefaultAnimationDuration = 0;
 #pragma mark Public methods
 
 - (void)reloadData {
+    self.prevViewWidth = NSWidth(self.frame);
     self.currentActiveCellIndex = kDefaultActiveCell;
     [self.tableView reloadData];
     [self updateCalculatorContentWidth];
@@ -189,6 +194,7 @@ static CGFloat const kDefaultAnimationDuration = 0;
 }
 
 - (void)resetAllData {
+    self.prevViewWidth = NSWidth(self.frame);
     [self.cellHeightCalculator cancel];
     self.currentActiveCellIndex = 0;
     self.loadedObject = nil;
@@ -241,7 +247,12 @@ static CGFloat const kDefaultAnimationDuration = 0;
 
 - (void)frameDidChange:(NSNotification *)notification {
     if (notification.object == self && self.isLiveResizingStart && self.isRecalculateHeight) {
-        [self updateOnlyVisiblesCells];
+        CGFloat width = NSWidth(self.frame);
+        CGFloat delta = fabs(self.prevViewWidth - width);
+        if (delta >= kIDPResizeDelta) {
+            self.prevViewWidth = width;
+            [self updateOnlyVisiblesCells];
+        }
     }
 }
 
@@ -358,12 +369,12 @@ static CGFloat const kDefaultAnimationDuration = 0;
     self.loadedObject = nil;
     NSArray *visibleRows = [self.tableView visibleRows];
     NSMutableArray *visibleObjects = [NSMutableArray array];
-    for (NSNumber *row in visibleRows) {
+    for (NSNumber *row in [visibleRows reverseObjectEnumerator]) {
         IDPTableCacheObject *object = [self.dataSourceObjects objectAtIndex:row.integerValue];
         object.dirty = YES;
         [visibleObjects addObject:object];
     }
-    self.objecstInQueueToLoadHeight = [NSMutableArray arrayWithArray:visibleObjects];
+    self.objecstInQueueToLoadHeight = visibleObjects;
     [self updateCalculatorContentWidth];
     [self loadCellHeightInBackground];
 }
