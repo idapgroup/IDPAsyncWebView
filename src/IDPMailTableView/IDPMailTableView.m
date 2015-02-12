@@ -168,6 +168,7 @@ static CGFloat const kDefaultAnimationDuration = 0;
 - (void)reloadData {
     self.currentActiveCellIndex = kDefaultActiveCell;
     [self.tableView reloadData];
+    [self updateCalculatorContentWidth];
     [self reorderCellsLoadingSequence];
 }
 
@@ -191,7 +192,6 @@ static CGFloat const kDefaultAnimationDuration = 0;
     self.currentActiveCellIndex = 0;
     self.loadedObject = nil;
     self.recalculateHeight = NO;
-    [self updateCalculatorContentWidth];
 }
 
 - (void)viewWillStartLiveResize {

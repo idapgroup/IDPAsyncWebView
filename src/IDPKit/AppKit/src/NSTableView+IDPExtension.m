@@ -26,16 +26,24 @@
 }
 
 - (NSTableCellView *)firstVisibleViewCell {
-    NSRange range = [self rangeOfVisibleRows];
-    if (range.length == 0) {
-        return nil;
-    }
-    NSTableCellView *cell = [self viewAtColumn:0 row:range.location makeIfNecessary:NO];
-    return cell;
+    return [self firstVisibleViewCellMakeIfNecessary:NO];
+}
+
+- (NSTableCellView *)firstVisibleViewCellMakeIfNecessary {
+    return [self firstVisibleViewCellMakeIfNecessary:YES];
 }
 
 #pragma mark -
 #pragma mark Private methods
+
+- (NSTableCellView *)firstVisibleViewCellMakeIfNecessary:(BOOL)makeIfNecessary {
+    NSRange range = [self rangeOfVisibleRows];
+    if (range.length == 0) {
+        return nil;
+    }
+    NSTableCellView *cell = [self viewAtColumn:0 row:range.location makeIfNecessary:makeIfNecessary];
+    return cell;
+}
 
 - (NSRange)rangeOfVisibleRows {
     NSScrollView *scrollView = [self enclosingScrollView];

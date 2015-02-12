@@ -116,7 +116,7 @@ static CGFloat   const kCellDefaultHeight = 190;
 }
 
 - (void)mailTableView:(IDPMailTableView *)tableView updateCellHeightCalculatorContentWidth:(IDPCellHeightCalculator *)cellHeightCalculator {
-    IDPMailViewCell *cell = (IDPMailViewCell *)[tableView.tableView firstVisibleViewCell];
+    IDPMailViewCell *cell = (IDPMailViewCell *)[tableView.tableView firstVisibleViewCellMakeIfNecessary];
     if (cell) {
         cellHeightCalculator.cellContentWidth = [cell contentWidth];
     }
