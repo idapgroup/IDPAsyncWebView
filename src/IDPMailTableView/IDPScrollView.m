@@ -8,16 +8,92 @@
 
 #import "IDPScrollView.h"
 
+static NSTimeInterval const kIDPScrollWheelTime = 0.5;
+static NSTimeInterval const kIDPkeyTime = 0.5;
+
+@interface IDPScrollView ()
+
+@property (nonatomic, strong) NSTimer   *scrollWheelTimer;
+@property (nonatomic, strong) NSTimer   *keyTimer;
+
+@end
+
 @implementation IDPScrollView
+
+#pragma mark -
+#pragma mark Initializations and Deallocations
+
+- (void)dealloc {
+    self.scrollWheelTimer = nil;
+    self.keyTimer = nil;
+}
+
+#pragma mark -
+#pragma mark Accessor methods
+
+- (void)setScrollWheelTimer:(NSTimer *)scrollWheelTimer {
+    if (_scrollWheelTimer == scrollWheelTimer) {
+        return;
+    }
+    [_scrollWheelTimer invalidate];
+    _scrollWheelTimer = scrollWheelTimer;
+}
+
+- (void)setKeyTimer:(NSTimer *)keyTimer {
+    if (_keyTimer == keyTimer) {
+        return;
+    }
+    [_keyTimer invalidate];
+    _keyTimer = keyTimer;
+}
 
 #pragma mark -
 #pragma mark Public methods
 
 - (void)scrollWheel:(NSEvent *)theEvent {
-    CGFloat deltaY = fabs(theEvent.deltaY);
-    [[NSNotificationCenter defaultCenter] postNotificationName:IDPNOTIFICATION_CENTER_WILL_SCROLL_WHEEL object:self];
+    if (!self.scrollWheelTimer) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:IDPNOTIFICATION_CENTER_START_SCROLL_WHEEL object:self];
+    }
+    [self setupScrollWheelTimer];
     [super scrollWheel:theEvent];
-    [[NSNotificationCenter defaultCenter] postNotificationName:IDPNOTIFICATION_CENTER_DID_SCROLL_WHEEL object:self];
+}
+
+- (void)keyDown:(NSEvent *)theEvent {
+    [self checkIfStartKey];
+    [super keyDown:theEvent];
+}
+
+- (void)keyUp:(NSEvent *)theEvent {
+    [self checkIfStartKey];
+    [super keyUp:theEvent];
+}
+
+#pragma mark -
+#pragma mark Private methods
+
+- (void)setupScrollWheelTimer {
+    self.scrollWheelTimer = [NSTimer scheduledTimerWithTimeInterval:kIDPScrollWheelTime target:self selector:@selector(scrollWheelDidStopScrolling:) userInfo:nil repeats:NO];
+}
+
+- (void)setupKeyTimer {
+    self.keyTimer = [NSTimer scheduledTimerWithTimeInterval:kIDPkeyTime target:self selector:@selector(keyDidStopScrolling:) userInfo:nil repeats:NO];
+}
+
+- (void)scrollWheelDidStopScrolling:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:IDPNOTIFICATION_CENTER_END_SCROLL_WHEEL object:self];
+    self.scrollWheelTimer = nil;
+}
+
+- (void)keyDidStopScrolling:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:IDPNOTIFICATION_CENTER_END_SCROLL_KEY object:self];
+    self.keyTimer = nil;
+}
+
+- (void)checkIfStartKey {
+    if (!self.scrollWheelTimer) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:IDPNOTIFICATION_CENTER_START_SCROLL_KEY object:self];
+    }
+    [self setupKeyTimer];
 }
 
 @end

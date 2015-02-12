@@ -197,8 +197,10 @@ static CGFloat const kDefaultAnimationDuration = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startScrolling:) name:NSScrollViewWillStartLiveScrollNotification object:self.scrollView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endScrolling:) name:NSScrollViewDidEndLiveScrollNotification object:self.scrollView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableViewCellDidSelected:) name:NSTableViewSelectionDidChangeNotification object:self.tableView];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willScrollWheel:) name:IDPNOTIFICATION_CENTER_WILL_SCROLL_WHEEL object:self.scrollView];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didScrollWheel:) name:IDPNOTIFICATION_CENTER_DID_SCROLL_WHEEL object:self.scrollView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startScrolling:) name:IDPNOTIFICATION_CENTER_START_SCROLL_WHEEL object:self.scrollView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endScrolling:) name:IDPNOTIFICATION_CENTER_END_SCROLL_WHEEL object:self.scrollView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startScrolling:) name:IDPNOTIFICATION_CENTER_START_SCROLL_KEY object:self.scrollView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endScrolling:) name:IDPNOTIFICATION_CENTER_END_SCROLL_KEY object:self.scrollView];
     
 }
 
@@ -206,23 +208,14 @@ static CGFloat const kDefaultAnimationDuration = 0;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSScrollViewWillStartLiveScrollNotification object:self.scrollView];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSScrollViewDidEndLiveScrollNotification object:self.scrollView];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSTableViewSelectionDidChangeNotification object:self.tableView];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IDPNOTIFICATION_CENTER_WILL_SCROLL_WHEEL object:self.scrollView];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IDPNOTIFICATION_CENTER_DID_SCROLL_WHEEL object:self.scrollView];
-}
-
-- (void)willScrollWheel:(NSNotification *)notification {
-//    if (notification.object == self.scrollView) {
-//        self.pausedObjectHeightLoading = YES;
-//    }
-}
-
-- (void)didScrollWheel:(NSNotification *)notification {
-//    [self updateCellsHeightAfterStopScrolling:notification];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IDPNOTIFICATION_CENTER_START_SCROLL_WHEEL object:self.scrollView];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IDPNOTIFICATION_CENTER_END_SCROLL_WHEEL object:self.scrollView];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IDPNOTIFICATION_CENTER_START_SCROLL_KEY object:self.scrollView];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IDPNOTIFICATION_CENTER_END_SCROLL_KEY object:self.scrollView];
 }
 
 - (void)startScrolling:(NSNotification *)notification {
-    id object = notification.object;
-    if (object == self.scrollView) {
+    if (notification.object == self.scrollView) {
         self.pausedObjectHeightLoading = YES;
     }
 }
