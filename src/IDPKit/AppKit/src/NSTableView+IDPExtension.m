@@ -14,9 +14,7 @@
 #pragma mark Public methods
 
 - (NSArray *)visibleRows {
-    NSScrollView *scrollView = [self enclosingScrollView];
-    CGRect visibleRect = scrollView.contentView.visibleRect;
-    NSRange range = [self rowsInRect:visibleRect];
+    NSRange range = [self rangeOfVisibleRows];
     NSMutableArray *visibleRows = [NSMutableArray array];
     NSInteger endIndex = range.location + range.length;
     
@@ -25,6 +23,33 @@
     }
     
     return visibleRows.count > 0 ? [NSArray arrayWithArray:visibleRows] : nil;
+}
+
+- (NSTableCellView *)firstVisibleViewCell {
+    return [self firstVisibleViewCellMakeIfNecessary:NO];
+}
+
+- (NSTableCellView *)firstVisibleViewCellMakeIfNecessary {
+    return [self firstVisibleViewCellMakeIfNecessary:YES];
+}
+
+#pragma mark -
+#pragma mark Private methods
+
+- (NSTableCellView *)firstVisibleViewCellMakeIfNecessary:(BOOL)makeIfNecessary {
+    NSRange range = [self rangeOfVisibleRows];
+    if (range.length == 0) {
+        return nil;
+    }
+    NSTableCellView *cell = [self viewAtColumn:0 row:range.location makeIfNecessary:makeIfNecessary];
+    return cell;
+}
+
+- (NSRange)rangeOfVisibleRows {
+    NSScrollView *scrollView = [self enclosingScrollView];
+    CGRect visibleRect = scrollView.contentView.visibleRect;
+    NSRange range = [self rowsInRect:visibleRect];
+    return range;
 }
 
 @end

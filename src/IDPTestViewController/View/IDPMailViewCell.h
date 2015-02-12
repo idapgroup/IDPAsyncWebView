@@ -8,8 +8,9 @@
 
 #import "IDPBaseTableCell.h"
 #import <WebKit/WebKit.h>
+#import "IDPMailCellProtocol.h"
 
-@interface IDPMailViewCell : IDPBaseTableCell
+@interface IDPMailViewCell : IDPBaseTableCell <IDPMailCellProtocol>
 
 @property (nonatomic, strong) IBOutlet NSTextField  *senderTextField;
 @property (nonatomic, strong) IBOutlet NSTextField  *recipientsTextField;

@@ -74,6 +74,8 @@ static CGFloat const kDefaultAnimationDuration = 0;
 
 @property (nonatomic, assign) NSInteger currentActiveCellIndex;
 
+@property (nonatomic, assign, getter = isRecalculateHeight) BOOL recalculateHeight;
+
 @end
 
 @implementation IDPMailTableView
@@ -166,6 +168,7 @@ static CGFloat const kDefaultAnimationDuration = 0;
 - (void)reloadData {
     self.currentActiveCellIndex = kDefaultActiveCell;
     [self.tableView reloadData];
+    [self updateCalculatorContentWidth];
     [self reorderCellsLoadingSequence];
 }
 
@@ -188,6 +191,22 @@ static CGFloat const kDefaultAnimationDuration = 0;
     [self.cellHeightCalculator cancel];
     self.currentActiveCellIndex = 0;
     self.loadedObject = nil;
+    self.recalculateHeight = NO;
+}
+
+- (void)viewWillStartLiveResize {
+    [super viewWillStartLiveResize];
+    [self checksIsStopCellHeightCalculation];
+}
+
+- (void)viewDidEndLiveResize {
+    [super viewDidEndLiveResize];
+    if (self.isRecalculateHeight) {
+        self.objecstInQueueToLoadHeight = [NSMutableArray arrayWithArray:self.dataSourceObjects];
+        [self updateCalculatorContentWidth];
+        [self reorderCellsLoadingSequence];
+        self.recalculateHeight = NO;
+    }
 }
 
 #pragma mark -
@@ -300,6 +319,25 @@ static CGFloat const kDefaultAnimationDuration = 0;
         visibleRow = visibleRows.count > 1 ? visibleRow + 1 : visibleRow;
     }
     self.currentActiveCellIndex = visibleRow;
+}
+
+- (void)checksIsStopCellHeightCalculation {
+    BOOL isRecalculateHeight = [self.delegate mailTableViewRecalculateCellHeightIfChangeCellWidth:self];
+    self.recalculateHeight = isRecalculateHeight;
+    if (isRecalculateHeight) {
+        [self markAllCachedObjectsAsDerty];
+    }
+}
+
+- (void)markAllCachedObjectsAsDerty {
+    [self.dataSourceObjects setValue:@(YES) forKeyPath:@"dirty"];
+    [self.cellHeightCalculator cancel];
+    self.objecstInQueueToLoadHeight = nil;
+    self.loadedObject = nil;
+}
+
+- (void)updateCalculatorContentWidth {
+    [self.delegate mailTableView:self updateCellHeightCalculatorContentWidth:self.cellHeightCalculator];
 }
 
 #pragma mark -

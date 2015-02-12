@@ -13,7 +13,10 @@
 
 typedef void(^IDPCellHeightCalculatorCallback)(IDPCellHeightCalculator *calculator, CGFloat newHeight);
 
-@interface IDPCellHeightCalculator : NSObject
+@interface IDPCellHeightCalculator : NSObject {
+    CGFloat _cellContentWidth;
+    CGFloat _cellHeight;
+}
 
 /**
  Set this property inside IDPCellHeightCalculator or in its inherited objects.
@@ -22,7 +25,10 @@ typedef void(^IDPCellHeightCalculatorCallback)(IDPCellHeightCalculator *calculat
 
 @property (nonatomic, strong) IDPTableCacheObject   *object;
 
-@property (nonatomic, assign) CGFloat cellWidth;
+/**
+ Cell content width
+ */
+@property (nonatomic, assign) CGFloat cellContentWidth;
 /**
  Cell height except cell content height.
  */
