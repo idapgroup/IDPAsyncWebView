@@ -8,6 +8,8 @@
 
 #import "IDPScrollView.h"
 
+static NSTimeInterval const kIDPScrollWheelTime = 0.5;
+
 @interface IDPScrollView ()
 
 @property (nonatomic, strong) NSTimer   *scrollWheelTimer;
@@ -48,9 +50,23 @@
 #pragma mark Public methods
 
 - (void)scrollWheel:(NSEvent *)theEvent {
-    [[NSNotificationCenter defaultCenter] postNotificationName:IDPNOTIFICATION_CENTER_WILL_SCROLL_WHEEL object:self];
+    if (!self.scrollWheelTimer) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:IDPNOTIFICATION_CENTER_START_SCROLL_WHEEL object:self];
+    }
+    [self setupScrollWheelTimer];
     [super scrollWheel:theEvent];
-    [[NSNotificationCenter defaultCenter] postNotificationName:IDPNOTIFICATION_CENTER_DID_SCROLL_WHEEL object:self];
+}
+
+#pragma mark -
+#pragma mark Private methods
+
+- (void)setupScrollWheelTimer {
+    self.scrollWheelTimer = [NSTimer scheduledTimerWithTimeInterval:kIDPScrollWheelTime target:self selector:@selector(scrollWheelDidStopScrolling:) userInfo:nil repeats:NO];
+}
+
+- (void)scrollWheelDidStopScrolling:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:IDPNOTIFICATION_CENTER_END_SCROLL_WHEEL object:self];
+    self.scrollWheelTimer = nil;
 }
 
 @end
