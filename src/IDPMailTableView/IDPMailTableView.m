@@ -59,7 +59,7 @@ static BOOL isInterceptedSelector(SEL sel) {
 static NSInteger const kColumnIndex = 0;
 static NSInteger const kDefaultActiveCell = 0;
 static CGFloat const kDefaultAnimationDuration = 0;
-static CGFloat const kIDPResizeDelta = 10;
+static CGFloat const kIDPResizeDelta = 15;
 
 @interface IDPMailTableView ()
 
