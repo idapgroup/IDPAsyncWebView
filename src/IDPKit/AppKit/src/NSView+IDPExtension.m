@@ -14,16 +14,17 @@
 #pragma mark Accessor methods
 
 - (void)setBackgroundColor:(NSColor *)backgroundColor {
-    self.wantsLayer = YES;
-    self.layer.backgroundColor = [backgroundColor CGColor];
+//    self.wantsLayer = YES;
+//    self.layer.backgroundColor = [backgroundColor CGColor];
 }
 
 - (NSColor *)backgroundColor {
-    return [NSColor colorWithCGColor:self.layer.backgroundColor];
+//    return [NSColor colorWithCGColor:self.layer.backgroundColor];
+    return nil;
 }
 
 - (void)setCornerRadius:(CGFloat)cornerRadius {
-    self.layer.cornerRadius = cornerRadius;
+//    self.layer.cornerRadius = cornerRadius;
 }
 
 - (CGFloat)cornerRadius {
