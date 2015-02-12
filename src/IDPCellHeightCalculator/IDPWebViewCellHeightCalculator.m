@@ -29,7 +29,6 @@ static CGFloat const kDefaultWidth = 50;
 {
     self = [super init];
     if (self) {
-        _size =  NSMakeSize(kDefaultWidth, kDefaultHeight);
         self.webView = [[WebView alloc] initWithFrame:NSMakeRect(0, 0, kDefaultWidth, kDefaultHeight)];
         self.webView.frameLoadDelegate = self;
     }
@@ -39,9 +38,11 @@ static CGFloat const kDefaultWidth = 50;
 #pragma mark -
 #pragma mark Accessor methods
 
-- (void)setSize:(CGSize)size {
-    _size = size;
-    self.webView.frame = NSMakeRect(0, 0, _size.width, _size.height);
+- (void)setCellContentWidth:(CGFloat)cellContentWidth {
+    _cellContentWidth = cellContentWidth;
+    NSRect frame = self.webView.frame;
+    frame.size.width = _cellContentWidth;
+    self.webView.frame = frame;
 }
 
 #pragma mark -

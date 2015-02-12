@@ -11,5 +11,6 @@
 @interface NSTableView (IDPExtension)
 
 - (NSArray *)visibleRows;
+- (NSTableCellView *)firstVisibleViewCell;
 
 @end

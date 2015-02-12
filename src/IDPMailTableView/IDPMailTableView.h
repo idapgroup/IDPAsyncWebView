@@ -15,6 +15,13 @@
 
 @protocol IDPMailTableViewDelegate <NSTableViewDelegate>
 
+@required
+- (BOOL)mailTableViewRecalculateCellHeightIfChangeCellWidth:(IDPMailTableView *)tableView;
+/**
+ This methods call after window resizing.
+ */
+- (void)mailTableView:(IDPMailTableView *)tableView updateCellHeightCalculatorContentWidth:(IDPCellHeightCalculator *)cellHeightCalculator;
+
 @end
 
 @protocol IDPMailTableViewDataSource  <NSTableViewDataSource>

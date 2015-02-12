@@ -86,4 +86,11 @@ static NSTimeInterval const kIDPTimerTime = 1;
     self.readMark.backgroundColor = self.model.isRead ? [NSColor clearColor] : [NSColor blueColor];
 }
 
+#pragma mark -
+#pragma mark IDPMailCellProtocol
+
+- (CGFloat)contentWidth {
+    return NSWidth(self.content.frame);
+}
+
 @end

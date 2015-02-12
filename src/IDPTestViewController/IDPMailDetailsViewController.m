@@ -15,6 +15,7 @@
 #import "IDPMailHistoryChainModel.h"
 #import "IDPWebViewCellHeightCalculator.h"
 #import "NSView+IDPExtension.h"
+#import "NSTableView+IDPExtension.h"
 
 static CGFloat   const kCellDefaultHeight = 190;
 
@@ -55,7 +56,7 @@ static CGFloat   const kCellDefaultHeight = 190;
     [super awakeFromNib];
     self.myView.tableView.backgroundColor = [NSColor grayColor];
     self.cellHeightCalculator.cellHeight = 97;
-    self.cellHeightCalculator.size = NSMakeSize(NSWidth(self.myView.frame), kCellDefaultHeight);
+    self.cellHeightCalculator.cellContentWidth = 500;
     self.myView.cellHeightCalculator = self.cellHeightCalculator;
     NSString *identifier = NSStringFromClass([IDPMailViewCell class]);
     self.objects = [NSMutableArray array];
@@ -108,6 +109,17 @@ static CGFloat   const kCellDefaultHeight = 190;
     IDPTableCacheObject *cachedObject = [self.objects objectAtIndex:row];
     [cell fillFromObject:cachedObject.model];
     return cell;
+}
+
+- (BOOL)mailTableViewRecalculateCellHeightIfChangeCellWidth:(IDPMailTableView *)tableView {
+    return YES;
+}
+
+- (void)mailTableView:(IDPMailTableView *)tableView updateCellHeightCalculatorContentWidth:(IDPCellHeightCalculator *)cellHeightCalculator {
+    IDPMailViewCell *cell = (IDPMailViewCell *)[tableView.tableView firstVisibleViewCell];
+    if (cell) {
+        cellHeightCalculator.cellContentWidth = [cell contentWidth];
+    }
 }
 
 @end
