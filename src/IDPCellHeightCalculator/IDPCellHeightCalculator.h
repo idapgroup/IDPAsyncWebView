@@ -16,7 +16,6 @@ typedef void(^IDPCellHeightCalculatorCallback)(IDPCellHeightCalculator *calculat
 @interface IDPCellHeightCalculator : NSObject {
     CGFloat _cellContentWidth;
     CGFloat _cellHeight;
-    CGFloat _cellContentHeight;
 }
 
 /**
@@ -32,26 +31,15 @@ typedef void(^IDPCellHeightCalculatorCallback)(IDPCellHeightCalculator *calculat
 @property (nonatomic, assign) CGFloat cellContentWidth;
 
 /**
- Cell content height
- */
-@property (nonatomic, assign) CGFloat cellContentHeight;
-
-/**
  Cell height except cell content height.
  */
 @property (nonatomic, assign) CGFloat cellHeight;
-
-@property (nonatomic, assign, getter = isSyncCalculating) BOOL syncCalculating;
 
 /**
  Override this method in inherited object. Call super.
  */
 - (void)calculateCellHeighForObject:(IDPTableCacheObject *)object
                            callback:(IDPCellHeightCalculatorCallback)callback;
-
-- (void)calculateCellHeighSyncForObject:(IDPTableCacheObject *)object
-                           callback:(IDPCellHeightCalculatorCallback)callback;
-
 
 - (void)cancel;
 

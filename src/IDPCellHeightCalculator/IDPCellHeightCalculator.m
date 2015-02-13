@@ -19,14 +19,6 @@
 
 - (void)calculateCellHeighForObject:(IDPTableCacheObject *)object
                            callback:(IDPCellHeightCalculatorCallback)callback {
-    self.syncCalculating = NO;
-    self.object = object;
-    self.callback = callback;
-}
-
-- (void)calculateCellHeighSyncForObject:(IDPTableCacheObject *)object
-                               callback:(IDPCellHeightCalculatorCallback)callback {
-    self.syncCalculating = YES;
     self.object = object;
     self.callback = callback;
 }
