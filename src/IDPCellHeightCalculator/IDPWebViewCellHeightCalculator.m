@@ -51,7 +51,19 @@ static CGFloat const kDefaultWidth = 50;
 - (void)calculateCellHeighForObject:(IDPTableCacheObject *)object
                            callback:(IDPCellHeightCalculatorCallback)callback {
     [super calculateCellHeighForObject:object callback:callback];
-    IDPMailMessageModel *mailObject = object.model;
+    [self makeRequest];
+}
+
+- (void)cancel {
+    [super cancel];
+    [self.webFrame stopLoading];
+}
+
+#pragma mark -
+#pragma mark Private methods
+
+- (void)makeRequest {
+    IDPMailMessageModel *mailObject = self.object.model;
     [[self.webView mainFrame] loadHTMLString:mailObject.content baseURL:nil];
 }
 

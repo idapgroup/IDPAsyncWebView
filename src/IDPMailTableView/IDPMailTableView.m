@@ -203,6 +203,9 @@ static CGFloat const kIDPResizeDelta = 15;
 
 - (void)viewWillStartLiveResize {
     [super viewWillStartLiveResize];
+    if (self.currentActiveCellIndex == self.dataSourceObjects.count - 1) {
+        [self updateActiveCellIndex];
+    }
     self.liveResizingStart = YES;
     [self checksIsStopCellHeightCalculation];
 }

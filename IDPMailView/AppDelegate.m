@@ -37,9 +37,11 @@ static NSInteger  kMailCount = 20;
 
 - (void)generateTestData {
     self.testMailObjects = [NSMutableArray array];
-//    NSString *fileName = @"test";
-    NSString *fileName = @"testEmailFile";
+    NSString *fileName = @"test";
+    NSString *fileName2 = @"test-2";
+//    NSString *fileName = @"testEmailFile";
     NSString *contentString = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:fileName ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
+    NSString *contentString2 = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:fileName2 ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
     for (NSInteger index = 0; index < kMailCount; index++) {
         IDPMailHistoryChainModel *chainModel = [IDPMailHistoryChainModel new];
         for (NSInteger kIndex = 0; kIndex < kMailInChain; kIndex++) {
@@ -48,7 +50,7 @@ static NSInteger  kMailCount = 20;
             model.recipients = @[@"test.test@recipient.com"];
             model.sender = @[[NSString stringWithFormat:@"test.test@sender.com %ld-%ld",(long)index,(long)kIndex]];
             model.date = [NSDate date];
-            model.content = contentString;
+            model.content = kIndex % 2 == 0 ? contentString : contentString2;
             [chainModel addNewMailMessage:model];
         }
         [self.testMailObjects addObject:chainModel];

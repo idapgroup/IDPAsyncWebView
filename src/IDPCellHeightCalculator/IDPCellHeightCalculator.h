@@ -29,6 +29,7 @@ typedef void(^IDPCellHeightCalculatorCallback)(IDPCellHeightCalculator *calculat
  Cell content width
  */
 @property (nonatomic, assign) CGFloat cellContentWidth;
+
 /**
  Cell height except cell content height.
  */

@@ -25,6 +25,17 @@
     return visibleRows.count > 0 ? [NSArray arrayWithArray:visibleRows] : nil;
 }
 
+- (NSArray *)visibleCells {
+    NSMutableArray *visibleCells = [NSMutableArray array];
+    NSArray *visibleRows = [self visibleRows];
+    for (NSNumber *row in [[visibleRows reverseObjectEnumerator] allObjects]) {
+        NSTableCellView *cell = [self viewAtColumn:0 row:row.integerValue makeIfNecessary:NO];
+        [visibleCells addObject:cell];
+    }
+    
+    return visibleCells.count > 0 ? [NSArray arrayWithArray:visibleCells] :  nil;
+}
+
 - (NSTableCellView *)firstVisibleViewCell {
     return [self firstVisibleViewCellMakeIfNecessary:NO];
 }
