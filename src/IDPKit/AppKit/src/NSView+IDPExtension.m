@@ -9,21 +9,21 @@
 #import "NSView+IDPExtension.h"
 #import <objc/runtime.h>
 
-static char __backgroundColor;
+static char __backgroundViewColor;
 
 @implementation NSView (IDPExtension)
 
 #pragma mark -
 #pragma mark Accessor methods
 
-- (void)setBackgroundColor:(NSColor *)backgroundColor {
+- (void)setBackgroundViewColor:(NSColor *)backgroundColor {
     self.wantsLayer = YES;
     self.layer.backgroundColor = [backgroundColor CGColor];
-    objc_setAssociatedObject(self, &__backgroundColor, backgroundColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, &__backgroundViewColor, backgroundColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NSColor *)backgroundColor {
-    NSColor *color = ((NSColor *)objc_getAssociatedObject(self, &__backgroundColor));
+- (NSColor *)backgroundViewColor {
+    NSColor *color = ((NSColor *)objc_getAssociatedObject(self, &__backgroundViewColor));
     return color;
 }
 

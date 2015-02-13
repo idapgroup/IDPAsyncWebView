@@ -10,7 +10,7 @@
 
 @interface NSView (IDPExtension)
 
-@property (nonatomic, strong) NSColor *backgroundColor;
+@property (nonatomic, strong) NSColor *backgroundViewColor;
 @property (nonatomic, assign) CGFloat cornerRadius;
 
 @end
