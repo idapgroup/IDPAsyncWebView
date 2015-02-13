@@ -7,6 +7,9 @@
 //
 
 #import "NSView+IDPExtension.h"
+#import <objc/runtime.h>
+
+static char __backgroundColor;
 
 @implementation NSView (IDPExtension)
 
@@ -14,17 +17,18 @@
 #pragma mark Accessor methods
 
 - (void)setBackgroundColor:(NSColor *)backgroundColor {
-//    self.wantsLayer = YES;
-//    self.layer.backgroundColor = [backgroundColor CGColor];
+    self.wantsLayer = YES;
+    self.layer.backgroundColor = [backgroundColor CGColor];
+    objc_setAssociatedObject(self, &__backgroundColor, backgroundColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSColor *)backgroundColor {
-//    return [NSColor colorWithCGColor:self.layer.backgroundColor];
-    return nil;
+    NSColor *color = ((NSColor *)objc_getAssociatedObject(self, &__backgroundColor));
+    return color;
 }
 
 - (void)setCornerRadius:(CGFloat)cornerRadius {
-//    self.layer.cornerRadius = cornerRadius;
+    self.layer.cornerRadius = cornerRadius;
 }
 
 - (CGFloat)cornerRadius {
