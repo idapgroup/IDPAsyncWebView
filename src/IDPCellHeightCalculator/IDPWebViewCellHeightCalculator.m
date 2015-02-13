@@ -56,7 +56,7 @@ static CGFloat const kDefaultWidth = 50;
 
 - (void)cancel {
     [super cancel];
-    [self.webFrame stopLoading];
+    [[self.webView mainFrame] stopLoading];
 }
 
 #pragma mark -
