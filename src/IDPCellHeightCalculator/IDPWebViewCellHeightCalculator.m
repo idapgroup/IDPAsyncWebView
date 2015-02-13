@@ -54,6 +54,11 @@ static CGFloat const kDefaultWidth = 50;
     [self makeRequest];
 }
 
+- (void)cancel {
+    [super cancel];
+    [self.webFrame stopLoading];
+}
+
 #pragma mark -
 #pragma mark Private methods
 
