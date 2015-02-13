@@ -63,7 +63,7 @@ static NSTimeInterval const kIDPTimerTime = 1;
         self.recipientsTextField.stringValue = [mailMessage recipientsString];
         self.subjectTextField.stringValue = [mailMessage subject];
         self.dateTextField.stringValue = mailMessage.formattedDate;
-
+        self.content.policyDelegate = self;
         
         [[self.content mainFrame] loadHTMLString:mailMessage.content baseURL:mailMessage.urlForContentResources];
         
@@ -93,6 +93,22 @@ static NSTimeInterval const kIDPTimerTime = 1;
 
 - (CGFloat)contentWidth {
     return NSWidth(self.content.frame);
+}
+
+#pragma mark -
+#pragma mark WebPolicyDelegate
+
+- (void)webView:(WebView *)webView
+    decidePolicyForNavigationAction:(NSDictionary *)actionInformation
+        request:(NSURLRequest *)request frame:(WebFrame *)frame
+    decisionListener:(id < WebPolicyDecisionListener >)listener
+{
+    NSString *host = [[request URL] host];
+    if (host) {
+        [[NSWorkspace sharedWorkspace] openURL:[request URL]];
+    } else {
+        [listener use];
+    }
 }
 
 @end
