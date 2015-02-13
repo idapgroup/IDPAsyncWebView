@@ -45,21 +45,52 @@ static CGFloat const kDefaultWidth = 50;
     self.webView.frame = frame;
 }
 
+- (void)setCellContentHeight:(CGFloat)cellContentHeight {
+    _cellContentHeight = cellContentHeight;
+    NSRect frame = self.webView.frame;
+    frame.size.height = _cellContentHeight;
+    self.webView.frame = frame;
+}
+
 #pragma mark -
 #pragma mark Public methods
 
 - (void)calculateCellHeighForObject:(IDPTableCacheObject *)object
                            callback:(IDPCellHeightCalculatorCallback)callback {
     [super calculateCellHeighForObject:object callback:callback];
-    IDPMailMessageModel *mailObject = object.model;
+    [self makeRequest];
+}
+
+- (void)calculateCellHeighSyncForObject:(IDPTableCacheObject *)object
+                               callback:(IDPCellHeightCalculatorCallback)callback {
+    [super calculateCellHeighSyncForObject:object callback:callback];
+    [self makeRequest];
+}
+
+#pragma mark -
+#pragma mark Private methods
+
+- (void)makeRequest {
+    IDPMailMessageModel *mailObject = self.object.model;
     [[self.webView mainFrame] loadHTMLString:mailObject.content baseURL:nil];
 }
 
 #pragma mark -
 #pragma mark WebFrameLoadDelegate
 
+- (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame {
+    if(self.isSyncCalculating && [frame isEqual:[self.webView mainFrame]]) {
+        NSRect rect = [[[frame frameView] documentView] frame];
+        CGFloat height = NSHeight(rect);
+        height += self.cellHeight;
+        if (self.callback) {
+            self.callback(self,height);
+        }
+    }
+}
+
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)webFrame {
-    if([webFrame isEqual:[self.webView mainFrame]]) {
+    if(!self.isSyncCalculating && [webFrame isEqual:[self.webView mainFrame]]) {
         NSRect frame = [[[[sender mainFrame] frameView] documentView] frame];
         CGFloat height = NSHeight(frame);
         height += self.cellHeight;

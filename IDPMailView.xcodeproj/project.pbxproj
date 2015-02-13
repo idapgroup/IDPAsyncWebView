@@ -34,6 +34,7 @@
 		69BC27881A8A4E0000F30FC0 /* IDPMailListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC27871A8A4E0000F30FC0 /* IDPMailListView.m */; };
 		69BC278B1A8A4FC800F30FC0 /* IDPMailListTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC278A1A8A4FC800F30FC0 /* IDPMailListTableCellView.m */; };
 		69BC278D1A8A4FD400F30FC0 /* IDPMailListTableCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69BC278C1A8A4FD400F30FC0 /* IDPMailListTableCellView.xib */; };
+		69C0174F1A8E008B0024FD97 /* test-2.html in Resources */ = {isa = PBXBuildFile; fileRef = 69C0174E1A8E008B0024FD97 /* test-2.html */; };
 		69EE2FC41A8BB3360058045D /* NSView+IDPExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 69EE2FC31A8BB3360058045D /* NSView+IDPExtension.m */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +99,7 @@
 		69BC278A1A8A4FC800F30FC0 /* IDPMailListTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPMailListTableCellView.m; sourceTree = "<group>"; };
 		69BC278C1A8A4FD400F30FC0 /* IDPMailListTableCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDPMailListTableCellView.xib; sourceTree = "<group>"; };
 		69BC27901A8A5FC700F30FC0 /* IDPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPConstants.h; sourceTree = "<group>"; };
+		69C0174E1A8E008B0024FD97 /* test-2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "test-2.html"; sourceTree = "<group>"; };
 		69EE2FC21A8BB3360058045D /* NSView+IDPExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+IDPExtension.h"; sourceTree = "<group>"; };
 		69EE2FC31A8BB3360058045D /* NSView+IDPExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+IDPExtension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -285,6 +287,7 @@
 			children = (
 				69B7B2661A8B810800B3FFD2 /* testEmailFile.html */,
 				698E25AF1A8CD90400ED64AA /* test.html */,
+				69C0174E1A8E008B0024FD97 /* test-2.html */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				6926C1441A88F91800FEA821 /* Images.xcassets in Resources */,
 				6926C1821A89004D00FEA821 /* IDPMailViewCell.xib in Resources */,
 				69B7B2671A8B810800B3FFD2 /* testEmailFile.html in Resources */,
+				69C0174F1A8E008B0024FD97 /* test-2.html in Resources */,
 				6926C1911A89047C00FEA821 /* LICENSE in Resources */,
 				6926C1471A88F91800FEA821 /* MainMenu.xib in Resources */,
 			);
