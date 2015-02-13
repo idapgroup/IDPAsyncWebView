@@ -64,7 +64,7 @@ static CGFloat const kDefaultWidth = 50;
 
 - (void)makeRequest {
     IDPMailMessageModel *mailObject = self.object.model;
-    [[self.webView mainFrame] loadHTMLString:mailObject.content baseURL:nil];
+    [[self.webView mainFrame] loadHTMLString:mailObject.content baseURL:mailObject.urlForContentResources];
 }
 
 #pragma mark -

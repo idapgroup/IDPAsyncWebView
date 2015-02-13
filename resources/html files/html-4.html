@@ -1,0 +1,888 @@
+
+<!-- saved from url=(0074)https://tracker.anahoret.com/system/files/25267/original/4.html?1423834691 -->
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><style type="text/css">#lleo_dialog, #lleo_dialog * {
+    margin: 0 !important;
+	padding: 0 !important;
+	background: none !important;
+	border: none 0 !important;
+	position: static !important;
+	vertical-align: baseline !important;
+	font: normal 13px Arial, Helvetica !important;
+	line-height: 15px !important;
+	color: #000 !important;
+	overflow: visible !important;
+	width: auto !important;
+	height: auto !important;
+	float: none !important;
+	visibility: visible !important;
+	text-align: left !important;
+	border-collapse: separate !important;
+	border-spacing: 2px !important;
+}
+
+#lleo_dialog iframe {
+	height: 0 !important;
+	width: 0 !important;
+}
+
+#lleo_dialog {
+    position: absolute !important;
+    background: #fff !important;
+    border: solid 1px #ccc !important;
+    padding: 7px 0 0 !important;
+    left: -999px;
+    top: -999px;
+	/*max-width: 450px !important;*/
+    width: 440px !important;
+    overflow: hidden;
+    display: block !important;
+    z-index: 999999999 !important;
+    opacity: 0 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+	-moz-border-radius: 3px !important;
+	-webkit-border-radius: 3px !important;
+	border-radius: 3px !important;
+}
+#lleo_dialog.lleo_show {
+    opacity: 1 !important;
+    -webkit-transition: opacity 0.3s !important;
+}
+#lleo_dialog input::-webkit-input-placeholder {
+    color: #aaa !important;
+}
+#lleo_dialog .lleo_has_pic #lleo_word {
+	margin-right: 80px !important;
+}
+#lleo_dialog #lleo_translationsCopntainer1 {
+	position: relative !important;
+}
+#lleo_dialog #lleo_translationsCopntainer2 {
+	padding: 7px 0 0 !important;
+	vertical-align: middle !important;
+}
+#lleo_dialog #lleo_word {
+    color: #000 !important;
+    margin: 0 5px 2px 0 !important;
+    /*float: left !important;*/
+}
+#lleo_dialog .lleo_has_sound #lleo_word {
+    margin-left: 17px !important;
+}
+#lleo_dialog #lleo_text {
+    font-weight: bold !important;
+    color: #d56e00 !important;
+    text-decoration: none !important;
+    cursor: default !important;
+}
+#lleo_dialog #lleo_text.lleo_known {
+    cursor: pointer !important;
+    text-decoration: underline !important;
+}
+#lleo_dialog #lleo_closeBtn {
+    position: absolute !important;
+    right: 6px !important;
+    top: 5px !important;
+    line-height: 1px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    font-size: 0 !important;
+    color: #aaa !important;
+    display: block !important;
+    padding: 2px !important;
+	z-index: 9999999999 !important;
+	width: 7px !important;
+	height: 7px !important;
+	padding: 0  !important;
+	margin: 0   !important;
+}
+
+#lleo_dialog #lleo_optionsBtn {
+    position: absolute !important; 
+    right: 1px !important;
+    top: 12px !important;
+    line-height: 1px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    font-size: 13px !important;
+    color: #aaa !important;
+    padding: 2px !important;
+	display: none;
+}
+#lleo_dialog #lleo_optionsBtn img{
+	width: 12px !important;
+	height: 12px !important;
+}
+#lleo_dialog #lleo_sound {
+    float: left !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin-left: 12px !important;
+    background: 0 0 no-repeat !important;
+    cursor: pointer !important;
+    display: none !important;
+}
+#lleo_dialog .lleo_has_sound #lleo_sound {
+    display: block !important;
+}
+#lleo_dialog #lleo_picOuter {
+    position: absolute !important;
+    float: right !important;
+    right: 29px;
+    top: 0;
+    display: none !important;
+    z-index: 9 !important;
+}
+#lleo_dialog .lleo_has_pic #lleo_picOuter {
+    display: block !important;
+}
+#lleo_dialog #lleo_picOuter:hover {
+    z-index: 11 !important;
+}
+#lleo_dialog #lleo_pic,
+#lleo_dialog #lleo_picBig {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    border: solid 2px #fff !important;
+    -moz-border-radius: 2px !important;
+	-webkit-border-radius: 2px !important;
+	border-radius: 2px !important;
+    z-index: 1 !important;
+}
+#lleo_dialog #lleo_pic {
+	position: relative !important;
+    border: none !important;
+	width: 34px !important;
+}
+#lleo_dialog #lleo_picBig {
+    box-shadow: -1px 2px 4px rgba(0,0,0,0.3);
+    z-index: 2 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+#lleo_dialog #lleo_picOuter:hover #lleo_picBig {
+    visibility: visible !important;
+    opacity: 1 !important;
+    -webkit-transition: opacity 0.3s !important;
+    -webkit-transition-delay: 0.3s !important;
+}
+#lleo_dialog #lleo_transcription {
+    color: #486D85 !important;
+    margin: 0 0 4px 29px !important;
+    color: #aaaaaa !important;
+}
+#lleo_dialog .lleo_no_trans {
+    color: #aaa !important;
+}
+
+
+
+
+
+
+#lleo_dialog .ll-translation-counter {
+	float: right !important;
+    font-size: 11px !important;
+    color: #aaa !important;
+    padding: 2px 2px 1px 10px !important;
+}
+
+#lleo_dialog .ll-translation-text {
+	float: left !important;
+	width: 80% !important;
+}
+
+#lleo_dialog #lleo_trans a {
+    color: #3F669F !important;
+    padding: 1px 4px !important;
+    text-decoration: none !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+}
+
+#lleo_dialog .ll-translation-item {
+	width: 100% !important;
+	float: left !important; 
+	padding:1px 4px;
+	color: #3F669F !important;
+	padding: 3px !important;
+	border: solid 1px white !important;
+	-moz-border-radius: 2px !important;
+	-webkit-border-radius: 2px !important;
+	border-radius: 2px !important;
+}
+
+#lleo_dialog .ll-translation-item:hover {
+	border: solid 1px #9FC2C9 !important;
+    background: #EDF4F6 !important;
+	cursor: pointer !important;
+}
+
+#lleo_dialog .ll-translation-marker {
+	margin: 0px 5px 2px 2px !important;
+}
+
+
+
+
+
+#lleo_dialog #lleo_icons {
+    margin: 10px 0 7px !important;
+    color: #aaa !important;
+    line-height: 20px !important;
+    font-size: 11px !important;
+    clear: both !important;
+    padding-left: 16px !important;
+}
+#lleo_icons a {
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 0 -2px 3px !important;
+    text-decoration: none !important;
+    background: 0 0 no-repeat !important;
+    opacity: 0.5 !important;
+}
+#lleo_icons a:hover {
+    opacity: 1 !important;
+}
+#lleo_icons a.lleo_google     {background-position:-34px 0 !important;}
+#lleo_icons a.lleo_multitran  {background-position:-64px 0 !important;}
+#lleo_icons a.lleo_lingvo     {background-position:-51px 0 !important; width: 12px !important;}
+#lleo_icons a.lleo_dict       {background-position:-17px 0 !important;}
+#lleo_icons a.lleo_linguee    {background-position:-81px 0 !important;}
+#lleo_icons a.lleo_michaelis  {background-position:-98px 0 !important;}
+
+
+
+
+#lleo_dialog #lleo_contextContainer {
+    margin: 0 !important;
+    padding: 3px 15px 3px 10px !important;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee)) !important;
+    border-bottom: solid 1px #ddd !important;
+    border-top-left-radius: 3px !important;
+    border-top-right-radius: 3px !important;
+    display: none !important;
+    overflow: hidden !important;
+}
+#lleo_dialog .lleo_has_context #lleo_contextContainer {
+    display: block !important;
+}
+#lleo_dialog #lleo_context {
+    color: #444 !important;
+    text-shadow: 1px 1px 0 #f4f4f4 !important;
+    line-height: 12px !important;
+    font-size: 11px !important;
+    margin-left: 2px !important;
+}
+#lleo_dialog #lleo_context b {
+    line-height: 12px !important;
+    color: #000 !important;
+    font-weight: bold !important;
+    font-size: 11px !important;
+}
+#lleo_dialog #lleo_gBrand {
+    color: #aaa !important;
+    font-size: 10px !important;
+    /*padding-right: 52px !important;*/
+    padding-bottom: 14px !important;
+    margin: -3px 4px 0 4px !important;
+    background: left bottom no-repeat !important;
+    display: inline-block !important;
+    float: right !important;
+}
+#lleo_dialog #lleo_gBrand.hidden {
+    display: none !important;
+}
+#lleo_dialog #lleo_translateContextLink {
+    color: #444 !important;
+    text-shadow: 1px 1px 0 #f4f4f4 !important;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f4f4f4), to(#ddd)) !important;
+    border: solid 1px !important;
+    box-shadow: 1px 1px 0 #f6f6f6 !important;
+    border-color: #999 #aaa #aaa #999 !important;
+    -moz-border-radius: 2px !important;
+	-webkit-border-radius: 2px !important;
+	border-radius: 2px !important;
+    padding: 0 3px !important;
+    font-size: 11px !important;
+    text-decoration: none !important;
+    margin: 1px 5px 0 !important;
+    display: inline-block !important;
+    white-space: nowrap !important;
+}
+#lleo_dialog #lleo_translateContextLink:hover {
+    background: #f8f8f8 !important;
+}
+
+#lleo_dialog #lleo_setTransForm {
+    display: block !important;
+    margin-top: 3px !important;
+    padding-top: 5px !important;
+    /* Set position and background because the form might be overlapped by an image when no translations */
+    position: relative !important;
+    background: #fff !important;
+    z-index: 10 !important;
+    padding-bottom: 10px !important;
+    padding-left: 16px !important;
+}
+#lleo_dialog .lleo-custom-translation {
+    padding: 4px 5px !important;
+    border: solid 1px #ddd !important;
+    -moz-border-radius: 2px !important;
+	-webkit-border-radius: 2px !important;
+	border-radius: 2px !important;
+    width: 90% !important;
+    min-width: 270px !important;
+    background: -webkit-gradient(linear, 0 0, 0 20, from(#f1f1f1), to(#fff)) !important;
+	font: normal 13px Arial, Helvetica !important;
+	line-height: 15px !important;
+}
+#lleo_dialog .lleo-custom-translation:hover {
+    border: solid 1px #aaa !important;
+}
+#lleo_dialog .lleo-custom-translation:focus {
+    background: #FFFEC9 !important;
+}
+
+#lleo_dialog *.hidden {
+    display: none !important;
+}
+
+#lleo_dialog .infinitive{
+    color: #D56E00 !important;
+    text-decoration: none;
+    border-bottom: 1px dotted #D56E00 !important;
+}
+#lleo_dialog .infinitive:hover{
+    border: none !important;
+}
+
+
+#lleo_dialog #lleo_trans{
+    zoom: 1;
+    border-top: 1px solid #eeeeee !important;
+    margin: 10px 0 0 !important;
+    padding: 5px 30px 0 14px !important;
+}
+
+#lleo_dialog .lleo_clearfix {
+	display: block !important;
+	clear: both !important;
+	visibility: hidden !important;
+	height: 0 !important;
+	font-size: 0 !important;
+}
+
+#lleo_dialog #lleo_markBlock {
+    background: #eeeeee !important;
+	cursor: pointer !important; 
+	border-bottom-left-radius: 3px !important;
+	border-bottom-right-radius: 3px !important;
+	border-collapse: separate !important;
+	border-spacing: 2px !important; 
+}
+
+#lleo_dialog #lleo_markBlock img{
+	width: 14px !important;
+	height: 14px !important;
+}
+
+#lleo_dialog #lleo_markBlock .icon-cell {
+	padding: 5px 2px 5px 16px !important;
+	height: 17px !important;
+}
+
+#lleo_dialog #lleo_markBlock .wide-cell {
+	width: 100% !important;
+}
+
+#lleo_dialog #lleo_markBlock .text-cell {
+	color: #999999 !important; 
+    font: normal 13px Arial, Helvetica !important;
+    text-shadow: 0 1px #fff !important; 
+}
+
+#lleo_dialog #lleo_markBlock td {
+	vertical-align: middle !important;
+	border-collapse: separate !important;
+	border-spacing: 2px !important;
+}
+
+
+#lleo_dialog #lleo_picOuter table{
+    width: 44px !important;
+    position: absolute !important;
+    right: 0 !important;
+    vertical-align: middle !important;
+}
+
+#lleo_dialog #lleo_picOuter td{
+    width: 38px !important;
+    height: 38px !important;
+    border: 1px solid #eeeeee !important;
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+
+#lleo_dialog #lleo_picOuter td div {
+	height: 38px !important;
+	overflow: hidden !important;
+}</style><style type="text/css">
+.ll-content-notification *{
+	letter-spacing: normal !important;
+	margin: 0 !important;
+    padding: 0 !important;
+	background: none !important;
+	border: 0 !important;
+	float: none !important;
+	text-align: left !important;
+	text-decoration: none !important;
+    font: normal 15px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+}
+
+
+.ll-content-notification {
+    vertical-align: baseline !important;
+    color: #000 !important;
+    overflow: visible !important;
+    visibility: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: fixed !important;
+    background: #fff !important;
+    border: solid 1px #AAA !important;
+	/*
+    left: -999px;
+    top: -999px;
+	*/
+    width: auto;
+    /* width: 300px !important; */
+    display: block;
+    z-index: 999999999 !important;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18) !important;
+    -webkit-border-radius: 3px !important;
+    -moz-border-radius: 3px !important;
+    border-radius: 3px !important;
+    overflow: hidden !important;
+    /* opacity: 0 !important; */
+    transition: opacity 0.8s !important;
+    -moz-transition: opacity 0.8s !important; /* Firefox 4 */
+    -webkit-transition: opacity 0.8s !important; /* Safari and Chrome */
+    -o-transition: opacity 0.8s !important; /* Opera */
+    cursor: default !important;
+}
+
+.ll-content-notification-shown {
+    opacity: 1 !important;
+    transition: opacity 0.8s !important;
+    -moz-transition: opacity 0.8s !important; /* Firefox 4 */
+    -webkit-transition: opacity 0.8s !important; /* Safari and Chrome */
+    -o-transition: opacity 0.8s !important; /* Opera */
+}
+
+.ll-content-notification-header {
+	border: 0 !important;
+	margin: 0 !important;
+    background: url(data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAABJJREFUGFdjePHmCxw9e/UZjgAVYhYtk8xZqAAAAABJRU5ErkJggg==) !important;
+    border-bottom: solid 1px #CCC !important;
+    padding: 1px 4px !important;
+	min-height: 18px !important;
+	width: 100% !important;
+	-webkit-border-top-left-radius: 3px !important;
+    -webkit-border-top-right-radius: 3px !important;
+    -moz-border-radius-topleft: 3px !important;
+    -moz-border-radius-topright: 3px !important;
+    border-top-left-radius: 3px !important;
+    border-top-right-radius: 3px !important;
+	border-collapse: collapse !important;
+	border-spacing: 0 !important;
+}
+
+.ll-content-notification-header-pic {
+	border: 0 !important;
+	margin: 0 !important;
+	padding: 3px 0 0 3px !important;
+	width: 20px !important;
+	vertical-align: top !important;
+	line-height: 1px !important;
+}
+
+.ll-content-notification-header-pic img{
+	border: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	line-height: 1px !important;
+}
+
+
+.ll-content-notification-header-caption {
+    font: normal 13px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+	font-weight: bold !important;
+    line-height: 15px !important;
+    color: #555 !important;
+    float: left !important;
+    text-shadow: none !important;
+    letter-spacing: normal !important;
+	white-space: normal !important;
+	padding: 3px !important;
+	margin: 0 !important;
+}
+
+.ll-content-notification-header-close {
+    width: 15px !important;
+	vertical-align: top !important;
+	text-align: right !important;
+	padding: 6px 5px 0 0 !important;
+	margin: 0 !important;
+	line-height: 1px !important;
+}
+
+.ll-content-notification-header-close img {
+	border: 0 !important;
+    width: 7px !important;
+    height: 7px !important;
+    margin: 0 !important;
+	padding: 0 !important;
+}
+
+.ll-content-notification-content {
+    margin: 0 !important;
+    padding: 8px !important;
+    float: left !important;
+    overflow: hidden !important;
+    width: auto !important;
+}
+
+.ll-content-notification-content-logo {
+    float: left !important;
+	height: 48px !important;
+	width: 48px !important;
+}
+
+.ll-content-notification-content-main {
+    margin-left: 60px !important;
+    overflow: hidden !important;
+    padding: 0 0 2px 0 !important;
+    color: #333 !important;
+    text-align: left !important;
+    text-shadow: none !important;
+    letter-spacing: normal !important;
+    font: normal 13px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+    line-height: 15px !important;
+    width: auto !important;
+}
+
+.ll-content-notification-content-header {
+	text-align: left !important;
+	text-decoration: none !important;
+    font: bold 15px 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Arial, Helvetica, sans-serif !important;
+    line-height: 19px !important;
+    margin: 0 0 4px 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    color: #333 !important;
+    text-shadow: none !important;
+    letter-spacing: normal !important;
+    display: block !important;
+    top: 0 !important;
+    left: 0 !important;
+}
+
+.ll-content-notification-word {
+    color: #d56e00 !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+}
+</style><style type="text/css"></style></head><body alink="red" bgcolor="#FFFFFF" link="blue" text="black" vlink="blue"><div style="padding-bottom: 20px;"></div><div><!--
+~~*~~
+-->
+
+
+<title>Subscribe.Ru : Онлайн опросы с призами</title>
+<meta name="keywords" content="товары предложения выгодные реклама">
+<meta name="author" content="optin@subscribe.ru Информационный канал Subscribe.Ru">
+<meta name="x-felis-optin-Name" content="Интернет;Игры, лотереи">
+<meta name="x-felis-optin-Id" content="30;39">
+<meta name="x-felis-optin-task-Id" content="https://subscribe.ru/manage/direct/task?tid=27643">
+<link rel="Shortcut Icon" type="image/x-icon" href="http://subscribe.ru/img/favicon.ico">
+<style type="text/css">
+/*<![CDATA[*/
+<!-- P {
+COLOR:#000000; FONT-FAMILY:Verdana,Arial,Helvetica,sans-serif; FONT-SIZE:10pt; FONT-STYLE:normal; FONT-WEIGHT:normal;
+}
+BODY {
+COLOR:#000000; FONT-FAMILY:Verdana,Arial,Helvetica,sans-serif; FONT-SIZE:10pt; FONT-STYLE:normal; FONT-WEIGHT:normal;
+}
+TD {
+COLOR:#000000; FONT-FAMILY:Verdana,Arial,Helvetica,sans-serif; FONT-SIZE:10pt; FONT-STYLE:normal; FONT-WEIGHT:normal;
+}
+ -->
+/*]]>*/
+</style>
+
+
+<center><img src="./html-4_files/m21704461" alt="" height="1" width="1" border="0">
+<table width="100%" summary="" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF" style="background-color: #ffffff; background-image:none; padding:0; margin:0;" class="pad_null">
+<tbody><tr>
+<td align="center">
+<table width="90%" summary="" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<table width="100%" summary="" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td align="left" width="70%"><font face="Trebuchet MS, Arial, Helvetica, sans-serif" color="#666666" size="2" style="color: #666666; font-size:13px; font-family: Arial, Helvetica, sans-serif;">
+Если выпуск не отображается, вы можете</font> <a rel="nofollow" href="http://subscribe.ru/archive/optin.custom/201502/13150335.html?clearview&amp;email=testimap@anahoret.com&amp;uuid=rvJi8D1lEC5S7VCRM_6L5w">
+<font face="Trebuchet MS, Arial, Helvetica, sans-serif" color="#1C70A0" size="2" style="color: #1c70a0; font-size:13px; font-family: Arial, Helvetica, sans-serif;">
+прочесть его на сайте</font></a></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td><font size="1" face="Arial, Helvetica, sans-serif" style="font-size: 8px;">&nbsp;&nbsp;</font></td>
+</tr>
+<tr>
+<td bgcolor="#B7B7B7" height="1"></td>
+</tr>
+<tr>
+<td align="center"><br>
+<table width="90%" summary="" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td>
+<table width="100%" summary="" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td align="left" width="204"><a rel="nofollow" href="http://subscribe.ru/?uuid=rvJi8D1lEC5S7VCRM_6L5w&email=testimap@anahoret.com">
+<img alt="" src="./html-4_files/_logo.png" width="204" height="43" border="0"></a></td>
+<td width="40">&nbsp;</td>
+<td align="left" valign="top"><font color="#D6220C" face="Trebuchet MS, Arial, Helvetica, sans-serif" size="6" style="font-size: 28px; color: #d6220c;"><strong>Онлайн опросы с
+призами</strong></font></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td><font size="1" face="Arial, Helvetica, sans-serif" style="font-size: 8px;">&nbsp;&nbsp;</font></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor="#B7B7B7" height="1"></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="center">
+<table width="100%" summary="" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF" style="background-color: #ffffff; background-image: ;">
+<tbody><tr valign="top" align="left">
+<td bgcolor="#FFFFFF" style="padding: 5px; background-color: #ffffff; background-image: ;">
+<center>
+<table bgcolor="#99BED8" border="0" bordercolor="#99BED8" cellpadding="0" cellspacing="0" width="600" class="weath" align="center">
+<tbody>
+<tr>
+<td>
+<table width="600" border="0" cellspacing="0" cellpadding="0" class="weath" bgcolor="#EFF4F7" align="center">
+<tbody><tr>
+<td><a href="http://subs.link.subscribe.ru/subscribe/567611/21704461/optin.custom,22390/20150213150335">
+<img src="./html-4_files/vox.jpg" inline="" width="165" height="130" border="0"></a></td>
+<td><img src="./html-4_files/11.jpg" inline="" width="506" height="130"></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="3" background="./html-4_files/bg.jpg" inline="">
+<table width="671" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="40"><img src="./html-4_files/emp40x1.gif" inline="" width="40" height="1"></td>
+<td width="631">
+<table width="631" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td colspan="3" width="631"><font face="Times New Roman, Times, serif;" size="5" color="#222222" style="color:#222222; font-family: Times New Roman, Times, serif; font-weight: normal; text-decoration:none;">
+Ваш голос - в копилку мнений</font><br>
+<br>
+<br></td>
+</tr>
+<tr>
+<td width="139" valign="top"><img src="./html-4_files/pic.jpg" inline="" width="139" height="155"></td>
+<td width="30"><img src="./html-4_files/emp30x1.gif" inline="" width="30" height="1"></td>
+<td width="462" valign="top"><font face="Arial, sans-serif;" size="2" color="#222222"><br>
+Желаете узнать мнение широкого круга пользователей �&nbsp;унета по самым
+разнообразным вопросам? Их реакцию на события общественной жизни?
+Информационные предпочтения и активность пользования различными
+сетевыми ресурсами?<br>
+<br>
+Становитесь участником интерактивной системы исследований аудитории
+интернета <b>Глас �&nbsp;унета (VoxRu.net)</b><br>
+<br>
+Участвуйте в наших онлайн опросах и тестах, получайте их
+статистически обработанные результаты с комментариями.<br>
+<br>
+Среди активных подписчиков нашей рассылки мы проводим розыгрыши
+призов. Ближайший состоится 28 февраля 2015 года. Будут
+разыгрываться:<br>
+<br></font>
+<ul>
+<li><font face="Arial, sans-serif;" size="2" color="#222222">Стерео
+гарнитура Ritmix RH-512M (1 экз.)<br></font></li>
+<li><font face="Arial, sans-serif;" size="2" color="#222222">USB
+Flash память на 4Gb (2 экз.)<br>
+<br>
+Заполните анкету подписчика, если, конечно, Вы не сделали этого
+ранее при оформлении подписки, и просто отвечайте на присылаемые
+Вам вопросы. От степени Вашей активности напрямую зависит
+вероятность выигрыша.<br>
+<br>
+Прямо сейчас Вы можете принять участие в исследовании<br>
+<b>"Холодная война"</b>.<br>
+<br>
+Чтобы принять участие в онлайн опросе, Вам нужно пройти по
+следующей ссылке:<br>
+<br>
+<b><a href="http://subs.link.subscribe.ru/subscribe/567611/21704461/optin.custom,22390/20150213150335">
+http://virtualexs.ru/cgi-bin/exsurveys/survey.cgi?ac=10606</a></b><br>
+
+<br>
+Если указанная ссылка не открывается, скопируйте ее в буфер обмена,
+вставьте в адресную строку браузера и нажмите ввод.<br>
+<br>
+<img src="./html-4_files/emp462x1.gif" inline="" width="462" height="1"></font></li>
+</ul>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td colspan="3"><img src="./html-4_files/bot.jpg" inline="" width="671" height="70"></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody>
+</table>
+</center>
+<table width="800" align="center" cellpadding="2" cellspacing="0" border="0" bordercolor="#FFFFFF" background="./html-4_files/4.html" s="" tyle="background-color: #ffffff; background-image: ;">
+<tbody><tr>
+<td align="left"><br>
+<p><font size="2" color="#000000" style="color: #000000; font-size: 10pt;">Вы получили это письмо,
+поскольку отметили в анкете подписчика, что хотите получать
+рекламные материалы и информацию от избранных партнеров
+Subscribe.Ru по одной из следующих тем:</font></p>
+<ul>
+<li><font size="2" color="#000000" style="color: #000000; font-size: 10pt;">Интернет</font></li>
+<li><font size="2" color="#000000" style="color: #000000; font-size: 10pt;">Игры, лотереи</font></li>
+</ul>
+<font size="2" color="#000000" style="color: #000000; font-size: 10pt;">Вы можете в любой момент
+изменить выбранные Вами темы в</font> <a href="http://subscribe.ru/member/anketa/optin"><font size="2" color="#000000" style="color: #000000; font-size: 10pt;">анкете
+подписчика</font></a>.</td>
+</tr>
+</tbody></table>
+<!--
+<b>Уважаемый подписчик!</b><br>
+Вы получили очередную рассылку "<a href=http://subscribe.ru/catalog/optin.custom>Онлайн опросы с призами</a>"
+из раздела <a href=http://subscribe.ru/catalog/optin>"В мире товаров и услуг"</a>.<br>
+Изменить состояние своей подписки Вы можете на сайте <a href=http://subscribe.ru/>http://subscribe.ru</a>
+<hr>
+-->
+<!-- " ' --></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor="#B7B7B7" height="1"></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>
+<table width="100%" summary="" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="50%" align="right">
+<table border="0" summary="" cellspacing="0" cellpadding="0">
+<tbody><tr valign="top">
+<td align="right"><a href="http://link.subscribe.ru/205278?u=http://subscribe.ru/archive/optin.custom/201502/13150335.html">
+<img alt="" height="16" border="0" width="16" src="./html-4_files/_s_fb.png"></a>&nbsp;<a href="http://link.subscribe.ru/205279?url=http://subscribe.ru/archive/optin.custom/201502/13150335.html"><img alt="" height="16" border="0" width="16" src="./html-4_files/_s_vk.png"></a>&nbsp;<a href="http://link.subscribe.ru/205280?status=http://subscribe.ru/archive/optin.custom/201502/13150335.html+%D0%9E%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD%20%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B%20%D1%81%20%D0%BF%D1%80%D0%B8%D0%B7%D0%B0%D0%BC%D0%B8"><img alt="" height="16" border="0" width="16" src="./html-4_files/_s_tw.png"></a>&nbsp;<a href="http://link.subscribe.ru/205281?share_url=http://subscribe.ru/archive/optin.custom/201502/13150335.html"><img alt="" height="16" border="0" width="16" src="./html-4_files/_s_mm.png"></a>&nbsp;</td>
+<td align="right"><font size="3" face="Arial, Helvetica, sans-serif" color="#D6220C" style="font-size: 14px; color: rgb(214, 34, 12);">+&nbsp;</font><a rel="nofollow" href="http://link.subscribe.ru/207559?what=add&type=issue&content=optin.custom,20150213150335&uuid=rvJi8D1lEC5S7VCRM_6L5w&email=testimap@anahoret.com" style="color: rgb(214, 34, 12);"><font size="3" face="Arial, Helvetica, sans-serif" color="#D6220C" style="font-size: 14px; color: rgb(214, 34, 12);">В&nbsp;избранное</font></a></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td bgcolor="#B7B7B7" height="1"></td>
+</tr>
+<tr>
+<td align="center" style="background-image:none; padding:0; margin:0;">
+<table summary="" width="90%" border="0" cellspacing="0" cellpadding="0" style="background-image:none; padding:0; margin:0;">
+<tbody><tr>
+<td colspan="3">&nbsp;</td>
+</tr>
+<tr>
+<td width="40%" valign="top" align="left" style="background-color:white; font-size:13px; background-image:none; padding:0; margin:0;">
+<font size="2" color="#888888" face="Trebuchet MS, Arial, Helvetica, sans-serif" style="color: #888888; font-size: 13px; font-weight: normal; font-family: Trebuchet MS, Arial, Helvetica, sans-serif;">
+Подписан адрес:</font> <a rel="nofollow" href="http://subscribe.ru/member?uuid=rvJi8D1lEC5S7VCRM_6L5w&email=testimap@anahoret.com">
+<font size="2" color="#888888" face="Trebuchet MS, Arial, Helvetica, sans-serif" style="color: #888888; font-size: 13px; font-weight: normal; font-family: Trebuchet MS, Arial, Helvetica, sans-serif;">
+testimap@anahoret.com</font></a><br>
+<a rel="nofollow" href="http://subscribe.ru/archive/optin.custom?uuid=rvJi8D1lEC5S7VCRM_6L5w&email=testimap@anahoret.com">
+<font size="2" color="#888888" face="Trebuchet MS, Arial, Helvetica, sans-serif" style="color: #888888; font-size: 13px; font-weight: normal; font-family: Trebuchet MS, Arial, Helvetica, sans-serif;">
+Архив рассылки</font></a></td>
+<td width="30%" valign="top" align="left" style="background-color:white; font-size:13px; background-image:none; padding:0; margin:0;">
+<a rel="nofollow" href="http://subscribe.ru/member/anketa/optin?email=testimap@anahoret.com&uuid=rvJi8D1lEC5S7VCRM_6L5w">
+<font size="2" color="#888888" face="Trebuchet MS, Arial, Helvetica, sans-serif" style="color: #888888; font-size: 13px; font-weight: normal; font-family: Trebuchet MS, Arial, Helvetica, sans-serif;">
+Отписаться</font></a><br>
+<a rel="nofollow" href="http://subscribe.ru/feedback/?testimap@anahoret.com,optin.custom,20150213150335">
+<font size="2" color="#888888" face="Trebuchet MS, Arial, Helvetica, sans-serif" style="color: #888888; font-size: 13px; font-weight: normal; font-family: Trebuchet MS, Arial, Helvetica, sans-serif;">
+Поддержка подписчиков</font></a></td>
+<td width="30%" valign="top" align="left" style="background-color:white; font-size:13px; background-image:none; padding:0; margin:0;">
+</td>
+</tr>
+<tr>
+<td colspan="3">&nbsp;</td>
+</tr>
+<tr>
+<td colspan="3" align="left" valign="middle" style="background-color:#white; font-size:13px; background-image:none; padding:0; margin:0;">
+<font size="2" color="#888888" face="Trebuchet MS, Arial, Helvetica, sans-serif" style="color: #888888; font-size: 13px; font-weight: normal; font-family: Trebuchet MS, Arial, Helvetica, sans-serif;">
+�&nbsp;ассылка производится:</font> <a href="http://subscribe.ru/"><font size="2" color="#888888" face="Trebuchet MS, Arial, Helvetica, sans-serif" style="color: #888888; font-size: 13px; font-weight: normal; font-family: Trebuchet MS, Arial, Helvetica, sans-serif;">
+Subscribe.Ru</font></a> <font size="2" color="#888888" face="Trebuchet MS, Arial, Helvetica, sans-serif" style="color: #888888; font-size: 13px; font-weight: normal; font-family: Trebuchet MS, Arial, Helvetica, sans-serif;">
+/ ЗАО «Интернет-Проекты» /</font> <a href="http://subscribe.ru/about/"><font size="2" color="#888888" face="Trebuchet MS, Arial, Helvetica, sans-serif" style="color: #888888; font-size: 13px; font-weight: normal; font-family: Trebuchet MS, Arial, Helvetica, sans-serif;">
+О компании</font></a> <font size="2" color="#888888" face="Trebuchet MS, Arial, Helvetica, sans-serif" style="color: #888888; font-size: 13px; font-weight: normal; font-family: Trebuchet MS, Arial, Helvetica, sans-serif;">
+/</font> <a href="http://subscribe.ru/about/privacy.html"><font size="2" color="#888888" face="Trebuchet MS, Arial, Helvetica, sans-serif" style="color: #888888; font-size: 13px; font-weight: normal; font-family: Trebuchet MS, Arial, Helvetica, sans-serif;">
+Политика конфиденциальности</font></a></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</center>
+
+
+</div></body></html>

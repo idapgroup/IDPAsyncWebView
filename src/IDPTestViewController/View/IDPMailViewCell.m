@@ -63,7 +63,9 @@ static NSTimeInterval const kIDPTimerTime = 1;
         self.recipientsTextField.stringValue = [mailMessage recipientsString];
         self.subjectTextField.stringValue = [mailMessage subject];
         self.dateTextField.stringValue = mailMessage.formattedDate;
-        [[self.content mainFrame] loadHTMLString:mailMessage.content baseURL:nil];
+
+        
+        [[self.content mainFrame] loadHTMLString:mailMessage.content baseURL:mailMessage.urlForContentResources];
         
         self.readMark.backgroundViewColor = mailMessage.isRead ? [NSColor clearColor] : [NSColor blueColor];
         self.readMark.cornerRadius = CGRectGetWidth(self.readMark.frame)/2;
