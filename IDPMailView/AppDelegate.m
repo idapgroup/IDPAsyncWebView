@@ -38,7 +38,7 @@ static NSInteger  kMailCount = 20;
 - (void)generateTestData {
     self.testMailObjects = [NSMutableArray array];
     NSString *folderName = @"html files";
-    NSArray *array = @[@"html-1",@"html-2",@"html-3"];
+    NSArray *array = @[@"html-1",@"html-2",@"html-3",@"html-4"];
     
     for (NSInteger index = 0; index < kMailCount; index++) {
         IDPMailHistoryChainModel *chainModel = [IDPMailHistoryChainModel new];
