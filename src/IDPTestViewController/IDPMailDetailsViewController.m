@@ -78,16 +78,17 @@ static CGFloat   const kCellDefaultHeight = 190;
 
 - (void)didSelectedNewMail:(NSNotification *)notification {
     [self.cellHeightCalculator cancel];
+    [self.myView resetAllData];
     IDPMailHistoryChainModel *model = notification.object;
     self.objects = [NSMutableArray array];
     NSInteger firstUnreadMail = [model indexOfFirstUnreadMail];
+    firstUnreadMail = NSNotFound == firstUnreadMail ? 0 : firstUnreadMail;
     for (IDPMailMessageModel *mailMessage in model.mailMessages) {
         IDPTableCacheObject *object = [IDPTableCacheObject new];
         object.cellHeight = kCellDefaultHeight;
         object.model = mailMessage;
         [self.objects addObject:object];
     }
-    [self.myView resetAllData];
     self.myView.dataSourceObjects = self.objects;
     [self.myView reloadData];
     [self.myView scrollRowToVisible:firstUnreadMail];
