@@ -58,7 +58,7 @@ static BOOL isInterceptedSelector(SEL sel) {
 
 static NSInteger const kColumnIndex = 0;
 static NSInteger const kDefaultActiveCell = 0;
-static CGFloat const kDefaultAnimationDuration = 0;
+static CGFloat const kDefaultAnimationDuration = 0.8;
 static CGFloat const kIDPResizeDelta = 15;
 
 @interface IDPMailTableView ()
@@ -198,6 +198,10 @@ static CGFloat const kIDPResizeDelta = 15;
     [self.cellHeightCalculator cancel];
     self.currentActiveCellIndex = 0;
     self.loadedObject = nil;
+    [self.objecstInQueueToLoadHeight removeAllObjects];
+    [self.pausedObjectHeightLoadingArray removeAllObjects];
+    self.pausedObjectHeightLoading = NO;
+    self.liveResizingStart = NO;
     self.recalculateHeight = NO;
 }
 
@@ -272,13 +276,22 @@ static CGFloat const kIDPResizeDelta = 15;
 - (void)updateCellsHeightAfterStopScrolling:(NSNotification *)notification {
     id object = notification.object;
     [self updateActiveCellIndex];
-    NSInteger visibleRow = self.currentActiveCellIndex;
     if (object == self.scrollView) {
         self.pausedObjectHeightLoading = NO;
-        for (NSNumber *row in self.pausedObjectHeightLoadingArray) {
-            IDPTableCacheObject *object = [self.dataSourceObjects objectAtIndex:row.integerValue];
-            [self updateCellHeightForRow:row.integerValue visibleRow:visibleRow object:object];
-        }
+        [self updateCellsHeightAfterStopScrolling];
+    }
+}
+
+- (void)updateCellsHeightAfterStopScrolling {
+    NSNumber *row = [self.pausedObjectHeightLoadingArray firstObject];
+    if (row) {
+        IDPTableCacheObject *object = [self.dataSourceObjects objectAtIndex:row.integerValue];
+        __weak typeof(self) weakSelf = self;
+        [self updateCellHeightForRow:row.integerValue visibleRow:self.currentActiveCellIndex object:object completionHandler:^{
+            [weakSelf.pausedObjectHeightLoadingArray removeObject:row];
+            [weakSelf performSelector:@selector(updateCellsHeightAfterStopScrolling)];
+        }];
+    } else {
         [self.pausedObjectHeightLoadingArray removeAllObjects];
         [self reorderCellsLoadingSequence];
     }
@@ -298,9 +311,10 @@ static CGFloat const kIDPResizeDelta = 15;
                 object.cellHeight = newHeight;
                 if (!weakSelf.isPausedObjectHeightLoading) {
                     NSInteger visibleRow = weakSelf.currentActiveCellIndex;
-                    [weakSelf updateCellHeightForRow:row visibleRow:visibleRow object:object];
-                    weakSelf.loadedObject = nil;
-                    [weakSelf loadCellHeightInBackground];
+                    [weakSelf updateCellHeightForRow:row visibleRow:visibleRow object:object completionHandler:^{
+                        weakSelf.loadedObject = nil;
+                        [weakSelf loadCellHeightInBackground];
+                    }];
                 } else {
                     weakSelf.loadedObject = nil;
                     [weakSelf.pausedObjectHeightLoadingArray addObject:@(row)];
@@ -310,16 +324,52 @@ static CGFloat const kIDPResizeDelta = 15;
     }
 }
 
-- (void)updateCellHeightForRow:(NSInteger)row visibleRow:(NSInteger)visibleRow object:(IDPTableCacheObject *)object {
-    [NSAnimationContext beginGrouping];
-    [[NSAnimationContext currentContext] setDuration:kDefaultAnimationDuration];
-    [self.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
-    if (visibleRow > row) {
-        NSPoint origin = [self.scrollView documentVisibleRect].origin;
-        origin.y += object.diffCellheight;
-        [[self.scrollView documentView] scrollPoint:origin];
+- (void)updateCellHeightForRow:(NSInteger)row visibleRow:(NSInteger)visibleRow object:(IDPTableCacheObject *)object completionHandler:(void (^)(void))completionHandler {
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        context.duration = [self animateRowReloading:row] ? kDefaultAnimationDuration : 0;
+        [[self.tableView animator] noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+        if (visibleRow > row) {
+            NSPoint origin = [self.scrollView documentVisibleRect].origin;
+            origin.y += object.diffCellheight;
+            [[[self.scrollView documentView] animator] scrollPoint:origin];
+        }
+    } completionHandler:^{
+        if (completionHandler) {
+            completionHandler();
+        }
+    }];
+
+//    [NSAnimationContext beginGrouping];
+//    [[NSAnimationContext currentContext] setDuration:kDefaultAnimationDuration];
+//    [self.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+//    if (visibleRow > row) {
+//        NSPoint origin = [self.scrollView documentVisibleRect].origin;
+//        origin.y += object.diffCellheight;
+//        [[self.scrollView documentView] scrollPoint:origin];
+//    }
+//    [NSAnimationContext endGrouping];
+}
+
+- (BOOL)animateRowReloading:(NSInteger)row {
+    BOOL isAnimate = row == self.currentActiveCellIndex;
+    if (!isAnimate) {
+        NSArray *visibleRows = [self.tableView visibleRows];
+        BOOL isVisible = [visibleRows containsObject:@(row)];
+        
+        
+        if (isVisible) {
+            NSInteger visibleRow = [[visibleRows firstObject] integerValue];
+            NSView *cell = [self.tableView viewAtColumn:kColumnIndex row:visibleRow makeIfNecessary:NO];
+            NSRect frame = cell.frame;
+            frame = [self.tableView convertRect:frame fromView:cell];
+            NSPoint origin = [self.scrollView documentVisibleRect].origin;
+            if (frame.origin.y + NSHeight(frame) / 2 < origin.y) {
+                isAnimate = NO;
+            }
+        }
     }
-    [NSAnimationContext endGrouping];
+    
+    return isAnimate;
 }
 
 - (void)reorderCellsLoadingSequence {
@@ -341,7 +391,7 @@ static CGFloat const kIDPResizeDelta = 15;
     NSRect frame = cell.frame;
     frame = [self.tableView convertRect:frame fromView:cell];
     NSPoint origin = [self.scrollView documentVisibleRect].origin;
-    if (frame.origin.y < origin.y) {
+    if (frame.origin.y + NSHeight(frame) / 2 < origin.y) {
         visibleRow = visibleRows.count > 1 ? visibleRow + 1 : visibleRow;
     }
     self.currentActiveCellIndex = visibleRow;
