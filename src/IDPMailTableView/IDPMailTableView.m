@@ -198,6 +198,10 @@ static CGFloat const kIDPResizeDelta = 15;
     [self.cellHeightCalculator cancel];
     self.currentActiveCellIndex = 0;
     self.loadedObject = nil;
+    [self.objecstInQueueToLoadHeight removeAllObjects];
+    [self.pausedObjectHeightLoadingArray removeAllObjects];
+    self.pausedObjectHeightLoading = NO;
+    self.liveResizingStart = NO;
     self.recalculateHeight = NO;
 }
 
@@ -311,6 +315,19 @@ static CGFloat const kIDPResizeDelta = 15;
 }
 
 - (void)updateCellHeightForRow:(NSInteger)row visibleRow:(NSInteger)visibleRow object:(IDPTableCacheObject *)object {
+//    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+//        context.duration = 0;//kDefaultAnimationDuration;
+//        [self.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+//        if (visibleRow > row) {
+//            NSPoint origin = [self.scrollView documentVisibleRect].origin;
+//            origin.y += object.diffCellheight;
+//            [[self.scrollView documentView] scrollPoint:origin];
+//        }
+//    } completionHandler:^{
+//        self.loadedObject = nil;
+//        [self loadCellHeightInBackground];
+//    }];
+//    
     [NSAnimationContext beginGrouping];
     [[NSAnimationContext currentContext] setDuration:kDefaultAnimationDuration];
     [self.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
