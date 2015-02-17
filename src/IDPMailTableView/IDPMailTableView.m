@@ -9,6 +9,7 @@
 #import "IDPMailTableView.h"
 #import "IDPTableCacheObject.h"
 #import "NSTableView+IDPExtension.h"
+#import "NSMutableArray+IDPExtensions.h"
 
 #pragma mark -
 #pragma mark Proxying
@@ -302,11 +303,11 @@ static CGFloat const kIDPResizeDelta = 15;
         self.loadedObject = [self.objecstInQueueToLoadHeight firstObject];
         if (self.loadedObject) {
             IDPTableCacheObject *object = self.loadedObject;
-            [self.objecstInQueueToLoadHeight removeObjectAtIndex:0];
             __weak IDPMailTableView *weakSelf = self;
             NSInteger row = [self.dataSourceObjects indexOfObject:object];
             
             [self.cellHeightCalculator calculateCellHeighForObject:object callback:^(IDPCellHeightCalculator *calculator, CGFloat newHeight) {
+                [weakSelf.objecstInQueueToLoadHeight removeFirstObject];
                 object.diffCellheight = newHeight - object.cellHeight;
                 object.cellHeight = newHeight;
                 if (!weakSelf.isPausedObjectHeightLoading) {

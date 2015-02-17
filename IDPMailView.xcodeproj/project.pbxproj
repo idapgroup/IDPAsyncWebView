@@ -34,6 +34,7 @@
 		69BC27881A8A4E0000F30FC0 /* IDPMailListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC27871A8A4E0000F30FC0 /* IDPMailListView.m */; };
 		69BC278B1A8A4FC800F30FC0 /* IDPMailListTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC278A1A8A4FC800F30FC0 /* IDPMailListTableCellView.m */; };
 		69BC278D1A8A4FD400F30FC0 /* IDPMailListTableCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69BC278C1A8A4FD400F30FC0 /* IDPMailListTableCellView.xib */; };
+		69BD86FE1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BD86FD1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.m */; };
 		69C0174F1A8E008B0024FD97 /* test-2.html in Resources */ = {isa = PBXBuildFile; fileRef = 69C0174E1A8E008B0024FD97 /* test-2.html */; };
 		69C018241A8E48770024FD97 /* html files in Resources */ = {isa = PBXBuildFile; fileRef = 69C018231A8E48770024FD97 /* html files */; };
 		69EE2FC41A8BB3360058045D /* NSView+IDPExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 69EE2FC31A8BB3360058045D /* NSView+IDPExtension.m */; };
@@ -100,6 +101,8 @@
 		69BC278A1A8A4FC800F30FC0 /* IDPMailListTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPMailListTableCellView.m; sourceTree = "<group>"; };
 		69BC278C1A8A4FD400F30FC0 /* IDPMailListTableCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDPMailListTableCellView.xib; sourceTree = "<group>"; };
 		69BC27901A8A5FC700F30FC0 /* IDPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPConstants.h; sourceTree = "<group>"; };
+		69BD86FC1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+IDPExtensions.h"; sourceTree = "<group>"; };
+		69BD86FD1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+IDPExtensions.m"; sourceTree = "<group>"; };
 		69C0174E1A8E008B0024FD97 /* test-2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "test-2.html"; sourceTree = "<group>"; };
 		69C018231A8E48770024FD97 /* html files */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "html files"; path = "resources/html files"; sourceTree = "<group>"; };
 		69EE2FC21A8BB3360058045D /* NSView+IDPExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+IDPExtension.h"; sourceTree = "<group>"; };
@@ -247,6 +250,7 @@
 		6926C1831A89047C00FEA821 /* IDPKit */ = {
 			isa = PBXGroup;
 			children = (
+				69BD86FB1A93C5A700537B19 /* Fondation */,
 				6926C1841A89047C00FEA821 /* AppKit */,
 			);
 			path = IDPKit;
@@ -352,6 +356,15 @@
 				69BC27901A8A5FC700F30FC0 /* IDPConstants.h */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		69BD86FB1A93C5A700537B19 /* Fondation */ = {
+			isa = PBXGroup;
+			children = (
+				69BD86FC1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.h */,
+				69BD86FD1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.m */,
+			);
+			path = Fondation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -463,6 +476,7 @@
 				6926C1931A89047C00FEA821 /* NSNib+IDPExtension.m in Sources */,
 				69BC27881A8A4E0000F30FC0 /* IDPMailListView.m in Sources */,
 				6926C1691A88FC7800FEA821 /* IDPMailTableView.m in Sources */,
+				69BD86FE1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.m in Sources */,
 				6926C1421A88F91800FEA821 /* main.m in Sources */,
 				69BC27801A8A4A0300F30FC0 /* IDPMailHistoryChainModel.m in Sources */,
 				6926C1801A89002500FEA821 /* IDPMailViewCell.m in Sources */,
