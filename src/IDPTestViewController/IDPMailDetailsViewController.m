@@ -82,6 +82,7 @@ static CGFloat   const kCellDefaultHeight = 190;
     IDPMailHistoryChainModel *model = notification.object;
     self.objects = [NSMutableArray array];
     NSInteger firstUnreadMail = [model indexOfFirstUnreadMail];
+    firstUnreadMail = NSNotFound == firstUnreadMail ? 0 : firstUnreadMail;
     for (IDPMailMessageModel *mailMessage in model.mailMessages) {
         IDPTableCacheObject *object = [IDPTableCacheObject new];
         object.cellHeight = kCellDefaultHeight;
