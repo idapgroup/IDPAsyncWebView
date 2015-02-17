@@ -338,16 +338,6 @@ static CGFloat const kIDPResizeDelta = 15;
             completionHandler();
         }
     }];
-
-//    [NSAnimationContext beginGrouping];
-//    [[NSAnimationContext currentContext] setDuration:kDefaultAnimationDuration];
-//    [self.tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
-//    if (visibleRow > row) {
-//        NSPoint origin = [self.scrollView documentVisibleRect].origin;
-//        origin.y += object.diffCellheight;
-//        [[self.scrollView documentView] scrollPoint:origin];
-//    }
-//    [NSAnimationContext endGrouping];
 }
 
 - (BOOL)animateRowReloading:(NSInteger)row {
