@@ -13,7 +13,13 @@
 
 @property (nonatomic, strong, readonly) NSArray    *mailMessages;
 
+/**
+ Return the newest unread mail.
+ */
 - (IDPMailMessageModel *)firstUnreadMail;
+/**
+ Return index of the newest unread mail.
+ */
 - (NSInteger)indexOfFirstUnreadMail;
 
 /**

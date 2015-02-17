@@ -43,7 +43,7 @@
 
 - (IDPMailMessageModel *)firstUnreadMail {
     IDPMailMessageModel *firstUnreadMail = nil;
-    for (IDPMailMessageModel *object in [[self.mailMessages reverseObjectEnumerator] allObjects]) {
+    for (IDPMailMessageModel *object in self.mailMessages) {
         if (NO == object.isRead) {
             firstUnreadMail = object;
             break;
