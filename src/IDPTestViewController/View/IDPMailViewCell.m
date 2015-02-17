@@ -10,11 +10,7 @@
 #import "IDPMailMessageModel.h"
 #import "NSView+IDPExtension.h"
 
-static NSTimeInterval const kIDPTimerTime = 1;
-
 @interface IDPMailViewCell ()
-
-@property (nonatomic, strong) NSTimer *markAsReadTimer;
 
 @property (nonatomic, strong) IDPMailMessageModel   *model;
 
@@ -26,24 +22,22 @@ static NSTimeInterval const kIDPTimerTime = 1;
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    self.markAsReadTimer = nil;
+    
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.containerView.backgroundViewColor = [NSColor whiteColor];
     self.separatorView.backgroundViewColor = [NSColor blackColor];
+    
 }
 
 #pragma mark -
-#pragma mark Accessor methods
+#pragma mark Interface Handling
 
-- (void)setMarkAsReadTimer:(NSTimer *)markAsReadTimer {
-    if (_markAsReadTimer == markAsReadTimer) {
-        return;
-    }
-    [_markAsReadTimer invalidate];
-    _markAsReadTimer = markAsReadTimer;
+- (IBAction)onMarkAsRead:(id)sender {
+    self.model.read = YES;
+    self.readMark.hidden = self.model.isRead;
 }
 
 #pragma mark -
@@ -52,7 +46,6 @@ static NSTimeInterval const kIDPTimerTime = 1;
 - (void)prepareForReuse {
     [super prepareForReuse];
     self.model = nil;
-    self.markAsReadTimer = nil;
 }
 
 - (void)fillFromObject:(id)object {
@@ -67,25 +60,8 @@ static NSTimeInterval const kIDPTimerTime = 1;
         
         [[self.content mainFrame] loadHTMLString:mailMessage.content baseURL:mailMessage.urlForContentResources];
         
-        self.readMark.backgroundViewColor = mailMessage.isRead ? [NSColor clearColor] : [NSColor blueColor];
-        self.readMark.cornerRadius = CGRectGetWidth(self.readMark.frame)/2;
-        if (!mailMessage.isRead) {
-            [self setupMarkTimer];
-        }
+        self.readMark.hidden = mailMessage.isRead;
     }
-}
-
-#pragma mark -
-#pragma mark Private methods 
-
-- (void)setupMarkTimer {
-    self.markAsReadTimer = [NSTimer scheduledTimerWithTimeInterval:kIDPTimerTime target:self selector:@selector(markAsRead) userInfo:nil repeats:NO];
-}
-
-- (void)markAsRead {
-    self.markAsReadTimer = nil;
-    self.model.read = YES;
-    self.readMark.backgroundViewColor = self.model.isRead ? [NSColor clearColor] : [NSColor blueColor];
 }
 
 #pragma mark -

@@ -86,7 +86,8 @@
 - (void)tableViewCellDidSelected:(NSNotification *)notification {
     NSTableView *tableView = notification.object;
     if (tableView == self.myView.tableView) {
-        IDPMailHistoryChainModel *model = [self.mailObjects objectAtIndex:tableView.selectedRow];
+        NSInteger index = tableView.selectedRow;
+        IDPMailHistoryChainModel *model = [self.mailObjects objectAtIndex:index];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_SELECTED_NEW_MAIL object:model];
     }
 }
