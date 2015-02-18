@@ -26,6 +26,7 @@
 		691EF7DB1A94E551004E3777 /* IDPMailDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 691EF7C51A94E551004E3777 /* IDPMailDetailsViewController.m */; };
 		691EF7DC1A94E551004E3777 /* IDPMailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 691EF7C91A94E551004E3777 /* IDPMailViewCell.m */; };
 		691EF7DD1A94E551004E3777 /* IDPMailViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 691EF7CA1A94E551004E3777 /* IDPMailViewCell.xib */; };
+		691EF7E01A94E894004E3777 /* NSColor+IDPExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 691EF7DF1A94E894004E3777 /* NSColor+IDPExtension.m */; };
 		6926C1401A88F91800FEA821 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926C13F1A88F91800FEA821 /* AppDelegate.m */; };
 		6926C1421A88F91800FEA821 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926C1411A88F91800FEA821 /* main.m */; };
 		6926C1441A88F91800FEA821 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6926C1431A88F91800FEA821 /* Images.xcassets */; };
@@ -93,6 +94,8 @@
 		691EF7C81A94E551004E3777 /* IDPMailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPMailViewCell.h; sourceTree = "<group>"; };
 		691EF7C91A94E551004E3777 /* IDPMailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPMailViewCell.m; sourceTree = "<group>"; };
 		691EF7CA1A94E551004E3777 /* IDPMailViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDPMailViewCell.xib; sourceTree = "<group>"; };
+		691EF7DE1A94E894004E3777 /* NSColor+IDPExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSColor+IDPExtension.h"; sourceTree = "<group>"; };
+		691EF7DF1A94E894004E3777 /* NSColor+IDPExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+IDPExtension.m"; sourceTree = "<group>"; };
 		6926C1391A88F91800FEA821 /* IDPMailView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IDPMailView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6926C13D1A88F91800FEA821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6926C13E1A88F91800FEA821 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -392,6 +395,8 @@
 				69EE2FC31A8BB3360058045D /* NSView+IDPExtension.m */,
 				69B652771A9489BE00C5B346 /* NSViewController+IDPExtension.h */,
 				69B652781A9489BE00C5B346 /* NSViewController+IDPExtension.m */,
+				691EF7DE1A94E894004E3777 /* NSColor+IDPExtension.h */,
+				691EF7DF1A94E894004E3777 /* NSColor+IDPExtension.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -544,6 +549,7 @@
 				691EF7D61A94E551004E3777 /* IDPMailPreviewTableCell.m in Sources */,
 				691EF7DA1A94E551004E3777 /* IDPScrollView.m in Sources */,
 				691EF7CD1A94E551004E3777 /* IDPMailHistoryChainModel.m in Sources */,
+				691EF7E01A94E894004E3777 /* NSColor+IDPExtension.m in Sources */,
 				6926C1401A88F91800FEA821 /* AppDelegate.m in Sources */,
 				69B652791A9489BE00C5B346 /* NSViewController+IDPExtension.m in Sources */,
 				691EF7D01A94E551004E3777 /* IDPBaseTableCell.m in Sources */,

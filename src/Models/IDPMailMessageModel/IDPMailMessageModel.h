@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 @interface IDPMailMessageModel : NSObject
 
@@ -16,9 +17,12 @@
 @property (nonatomic, assign, getter = isRead) BOOL read;
 @property (nonatomic, strong) NSDate    *date;
 @property (nonatomic, copy)   NSString  *content;
-@property (nonatomic, retain) NSURL     *urlForContentResources;
+@property (nonatomic, strong) NSURL     *urlForContentResources;
 @property (nonatomic, copy, readonly)   NSString  *formattedDate;
 @property (nonatomic, copy)   NSString  *previewContent;
+
+@property (nonatomic, strong) NSColor   *previewBackgroundColor;
+@property (nonatomic, strong) NSColor   *previewTextColor;
 
 - (NSString *)senderString;
 - (NSString *)recipientsString;

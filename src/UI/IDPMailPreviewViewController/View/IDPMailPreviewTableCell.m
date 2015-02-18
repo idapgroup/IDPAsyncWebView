@@ -44,11 +44,17 @@
 - (void)fillFromObject:(id)object {
     if ([object isKindOfClass:[IDPMailMessageModel class]]) {
         IDPMailMessageModel *mailMessage = (IDPMailMessageModel *)object;
+        self.containerView.backgroundViewColor = mailMessage.previewBackgroundColor;
         self.model = mailMessage;
         self.senderTextField.stringValue = [mailMessage senderString];
         self.recipientsTextField.stringValue = [mailMessage recipientsString];
         self.subjectTextField.stringValue = [mailMessage subject];
         self.dateTextField.stringValue = mailMessage.formattedDate;
+        
+        self.senderTextField.textColor = mailMessage.previewTextColor;
+        self.recipientsTextField.textColor = mailMessage.previewTextColor;
+        self.subjectTextField.textColor = mailMessage.previewTextColor;
+        self.dateTextField.textColor = mailMessage.previewTextColor;
         
         [[self.content mainFrame] loadHTMLString:mailMessage.previewContent baseURL:nil];
     }

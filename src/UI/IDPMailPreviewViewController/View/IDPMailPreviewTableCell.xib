@@ -14,13 +14,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ym0-Yb-mqb" userLabel="Container View">
-                    <rect key="frame" x="3" y="10" width="393" height="194"/>
+                    <rect key="frame" x="3" y="3" width="394" height="209"/>
                     <subviews>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="2De-H5-Leu" userLabel="Header View">
-                            <rect key="frame" x="0.0" y="136" width="393" height="58"/>
+                            <rect key="frame" x="0.0" y="151" width="394" height="58"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VCb-2A-ppI">
-                                    <rect key="frame" x="20" y="40" width="239" height="17"/>
+                                    <rect key="frame" x="20" y="40" width="240" height="17"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="17" id="zxl-G2-0q4"/>
                                     </constraints>
@@ -31,7 +31,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6sW-YE-NZM">
-                                    <rect key="frame" x="263" y="40" width="123" height="17"/>
+                                    <rect key="frame" x="264" y="40" width="123" height="17"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="119" id="I5f-hj-iZi"/>
                                         <constraint firstAttribute="height" constant="17" id="qDk-eL-d1N"/>
@@ -43,7 +43,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LkL-8d-Hpp">
-                                    <rect key="frame" x="20" y="8" width="366" height="17"/>
+                                    <rect key="frame" x="20" y="8" width="367" height="17"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="17" id="abJ-0U-Ru1"/>
                                     </constraints>
@@ -54,13 +54,13 @@
                                     </textFieldCell>
                                 </textField>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="civ-JV-Xdg" userLabel="Separator View">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="1"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="394" height="1"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="siM-Zt-pC1"/>
                                     </constraints>
                                 </customView>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XLi-q6-ulD">
-                                    <rect key="frame" x="20" y="21" width="366" height="17"/>
+                                    <rect key="frame" x="20" y="21" width="367" height="17"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="17" id="MFh-ek-tNx"/>
                                     </constraints>
@@ -90,10 +90,10 @@
                             </constraints>
                         </customView>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="mo9-Dz-Ob5" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="137"/>
+                            <rect key="frame" x="0.0" y="0.0" width="394" height="152"/>
                             <subviews>
                                 <webView translatesAutoresizingMaskIntoConstraints="NO" id="M6O-cC-oBy">
-                                    <rect key="frame" x="20" y="6" width="353" height="117"/>
+                                    <rect key="frame" x="20" y="6" width="354" height="132"/>
                                     <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
                                         <nil key="identifier"/>
                                     </webPreferences>
@@ -119,10 +119,10 @@
                 </customView>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Ym0-Yb-mqb" secondAttribute="trailing" constant="4" id="BQv-54-Pwj"/>
-                <constraint firstAttribute="bottom" secondItem="Ym0-Yb-mqb" secondAttribute="bottom" constant="10" id="eH3-qY-G2g"/>
+                <constraint firstAttribute="trailing" secondItem="Ym0-Yb-mqb" secondAttribute="trailing" constant="3" id="BQv-54-Pwj"/>
+                <constraint firstAttribute="bottom" secondItem="Ym0-Yb-mqb" secondAttribute="bottom" constant="3" id="eH3-qY-G2g"/>
                 <constraint firstItem="Ym0-Yb-mqb" firstAttribute="leading" secondItem="wlo-fp-kBF" secondAttribute="leading" constant="3" id="fDO-hG-0WC"/>
-                <constraint firstItem="Ym0-Yb-mqb" firstAttribute="top" secondItem="wlo-fp-kBF" secondAttribute="top" constant="11" id="zET-tD-0At"/>
+                <constraint firstItem="Ym0-Yb-mqb" firstAttribute="top" secondItem="wlo-fp-kBF" secondAttribute="top" constant="3" id="zET-tD-0At"/>
             </constraints>
             <connections>
                 <outlet property="containerView" destination="Ym0-Yb-mqb" id="SP8-xb-vEY"/>
