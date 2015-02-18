@@ -175,6 +175,7 @@ static CGFloat const kIDPResizeDelta = 15;
 #pragma mark Public methods
 
 - (void)reloadData {
+    self.visibleRows = nil;
     self.prevViewWidth = NSWidth(self.frame);
     self.currentActiveCellIndex = kDefaultActiveCell;
     [self.tableView reloadData];
@@ -220,6 +221,7 @@ static CGFloat const kIDPResizeDelta = 15;
     self.pausedObjectHeightLoading = NO;
     self.liveResizingStart = NO;
     self.recalculateHeight = NO;
+    self.visibleRows = nil;
 }
 
 - (void)viewWillStartLiveResize {
