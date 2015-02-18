@@ -12,6 +12,8 @@
 #import "IDPMailPreviewView.h"
 #import "NSNib+IDPExtension.h"
 #import "IDPMailMessageModel.h"
+#import "IDPConstants.h"
+#import "IDPMailHistoryChainModel.h"
 
 @interface IDPMailPreviewViewController ()
 
@@ -22,7 +24,7 @@
 @implementation IDPMailPreviewViewController
 
 - (void)dealloc {
-    
+    [self unsubscribeFromNotifications];
 }
 
 #pragma mark -
@@ -30,25 +32,44 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.myView.tableView.backgroundColor = [NSColor grayColor];
     NSString *identifier = NSStringFromClass([IDPMailPreviewTableCell class]);
     [self.myView.tableView registerNib:[[NSNib alloc] initWithNibNamed:identifier bundle:nil] forIdentifier:identifier];
+    [self subscribeOnNitifications];
     
 }
 
 #pragma mark -
 #pragma mark Accessor methods
 
-IDPViewControllerViewOfClassGetterSynthesize(IDPMailPreviewView, myView)
+- (IDPMailPreviewView *)myView {
+    if ([self.view isKindOfClass:[IDPMailPreviewView class]]) {
+        return (IDPMailPreviewView *)self.view;
+    }
+    return nil;
+}
 
 #pragma mark -
 #pragma mark Private methods
 
 - (void)subscribeOnNitifications {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectTableViewCell:) name:NSTableViewSelectionDidChangeNotification object:self.myView.tableView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedNewMail:) name:NOTIFICATION_CENTER_DID_SELECTED_NEW_MAIL object:nil];
 }
 
 - (void)unsubscribeFromNotifications {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSTableViewSelectionDidChangeNotification object:self.myView.tableView];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_CENTER_DID_SELECTED_NEW_MAIL object:nil];
+}
+
+- (void)didSelectedNewMail:(NSNotification *)notification {
+    IDPMailHistoryChainModel *model = notification.object;
+    self.dataSourceObjects = model.mailMessages;
+    [self reloadData];
+}
+
+- (void)reloadData {
+    [self.myView.tableView reloadData];
 }
 
 #pragma mark -

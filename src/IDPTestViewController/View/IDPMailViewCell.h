@@ -10,7 +10,6 @@
 #import <WebKit/WebKit.h>
 #import "IDPMailCellProtocol.h"
 
-@class IDPMailTableView;
 @class IDPMailMessageModel;
 
 @interface IDPMailViewCell : IDPBaseTableCell <IDPMailCellProtocol>
