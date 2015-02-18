@@ -9,6 +9,8 @@
 #import "IDPMailTableView.h"
 #import "IDPTableCacheObject.h"
 #import "NSTableView+IDPExtension.h"
+#import "NSMutableArray+IDPExtensions.h"
+#import <QuartzCore/QuartzCore.h>
 
 #pragma mark -
 #pragma mark Proxying
@@ -302,11 +304,11 @@ static CGFloat const kIDPResizeDelta = 15;
         self.loadedObject = [self.objecstInQueueToLoadHeight firstObject];
         if (self.loadedObject) {
             IDPTableCacheObject *object = self.loadedObject;
-            [self.objecstInQueueToLoadHeight removeObjectAtIndex:0];
             __weak IDPMailTableView *weakSelf = self;
             NSInteger row = [self.dataSourceObjects indexOfObject:object];
             
             [self.cellHeightCalculator calculateCellHeighForObject:object callback:^(IDPCellHeightCalculator *calculator, CGFloat newHeight) {
+                [weakSelf.objecstInQueueToLoadHeight removeFirstObject];
                 object.diffCellheight = newHeight - object.cellHeight;
                 object.cellHeight = newHeight;
                 if (!weakSelf.isPausedObjectHeightLoading) {
@@ -326,6 +328,7 @@ static CGFloat const kIDPResizeDelta = 15;
 
 - (void)updateCellHeightForRow:(NSInteger)row visibleRow:(NSInteger)visibleRow object:(IDPTableCacheObject *)object completionHandler:(void (^)(void))completionHandler {
     [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
         context.duration = [self animateRowReloading:row] ? kDefaultAnimationDuration : 0;
         [[self.tableView animator] noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
         if (visibleRow > row) {
