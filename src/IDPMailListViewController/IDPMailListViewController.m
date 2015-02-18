@@ -25,14 +25,13 @@
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSTableViewSelectionDidChangeNotification object:self.myView.tableView];
+    
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     NSString *identifier = NSStringFromClass([IDPMailListTableCellView class]);
     [self.myView.tableView registerNib:[[NSNib alloc] initWithNibNamed:identifier bundle:nil] forIdentifier:identifier];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableViewCellDidSelected:) name:NSTableViewSelectionDidChangeNotification object:self.myView.tableView];
 }
 
 #pragma mark -
@@ -83,7 +82,7 @@
     return cell;
 }
 
-- (void)tableViewCellDidSelected:(NSNotification *)notification {
+- (void)tableViewSelectionDidChange:(NSNotification *)notification {
     NSTableView *tableView = notification.object;
     if (tableView == self.myView.tableView) {
         NSInteger index = tableView.selectedRow;
