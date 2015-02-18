@@ -62,7 +62,6 @@ static NSInteger const kColumnIndex = 0;
 static NSInteger const kDefaultActiveCell = 0;
 static CGFloat const kDefaultAnimationDuration = 0.8;
 static CGFloat const kIDPResizeDelta = 15;
-static CGFloat const kIDPScrollAnimationDuration = 0.5;
 
 @interface IDPMailTableView ()
 

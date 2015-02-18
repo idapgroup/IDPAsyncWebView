@@ -36,7 +36,6 @@
     NSString *identifier = NSStringFromClass([IDPMailPreviewTableCell class]);
     [self.myView.tableView registerNib:[[NSNib alloc] initWithNibNamed:identifier bundle:nil] forIdentifier:identifier];
     [self subscribeOnNitifications];
-    
 }
 
 #pragma mark -
@@ -66,6 +65,8 @@
     IDPMailHistoryChainModel *model = notification.object;
     self.dataSourceObjects = model.mailMessages;
     [self reloadData];
+    [self.myView.tableView scrollRowToVisible:0];
+    [self.myView.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
 }
 
 - (void)reloadData {
