@@ -60,7 +60,7 @@ static BOOL isInterceptedSelector(SEL sel) {
 
 static NSInteger const kColumnIndex = 0;
 static NSInteger const kDefaultActiveCell = 0;
-static CGFloat const kDefaultAnimationDuration = 0.8;
+static CGFloat const kDefaultAnimationDuration = 0.3;
 static CGFloat const kIDPResizeDelta = 15;
 
 @interface IDPMailTableView ()
@@ -339,9 +339,8 @@ static CGFloat const kIDPResizeDelta = 15;
             IDPTableCacheObject *object = self.loadedObject;
             __weak IDPMailTableView *weakSelf = self;
             NSInteger row = [self.dataSourceObjects indexOfObject:object];
-            
             [self.cellHeightCalculator calculateCellHeighForObject:object callback:^(IDPCellHeightCalculator *calculator, CGFloat newHeight) {
-                [weakSelf.objecstInQueueToLoadHeight removeFirstObject];
+                [weakSelf.objecstInQueueToLoadHeight removeObject:object];
                 object.diffCellheight = newHeight - object.cellHeight;
                 object.cellHeight = newHeight;
                 if (!weakSelf.isPausedObjectHeightLoading) {
