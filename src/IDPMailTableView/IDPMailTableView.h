@@ -22,6 +22,9 @@
  */
 - (void)mailTableView:(IDPMailTableView *)tableView updateCellHeightCalculatorContentWidth:(IDPCellHeightCalculator *)cellHeightCalculator;
 
+@optional
+- (void)mailTableView:(IDPMailTableView *)tableView didDispalyRowAtIndex:(NSInteger)rowIndex;
+
 @end
 
 @protocol IDPMailTableViewDataSource  <NSTableViewDataSource>

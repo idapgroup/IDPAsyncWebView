@@ -18,6 +18,7 @@
 @interface IDPMailPreviewViewController ()
 
 @property (nonatomic, strong) IDPMailPreviewView    *myView;
+@property (nonatomic, assign) BOOL disableRowSelectionNotification;
 
 @end
 
@@ -54,16 +55,19 @@
 - (void)subscribeOnNitifications {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectTableViewCell:) name:NSTableViewSelectionDidChangeNotification object:self.myView.tableView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedNewMail:) name:NOTIFICATION_CENTER_DID_SELECTED_MAIL_CHAIN object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSelectedCellAccordingToScrolling:) name:NOTIFICATION_CENTER_DID_UPDATE_ACTIVE_PREVIEW_CELL object:nil];
 }
 
 - (void)unsubscribeFromNotifications {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSTableViewSelectionDidChangeNotification object:self.myView.tableView];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_CENTER_DID_SELECTED_MAIL_CHAIN object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_CENTER_DID_UPDATE_ACTIVE_PREVIEW_CELL object:nil];
 }
 
 - (void)didSelectedNewMail:(NSNotification *)notification {
     IDPMailHistoryChainModel *model = notification.object;
     self.dataSourceObjects = model.mailMessages;
+    self.disableRowSelectionNotification = NO;
     [self reloadData];
     [self.myView.tableView scrollRowToVisible:0];
     [self.myView.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
@@ -71,6 +75,14 @@
 
 - (void)reloadData {
     [self.myView.tableView reloadData];
+}
+
+- (void)updateSelectedCellAccordingToScrolling:(NSNotification *)notification {
+    NSInteger row = [notification.object integerValue];
+    self.disableRowSelectionNotification = YES;
+    [self.myView.tableView scrollRowToVisible:row];
+    [self.myView.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+    self.disableRowSelectionNotification = NO;
 }
 
 #pragma mark -
@@ -95,7 +107,7 @@
 }
 
 - (void)didSelectTableViewCell:(NSNotification *)notification {
-    if (notification.object == self.myView.tableView) {
+    if (notification.object == self.myView.tableView && self.disableRowSelectionNotification == NO) {
         NSInteger index = self.myView.tableView.selectedRow;
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_SELECTED_MAIL object:@(index)];
     }
