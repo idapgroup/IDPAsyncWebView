@@ -71,12 +71,12 @@
                                     </textFieldCell>
                                 </textField>
                                 <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dJ1-73-MKQ">
-                                    <rect key="frame" x="-3" y="28" width="30" height="30"/>
+                                    <rect key="frame" x="3" y="38" width="17" height="17"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="17" id="4lJ-lW-EBV"/>
                                         <constraint firstAttribute="height" constant="17" id="fpn-wO-Hr1"/>
                                     </constraints>
-                                    <buttonCell key="cell" type="round" bezelStyle="circular" imagePosition="above" alignment="left" controlSize="mini" borderStyle="border" imageScaling="proportionallyDown" id="rcK-Jv-OG4">
+                                    <buttonCell key="cell" type="bevel" bezelStyle="circular" image="unread.png" imagePosition="above" alignment="left" controlSize="mini" imageScaling="proportionallyDown" id="rcK-Jv-OG4">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="miniSystem"/>
                                     </buttonCell>
@@ -155,4 +155,7 @@
             <point key="canvasLocation" x="660.5" y="454"/>
         </tableCellView>
     </objects>
+    <resources>
+        <image name="unread.png" width="128" height="128"/>
+    </resources>
 </document>

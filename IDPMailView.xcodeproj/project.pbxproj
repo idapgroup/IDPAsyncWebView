@@ -24,6 +24,7 @@
 		692FC4CD1A93978F00E79AF1 /* IDPMailPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 692FC4CC1A93978F00E79AF1 /* IDPMailPreviewViewController.m */; };
 		692FC4D01A9397AA00E79AF1 /* IDPMailPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 692FC4CF1A9397AA00E79AF1 /* IDPMailPreviewView.m */; };
 		698E25B01A8CD90400ED64AA /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 698E25AF1A8CD90400ED64AA /* test.html */; };
+		69B6526F1A94837900C5B346 /* unread.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 69B6526E1A94837900C5B346 /* unread.tiff */; };
 		69B7B2611A8B437B00B3FFD2 /* NSTableView+IDPExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B7B2601A8B437B00B3FFD2 /* NSTableView+IDPExtension.m */; };
 		69B7B2641A8B609900B3FFD2 /* IDPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B7B2631A8B609900B3FFD2 /* IDPScrollView.m */; };
 		69B7B2671A8B810800B3FFD2 /* testEmailFile.html in Resources */ = {isa = PBXBuildFile; fileRef = 69B7B2661A8B810800B3FFD2 /* testEmailFile.html */; };
@@ -85,6 +86,7 @@
 		692FC4CF1A9397AA00E79AF1 /* IDPMailPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPMailPreviewView.m; sourceTree = "<group>"; };
 		698E25AF1A8CD90400ED64AA /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		698E25B11A8CD99500ED64AA /* IDPMailCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPMailCellProtocol.h; sourceTree = "<group>"; };
+		69B6526E1A94837900C5B346 /* unread.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = unread.tiff; sourceTree = "<group>"; };
 		69B7B25F1A8B437B00B3FFD2 /* NSTableView+IDPExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTableView+IDPExtension.h"; sourceTree = "<group>"; };
 		69B7B2601A8B437B00B3FFD2 /* NSTableView+IDPExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTableView+IDPExtension.m"; sourceTree = "<group>"; };
 		69B7B2621A8B609900B3FFD2 /* IDPScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPScrollView.h; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 		69B7B2651A8B810800B3FFD2 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				69B6526E1A94837900C5B346 /* unread.tiff */,
 				69B7B2661A8B810800B3FFD2 /* testEmailFile.html */,
 				698E25AF1A8CD90400ED64AA /* test.html */,
 				69C0174E1A8E008B0024FD97 /* test-2.html */,
@@ -480,6 +483,7 @@
 				6926C1821A89004D00FEA821 /* IDPMailViewCell.xib in Resources */,
 				69B7B2671A8B810800B3FFD2 /* testEmailFile.html in Resources */,
 				69C0174F1A8E008B0024FD97 /* test-2.html in Resources */,
+				69B6526F1A94837900C5B346 /* unread.tiff in Resources */,
 				6926C1911A89047C00FEA821 /* LICENSE in Resources */,
 				6926C1471A88F91800FEA821 /* MainMenu.xib in Resources */,
 			);
