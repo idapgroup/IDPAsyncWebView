@@ -39,6 +39,7 @@ static NSInteger  kMailCount = 20;
     self.testMailObjects = [NSMutableArray array];
     NSString *folderName = @"html files";
     NSArray *array = @[@"html-1",@"html-2",@"html-3",@"html-4"];
+    NSArray *previewArray = @[@"html-1_text",@"html-2_text",@"html-3_text",@"html-4_text"];
     
     for (NSInteger index = 0; index < kMailCount; index++) {
         IDPMailHistoryChainModel *chainModel = [IDPMailHistoryChainModel new];
@@ -48,10 +49,14 @@ static NSInteger  kMailCount = 20;
             model.recipients = @[@"test.test@recipient.com"];
             model.sender = @[[NSString stringWithFormat:@"test.test@sender.com %ld-%ld",(long)index+1,(long)kIndex+1]];
             model.date = [NSDate date];
-            NSString *fileName = [array objectAtIndex:(NSInteger)arc4random_uniform((u_int32_t)array.count)];
+            NSInteger randomIndex = (NSInteger)arc4random_uniform((u_int32_t)array.count);
+            NSString *fileName = [array objectAtIndex:randomIndex];
             NSString *contentString = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@/%@", folderName, fileName] ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
             model.content = contentString;
             model.urlForContentResources = [[NSBundle mainBundle] URLForResource:folderName withExtension:nil];
+            fileName = [previewArray objectAtIndex:randomIndex];
+            NSString *previewContent = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@/%@", folderName, fileName] ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
+            model.previewContent = previewContent;
             [chainModel addNewMailMessage:model];
         }
         [self.testMailObjects addObject:chainModel];

@@ -82,6 +82,8 @@ static CGFloat const kIDPResizeDelta = 15;
 
 @property (nonatomic, assign) CGFloat prevViewWidth;
 
+@property (nonatomic, strong) NSArray   *visibleRows;
+
 @end
 
 @implementation IDPMailTableView
@@ -173,6 +175,7 @@ static CGFloat const kIDPResizeDelta = 15;
 #pragma mark Public methods
 
 - (void)reloadData {
+    self.visibleRows = nil;
     self.prevViewWidth = NSWidth(self.frame);
     self.currentActiveCellIndex = kDefaultActiveCell;
     [self.tableView reloadData];
@@ -184,6 +187,19 @@ static CGFloat const kIDPResizeDelta = 15;
     self.currentActiveCellIndex = index;
     [self.tableView scrollRowToVisible:index];
     [self reorderCellsLoadingSequence];
+}
+
+- (void)scrollToTopOfRow:(NSInteger)index {
+    NSInteger oldIndex = self.currentActiveCellIndex;
+    self.currentActiveCellIndex = index;
+    if (index > oldIndex) {
+        [self scrollRowToVisible:index];
+    } else {
+        NSRect rect = [self.tableView rectOfRow:index];
+        rect.size = NSMakeSize(NSWidth(rect), 1);
+        [self.tableView scrollRectToVisible:rect];
+        [self reorderCellsLoadingSequence];
+    }
 }
 
 - (void)updateCellHeight:(CGFloat)cellHeight forRow:(NSInteger)row {
@@ -205,6 +221,7 @@ static CGFloat const kIDPResizeDelta = 15;
     self.pausedObjectHeightLoading = NO;
     self.liveResizingStart = NO;
     self.recalculateHeight = NO;
+    self.visibleRows = nil;
 }
 
 - (void)viewWillStartLiveResize {
@@ -241,6 +258,12 @@ static CGFloat const kIDPResizeDelta = 15;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(frameDidChange:) name:NSViewFrameDidChangeNotification object:self];
     
+    NSView *view = [self.scrollView contentView];
+    [view setPostsBoundsChangedNotifications:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(frameDidChange:)
+                                                 name:NSViewBoundsDidChangeNotification
+                                               object:view];
 }
 
 - (void)removeNotificationObservers {
@@ -252,6 +275,8 @@ static CGFloat const kIDPResizeDelta = 15;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IDPNOTIFICATION_CENTER_START_SCROLL_KEY object:self.scrollView];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IDPNOTIFICATION_CENTER_END_SCROLL_KEY object:self.scrollView];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSViewFrameDidChangeNotification object:self];
+    NSView *view = [self.scrollView contentView];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSViewBoundsDidChangeNotification object:view];
 }
 
 - (void)frameDidChange:(NSNotification *)notification {
@@ -261,6 +286,14 @@ static CGFloat const kIDPResizeDelta = 15;
         if (delta >= kIDPResizeDelta) {
             self.prevViewWidth = width;
             [self updateOnlyVisiblesCells];
+        }
+    } else if (notification.object == [self.scrollView contentView]) {
+        NSArray *visibleRows = [self.tableView visibleRows];
+        NSMutableArray *visibleRowsMutable = [NSMutableArray arrayWithArray:visibleRows];
+        [visibleRowsMutable removeObjectsInArray:self.visibleRows];
+        self.visibleRows = visibleRows;
+        if (visibleRowsMutable.count > 0 && [self.delegate conformsToProtocol:@protocol(IDPMailTableViewDelegate)] && [self.delegate respondsToSelector:@selector(mailTableView:didDispalyRowAtIndex:)]) {
+            [self.delegate mailTableView:self didDispalyRowAtIndex:[[visibleRowsMutable firstObject] integerValue]];
         }
     }
 }
@@ -337,6 +370,8 @@ static CGFloat const kIDPResizeDelta = 15;
             [[[self.scrollView documentView] animator] scrollPoint:origin];
         }
     } completionHandler:^{
+        NSArray *visibleRows = [self.tableView visibleRows];
+        self.visibleRows = visibleRows;
         if (completionHandler) {
             completionHandler();
         }
@@ -348,7 +383,6 @@ static CGFloat const kIDPResizeDelta = 15;
     if (!isAnimate) {
         NSArray *visibleRows = [self.tableView visibleRows];
         BOOL isVisible = [visibleRows containsObject:@(row)];
-        
         
         if (isVisible) {
             NSInteger visibleRow = [[visibleRows firstObject] integerValue];

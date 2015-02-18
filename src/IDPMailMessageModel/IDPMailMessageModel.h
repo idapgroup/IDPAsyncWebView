@@ -18,6 +18,7 @@
 @property (nonatomic, copy)   NSString  *content;
 @property (nonatomic, retain) NSURL     *urlForContentResources;
 @property (nonatomic, copy, readonly)   NSString  *formattedDate;
+@property (nonatomic, copy)   NSString  *previewContent;
 
 - (NSString *)senderString;
 - (NSString *)recipientsString;

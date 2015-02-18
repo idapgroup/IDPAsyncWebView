@@ -1,18 +1,17 @@
 //
-//  IDPMailViewCell.h
+//  IDPMailPreviewTableCell.h
 //  IDPMailView
 //
-//  Created by Artem Chabanniy on 2/9/15.
+//  Created by Artem Chabanniy on 2/18/15.
 //  Copyright (c) 2015 IDAP Group. All rights reserved.
 //
 
 #import "IDPBaseTableCell.h"
 #import <WebKit/WebKit.h>
-#import "IDPMailCellProtocol.h"
 
 @class IDPMailMessageModel;
 
-@interface IDPMailViewCell : IDPBaseTableCell <IDPMailCellProtocol>
+@interface IDPMailPreviewTableCell : IDPBaseTableCell
 
 @property (nonatomic, strong) IBOutlet NSTextField  *senderTextField;
 @property (nonatomic, strong) IBOutlet NSTextField  *recipientsTextField;

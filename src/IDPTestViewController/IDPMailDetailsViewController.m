@@ -25,6 +25,7 @@ static CGFloat   const kCellDefaultHeight = 190;
 
 @property (nonatomic, strong) NSMutableArray    *objects;
 @property (nonatomic, strong) IDPWebViewCellHeightCalculator   *cellHeightCalculator;
+@property (nonatomic, assign) BOOL blockActiveCellUpdatingNotification;
 
 @end
 
@@ -49,7 +50,8 @@ static CGFloat   const kCellDefaultHeight = 190;
 
 - (void)baseInit {
     self.cellHeightCalculator = [IDPWebViewCellHeightCalculator new];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedNewMail:) name:NOTIFICATION_CENTER_DID_SELECTED_NEW_MAIL object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedNewMail:) name:NOTIFICATION_CENTER_DID_SELECTED_MAIL_CHAIN object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedMail:) name:NOTIFICATION_CENTER_DID_SELECTED_MAIL object:nil];
 }
 
 - (void)awakeFromNib {
@@ -77,6 +79,7 @@ static CGFloat   const kCellDefaultHeight = 190;
 #pragma mark Private methods
 
 - (void)didSelectedNewMail:(NSNotification *)notification {
+    self.blockActiveCellUpdatingNotification = NO;
     [self.cellHeightCalculator cancel];
     [self.myView resetAllData];
     IDPMailHistoryChainModel *model = notification.object;
@@ -92,6 +95,13 @@ static CGFloat   const kCellDefaultHeight = 190;
     self.myView.dataSourceObjects = self.objects;
     [self.myView reloadData];
     [self.myView scrollRowToVisible:firstUnreadMail];
+}
+
+- (void)didSelectedMail:(NSNotification *)notification {
+    NSInteger scrollToIndex = [notification.object integerValue];
+    self.blockActiveCellUpdatingNotification = YES;
+    [self.myView scrollToTopOfRow:scrollToIndex];
+    self.blockActiveCellUpdatingNotification = NO;
 }
 
 #pragma mark -
@@ -120,6 +130,12 @@ static CGFloat   const kCellDefaultHeight = 190;
     IDPMailViewCell *cell = (IDPMailViewCell *)[tableView.tableView firstVisibleViewCellMakeIfNecessary];
     if (cell) {
         cellHeightCalculator.cellContentWidth = [cell contentWidth];
+    }
+}
+
+- (void)mailTableView:(IDPMailTableView *)tableView didDispalyRowAtIndex:(NSInteger)rowIndex {
+    if (!self.blockActiveCellUpdatingNotification) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_UPDATE_ACTIVE_PREVIEW_CELL object:@(rowIndex)];
     }
 }
 
