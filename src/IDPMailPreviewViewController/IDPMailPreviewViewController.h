@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface IDPMailPreviewViewController : NSViewController
+@interface IDPMailPreviewViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
+
+@property (nonatomic, strong) NSArray   *dataSourceObjects;
 
 @end

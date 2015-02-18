@@ -10,4 +10,6 @@
 
 @interface IDPMailPreviewView : NSView
 
+@property (nonatomic, strong) IBOutlet NSTableView  *tableView;
+
 @end
