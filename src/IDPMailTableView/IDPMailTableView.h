@@ -56,4 +56,6 @@
 
 - (void)resetAllData;
 
+- (void)scrollToTopOfRow:(NSInteger)index;
+
 @end

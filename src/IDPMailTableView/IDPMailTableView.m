@@ -62,6 +62,7 @@ static NSInteger const kColumnIndex = 0;
 static NSInteger const kDefaultActiveCell = 0;
 static CGFloat const kDefaultAnimationDuration = 0.8;
 static CGFloat const kIDPResizeDelta = 15;
+static CGFloat const kIDPScrollAnimationDuration = 0.5;
 
 @interface IDPMailTableView ()
 
@@ -184,6 +185,19 @@ static CGFloat const kIDPResizeDelta = 15;
     self.currentActiveCellIndex = index;
     [self.tableView scrollRowToVisible:index];
     [self reorderCellsLoadingSequence];
+}
+
+- (void)scrollToTopOfRow:(NSInteger)index {
+    NSInteger oldIndex = self.currentActiveCellIndex;
+    self.currentActiveCellIndex = index;
+    if (index > oldIndex) {
+        [self scrollRowToVisible:index];
+    } else {
+        NSRect rect = [self.tableView rectOfRow:index];
+        rect.size = NSMakeSize(NSWidth(rect), 1);
+        [self.tableView scrollRectToVisible:rect];
+        [self reorderCellsLoadingSequence];
+    }
 }
 
 - (void)updateCellHeight:(CGFloat)cellHeight forRow:(NSInteger)row {

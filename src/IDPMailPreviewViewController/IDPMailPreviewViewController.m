@@ -54,12 +54,12 @@
 
 - (void)subscribeOnNitifications {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectTableViewCell:) name:NSTableViewSelectionDidChangeNotification object:self.myView.tableView];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedNewMail:) name:NOTIFICATION_CENTER_DID_SELECTED_NEW_MAIL object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedNewMail:) name:NOTIFICATION_CENTER_DID_SELECTED_MAIL_CHAIN object:nil];
 }
 
 - (void)unsubscribeFromNotifications {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSTableViewSelectionDidChangeNotification object:self.myView.tableView];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_CENTER_DID_SELECTED_NEW_MAIL object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_CENTER_DID_SELECTED_MAIL_CHAIN object:nil];
 }
 
 - (void)didSelectedNewMail:(NSNotification *)notification {
@@ -95,7 +95,8 @@
 
 - (void)didSelectTableViewCell:(NSNotification *)notification {
     if (notification.object == self.myView.tableView) {
-        
+        NSInteger index = self.myView.tableView.selectedRow;
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_SELECTED_MAIL object:@(index)];
     }
 }
 
