@@ -61,14 +61,16 @@ static NSInteger  kMailCount = 20;
             model.date = [NSDate date];
             NSInteger randomIndex = (NSInteger)arc4random_uniform((u_int32_t)array.count);
             NSString *fileName = [array objectAtIndex:randomIndex];
+            model.senderAvater = fileName;
             NSString *contentString = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@/%@", folderName, fileName] ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
             model.content = contentString;
             model.urlForContentResources = [[NSBundle mainBundle] URLForResource:folderName withExtension:nil];
             fileName = [previewArray objectAtIndex:randomIndex];
-            NSString *previewContent = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@/%@", folderName, fileName] ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
+            NSString *previewContent = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@/%@", folderName, fileName] ofType:@"txt"] encoding:NSUTF8StringEncoding error:nil];
             model.previewContent = previewContent;
             model.previewBackgroundColor = [backgroundColors objectAtIndex:randomIndex];
             model.previewTextColor = [textColors objectAtIndex:randomIndex];
+            
             [chainModel addNewMailMessage:model];
         }
         [self.testMailObjects addObject:chainModel];

@@ -29,8 +29,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.containerView.backgroundViewColor = [NSColor whiteColor];
-    self.separatorView.backgroundViewColor = [NSColor blackColor];
-    
 }
 
 #pragma mark -
@@ -47,16 +45,18 @@
         self.containerView.backgroundViewColor = mailMessage.previewBackgroundColor;
         self.model = mailMessage;
         self.senderTextField.stringValue = [mailMessage senderString];
-        self.recipientsTextField.stringValue = [mailMessage recipientsString];
         self.subjectTextField.stringValue = [mailMessage subject];
         self.dateTextField.stringValue = mailMessage.formattedDate;
+        self.content.stringValue = mailMessage.previewContent;
+        self.avatarImageView.image = [NSImage imageNamed:mailMessage.senderAvater];
+        self.avatarImageView.backgroundViewColor = [NSColor whiteColor];
+        [self.avatarImageView round];
         
         self.senderTextField.textColor = mailMessage.previewTextColor;
-        self.recipientsTextField.textColor = mailMessage.previewTextColor;
         self.subjectTextField.textColor = mailMessage.previewTextColor;
         self.dateTextField.textColor = mailMessage.previewTextColor;
+        self.content.textColor = mailMessage.previewTextColor;
         
-        [[self.content mainFrame] loadHTMLString:mailMessage.previewContent baseURL:nil];
     }
 }
 

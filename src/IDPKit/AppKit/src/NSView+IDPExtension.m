@@ -27,12 +27,8 @@ static char __backgroundViewColor;
     return color;
 }
 
-- (void)setCornerRadius:(CGFloat)cornerRadius {
-    self.layer.cornerRadius = cornerRadius;
-}
-
-- (CGFloat)cornerRadius {
-    return self.layer.cornerRadius;
+- (void)round {
+    self.layer.cornerRadius = MIN(NSWidth(self.frame) / 2, NSHeight(self.frame) / 2);
 }
 
 @end

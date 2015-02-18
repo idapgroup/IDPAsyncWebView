@@ -23,6 +23,7 @@
 
 @property (nonatomic, strong) NSColor   *previewBackgroundColor;
 @property (nonatomic, strong) NSColor   *previewTextColor;
+@property (nonatomic, copy)   NSString  *senderAvater;
 
 - (NSString *)senderString;
 - (NSString *)recipientsString;

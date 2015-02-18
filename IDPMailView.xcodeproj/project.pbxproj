@@ -27,6 +27,10 @@
 		691EF7DC1A94E551004E3777 /* IDPMailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 691EF7C91A94E551004E3777 /* IDPMailViewCell.m */; };
 		691EF7DD1A94E551004E3777 /* IDPMailViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 691EF7CA1A94E551004E3777 /* IDPMailViewCell.xib */; };
 		691EF7E01A94E894004E3777 /* NSColor+IDPExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 691EF7DF1A94E894004E3777 /* NSColor+IDPExtension.m */; };
+		691EF7E51A94F5D2004E3777 /* html-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 691EF7E11A94F5D2004E3777 /* html-1.jpg */; };
+		691EF7E61A94F5D2004E3777 /* html-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 691EF7E21A94F5D2004E3777 /* html-2.jpg */; };
+		691EF7E71A94F5D2004E3777 /* html-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 691EF7E31A94F5D2004E3777 /* html-3.png */; };
+		691EF7E81A94F5D2004E3777 /* html-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 691EF7E41A94F5D2004E3777 /* html-4.png */; };
 		6926C1401A88F91800FEA821 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926C13F1A88F91800FEA821 /* AppDelegate.m */; };
 		6926C1421A88F91800FEA821 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6926C1411A88F91800FEA821 /* main.m */; };
 		6926C1441A88F91800FEA821 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6926C1431A88F91800FEA821 /* Images.xcassets */; };
@@ -96,6 +100,10 @@
 		691EF7CA1A94E551004E3777 /* IDPMailViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDPMailViewCell.xib; sourceTree = "<group>"; };
 		691EF7DE1A94E894004E3777 /* NSColor+IDPExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSColor+IDPExtension.h"; sourceTree = "<group>"; };
 		691EF7DF1A94E894004E3777 /* NSColor+IDPExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+IDPExtension.m"; sourceTree = "<group>"; };
+		691EF7E11A94F5D2004E3777 /* html-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "html-1.jpg"; sourceTree = "<group>"; };
+		691EF7E21A94F5D2004E3777 /* html-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "html-2.jpg"; sourceTree = "<group>"; };
+		691EF7E31A94F5D2004E3777 /* html-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "html-3.png"; sourceTree = "<group>"; };
+		691EF7E41A94F5D2004E3777 /* html-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "html-4.png"; sourceTree = "<group>"; };
 		6926C1391A88F91800FEA821 /* IDPMailView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IDPMailView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6926C13D1A88F91800FEA821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6926C13E1A88F91800FEA821 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -404,6 +412,10 @@
 		69B7B2651A8B810800B3FFD2 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				691EF7E11A94F5D2004E3777 /* html-1.jpg */,
+				691EF7E21A94F5D2004E3777 /* html-2.jpg */,
+				691EF7E31A94F5D2004E3777 /* html-3.png */,
+				691EF7E41A94F5D2004E3777 /* html-4.png */,
 				69B6526E1A94837900C5B346 /* unread.tiff */,
 				69B7B2661A8B810800B3FFD2 /* testEmailFile.html */,
 				698E25AF1A8CD90400ED64AA /* test.html */,
@@ -509,17 +521,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				691EF7E71A94F5D2004E3777 /* html-3.png in Resources */,
 				69C018241A8E48770024FD97 /* html files in Resources */,
 				691EF7D31A94E551004E3777 /* IDPMailListTableCellView.xib in Resources */,
 				698E25B01A8CD90400ED64AA /* test.html in Resources */,
 				6926C1441A88F91800FEA821 /* Images.xcassets in Resources */,
+				691EF7E51A94F5D2004E3777 /* html-1.jpg in Resources */,
 				691EF7D71A94E551004E3777 /* IDPMailPreviewTableCell.xib in Resources */,
 				69B7B2671A8B810800B3FFD2 /* testEmailFile.html in Resources */,
 				69C0174F1A8E008B0024FD97 /* test-2.html in Resources */,
 				69B6526F1A94837900C5B346 /* unread.tiff in Resources */,
 				691EF7DD1A94E551004E3777 /* IDPMailViewCell.xib in Resources */,
+				691EF7E81A94F5D2004E3777 /* html-4.png in Resources */,
 				6926C1911A89047C00FEA821 /* LICENSE in Resources */,
 				6926C1471A88F91800FEA821 /* MainMenu.xib in Resources */,
+				691EF7E61A94F5D2004E3777 /* html-2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
