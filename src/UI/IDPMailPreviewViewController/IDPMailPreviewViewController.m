@@ -18,7 +18,7 @@
 #import "NSTableView+IDPExtension.h"
 #import "NSView+IDPExtension.h"
 
-static CGFloat const kIDPAnimationDuration = 5;
+static CGFloat const kIDPAnimationDuration = 1.5;
 
 @interface IDPMailPreviewViewController ()
 
