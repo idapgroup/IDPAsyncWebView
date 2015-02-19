@@ -16,5 +16,6 @@
 - (void)roundWithValue:(CGFloat)value;
 - (void)borderWidthValue:(CGFloat)value;
 - (void)borderViewColor:(NSColor *)color;
+- (NSImage *)imageFromView;
 
 @end

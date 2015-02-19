@@ -16,11 +16,15 @@
 #import "IDPMailHistoryChainModel.h"
 #import "IDPTableRowView.h"
 #import "NSTableView+IDPExtension.h"
+#import "NSView+IDPExtension.h"
+
+static CGFloat const kIDPAnimationDuration = 5;
 
 @interface IDPMailPreviewViewController ()
 
 @property (nonatomic, strong) IDPMailPreviewView    *myView;
 @property (nonatomic, assign) BOOL disableRowSelectionNotification;
+@property (nonatomic, assign) NSInteger selectedRowIndex;
 
 @end
 
@@ -64,12 +68,32 @@
 }
 
 - (void)didSelectedNewMail:(NSNotification *)notification {
+    NSDictionary *userInfo = notification.userInfo;
+    NSInteger index = [[userInfo objectForKey:kIDPRowIndex] integerValue];
+    NSImage *image = [self.myView imageFromView];
+    self.myView.imageView.image = image;
+    
+    NSRect frame = self.myView.scrollView.frame;
+    NSRect startFrame = frame;
+    NSRect endFrame = frame;
+    
+    startFrame.origin.y = index < self.selectedRowIndex ? NSHeight(self.myView.frame) : -NSHeight(self.myView.frame);
+    
     IDPMailHistoryChainModel *model = notification.object;
     self.dataSourceObjects = model.mailMessages;
     self.disableRowSelectionNotification = NO;
     [self reloadData];
     [self.myView.tableView scrollRowToVisible:0];
     [self.myView.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+    
+    self.selectedRowIndex = index;
+    self.myView.imageView.alphaValue = 1;
+    self.myView.scrollView.frame = startFrame;
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        context.duration = kIDPAnimationDuration;
+        [self.myView.scrollView animator].frame = endFrame;
+        [self.myView.imageView animator].alphaValue = 0;
+    } completionHandler:nil];
 }
 
 - (void)reloadData {

@@ -773,6 +773,10 @@
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="a0Y-Yc-DY5" userLabel="Mail Preview View" customClass="IDPMailPreviewView">
                         <rect key="frame" x="219" y="0.0" width="305" height="620"/>
                         <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="leI-Sm-4Lz">
+                                <rect key="frame" x="0.0" y="0.0" width="307" height="620"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="TnW-OE-1QZ"/>
+                            </imageView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="83" horizontalPageScroll="10" verticalLineScroll="83" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSS-93-Gs0">
                                 <rect key="frame" x="0.0" y="0.0" width="307" height="620"/>
                                 <clipView key="contentView" id="A6G-S7-MLR">
@@ -839,11 +843,17 @@
                         <constraints>
                             <constraint firstItem="xSS-93-Gs0" firstAttribute="leading" secondItem="a0Y-Yc-DY5" secondAttribute="leading" id="7Hs-3E-lG0"/>
                             <constraint firstItem="xSS-93-Gs0" firstAttribute="top" secondItem="a0Y-Yc-DY5" secondAttribute="top" id="80O-Bu-YF2"/>
+                            <constraint firstAttribute="bottom" secondItem="leI-Sm-4Lz" secondAttribute="bottom" id="HFe-t9-xDa"/>
                             <constraint firstAttribute="trailing" secondItem="xSS-93-Gs0" secondAttribute="trailing" constant="-2" id="LLd-n8-VWM"/>
                             <constraint firstAttribute="bottom" secondItem="xSS-93-Gs0" secondAttribute="bottom" id="LXA-py-Ece"/>
+                            <constraint firstItem="leI-Sm-4Lz" firstAttribute="leading" secondItem="a0Y-Yc-DY5" secondAttribute="leading" id="Smc-bn-biA"/>
+                            <constraint firstAttribute="trailing" secondItem="leI-Sm-4Lz" secondAttribute="trailing" constant="-2" id="aop-a5-dR3"/>
+                            <constraint firstItem="leI-Sm-4Lz" firstAttribute="top" secondItem="a0Y-Yc-DY5" secondAttribute="top" id="jLk-dl-K1B"/>
                             <constraint firstAttribute="width" constant="305" id="t8I-Qk-S8G"/>
                         </constraints>
                         <connections>
+                            <outlet property="imageView" destination="leI-Sm-4Lz" id="4K3-cg-UiB"/>
+                            <outlet property="scrollView" destination="xSS-93-Gs0" id="fCo-wK-WII"/>
                             <outlet property="tableView" destination="OGB-qv-laC" id="UxI-LN-VRV"/>
                         </connections>
                     </customView>

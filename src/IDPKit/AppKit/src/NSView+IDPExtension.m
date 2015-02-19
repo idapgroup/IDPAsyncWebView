@@ -50,4 +50,11 @@ static char __backgroundViewColor;
     self.layer.borderColor = [color CGColor];
 }
 
+- (NSImage *)imageFromView {
+    NSRect frame = [self visibleRect];
+    NSBitmapImageRep* bitmapImageRep = [self bitmapImageRepForCachingDisplayInRect:NSMakeRect(0, 0, NSWidth(frame), NSHeight(frame))];
+    [self cacheDisplayInRect:frame toBitmapImageRep:bitmapImageRep];
+    return [[NSImage alloc] initWithCGImage:[bitmapImageRep CGImage] size:bitmapImageRep.size];
+}
+
 @end

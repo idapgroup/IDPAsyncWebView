@@ -11,5 +11,7 @@
 @interface IDPMailPreviewView : NSView
 
 @property (nonatomic, strong) IBOutlet NSTableView  *tableView;
+@property (nonatomic, strong) IBOutlet NSScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet NSImageView  *imageView;
 
 @end
