@@ -7,6 +7,7 @@
 //
 
 #import "IDPMailMessageModel.h"
+#import "NSDate+DateTools.h"
 
 @interface IDPMailMessageModel ()
 
@@ -45,6 +46,10 @@
 
 - (NSString *)recipientsString {
     return [self.recipients componentsJoinedByString:@","];
+}
+
+- (NSString *)shortFromattedDate {
+    return self.date.shortTimeAgoSinceNow;
 }
 
 @end

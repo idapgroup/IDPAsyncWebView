@@ -45,6 +45,13 @@
 		69B7B2611A8B437B00B3FFD2 /* NSTableView+IDPExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B7B2601A8B437B00B3FFD2 /* NSTableView+IDPExtension.m */; };
 		69B7B2671A8B810800B3FFD2 /* testEmailFile.html in Resources */ = {isa = PBXBuildFile; fileRef = 69B7B2661A8B810800B3FFD2 /* testEmailFile.html */; };
 		69B7B2691A8B828100B3FFD2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69B7B2681A8B828100B3FFD2 /* WebKit.framework */; };
+		69BC7A861A95D99D003FD7CD /* DateTools.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 69BC7A771A95D99D003FD7CD /* DateTools.bundle */; };
+		69BC7A871A95D99D003FD7CD /* DTError.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC7A7B1A95D99D003FD7CD /* DTError.m */; };
+		69BC7A881A95D99D003FD7CD /* DTTimePeriod.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC7A7D1A95D99D003FD7CD /* DTTimePeriod.m */; };
+		69BC7A891A95D99D003FD7CD /* DTTimePeriodChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC7A7F1A95D99D003FD7CD /* DTTimePeriodChain.m */; };
+		69BC7A8A1A95D99D003FD7CD /* DTTimePeriodCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC7A811A95D99D003FD7CD /* DTTimePeriodCollection.m */; };
+		69BC7A8B1A95D99D003FD7CD /* DTTimePeriodGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC7A831A95D99D003FD7CD /* DTTimePeriodGroup.m */; };
+		69BC7A8C1A95D99D003FD7CD /* NSDate+DateTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC7A851A95D99D003FD7CD /* NSDate+DateTools.m */; };
 		69BD86FE1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BD86FD1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.m */; };
 		69C0174F1A8E008B0024FD97 /* test-2.html in Resources */ = {isa = PBXBuildFile; fileRef = 69C0174E1A8E008B0024FD97 /* test-2.html */; };
 		69C018241A8E48770024FD97 /* html files in Resources */ = {isa = PBXBuildFile; fileRef = 69C018231A8E48770024FD97 /* html files */; };
@@ -128,6 +135,21 @@
 		69B7B2661A8B810800B3FFD2 /* testEmailFile.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = testEmailFile.html; sourceTree = "<group>"; };
 		69B7B2681A8B828100B3FFD2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		69BC27901A8A5FC700F30FC0 /* IDPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPConstants.h; sourceTree = "<group>"; };
+		69BC7A771A95D99D003FD7CD /* DateTools.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DateTools.bundle; sourceTree = "<group>"; };
+		69BC7A781A95D99D003FD7CD /* DateTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTools.h; sourceTree = "<group>"; };
+		69BC7A791A95D99D003FD7CD /* DTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTConstants.h; sourceTree = "<group>"; };
+		69BC7A7A1A95D99D003FD7CD /* DTError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTError.h; sourceTree = "<group>"; };
+		69BC7A7B1A95D99D003FD7CD /* DTError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTError.m; sourceTree = "<group>"; };
+		69BC7A7C1A95D99D003FD7CD /* DTTimePeriod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTimePeriod.h; sourceTree = "<group>"; };
+		69BC7A7D1A95D99D003FD7CD /* DTTimePeriod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriod.m; sourceTree = "<group>"; };
+		69BC7A7E1A95D99D003FD7CD /* DTTimePeriodChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTimePeriodChain.h; sourceTree = "<group>"; };
+		69BC7A7F1A95D99D003FD7CD /* DTTimePeriodChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriodChain.m; sourceTree = "<group>"; };
+		69BC7A801A95D99D003FD7CD /* DTTimePeriodCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTimePeriodCollection.h; sourceTree = "<group>"; };
+		69BC7A811A95D99D003FD7CD /* DTTimePeriodCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriodCollection.m; sourceTree = "<group>"; };
+		69BC7A821A95D99D003FD7CD /* DTTimePeriodGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTimePeriodGroup.h; sourceTree = "<group>"; };
+		69BC7A831A95D99D003FD7CD /* DTTimePeriodGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriodGroup.m; sourceTree = "<group>"; };
+		69BC7A841A95D99D003FD7CD /* NSDate+DateTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateTools.h"; sourceTree = "<group>"; };
+		69BC7A851A95D99D003FD7CD /* NSDate+DateTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateTools.m"; sourceTree = "<group>"; };
 		69BD86FC1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+IDPExtensions.h"; sourceTree = "<group>"; };
 		69BD86FD1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+IDPExtensions.m"; sourceTree = "<group>"; };
 		69C0174E1A8E008B0024FD97 /* test-2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "test-2.html"; sourceTree = "<group>"; };
@@ -364,6 +386,7 @@
 		6926C1651A88FC6300FEA821 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				69BC7A761A95D99D003FD7CD /* DateTools */,
 				691EF7991A94E551004E3777 /* Models */,
 				691EF7A81A94E551004E3777 /* UI */,
 				69BC278E1A8A5FB400F30FC0 /* Constants */,
@@ -430,6 +453,28 @@
 				69BC27901A8A5FC700F30FC0 /* IDPConstants.h */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		69BC7A761A95D99D003FD7CD /* DateTools */ = {
+			isa = PBXGroup;
+			children = (
+				69BC7A771A95D99D003FD7CD /* DateTools.bundle */,
+				69BC7A781A95D99D003FD7CD /* DateTools.h */,
+				69BC7A791A95D99D003FD7CD /* DTConstants.h */,
+				69BC7A7A1A95D99D003FD7CD /* DTError.h */,
+				69BC7A7B1A95D99D003FD7CD /* DTError.m */,
+				69BC7A7C1A95D99D003FD7CD /* DTTimePeriod.h */,
+				69BC7A7D1A95D99D003FD7CD /* DTTimePeriod.m */,
+				69BC7A7E1A95D99D003FD7CD /* DTTimePeriodChain.h */,
+				69BC7A7F1A95D99D003FD7CD /* DTTimePeriodChain.m */,
+				69BC7A801A95D99D003FD7CD /* DTTimePeriodCollection.h */,
+				69BC7A811A95D99D003FD7CD /* DTTimePeriodCollection.m */,
+				69BC7A821A95D99D003FD7CD /* DTTimePeriodGroup.h */,
+				69BC7A831A95D99D003FD7CD /* DTTimePeriodGroup.m */,
+				69BC7A841A95D99D003FD7CD /* NSDate+DateTools.h */,
+				69BC7A851A95D99D003FD7CD /* NSDate+DateTools.m */,
+			);
+			path = DateTools;
 			sourceTree = "<group>";
 		};
 		69BD86FB1A93C5A700537B19 /* Fondation */ = {
@@ -528,6 +573,7 @@
 				6926C1441A88F91800FEA821 /* Images.xcassets in Resources */,
 				691EF7E51A94F5D2004E3777 /* html-1.jpg in Resources */,
 				691EF7D71A94E551004E3777 /* IDPMailPreviewTableCell.xib in Resources */,
+				69BC7A861A95D99D003FD7CD /* DateTools.bundle in Resources */,
 				69B7B2671A8B810800B3FFD2 /* testEmailFile.html in Resources */,
 				69C0174F1A8E008B0024FD97 /* test-2.html in Resources */,
 				69B6526F1A94837900C5B346 /* unread.tiff in Resources */,
@@ -554,6 +600,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				691EF7DB1A94E551004E3777 /* IDPMailDetailsViewController.m in Sources */,
+				69BC7A8B1A95D99D003FD7CD /* DTTimePeriodGroup.m in Sources */,
 				691EF7D91A94E551004E3777 /* IDPMailTableView.m in Sources */,
 				6926C1931A89047C00FEA821 /* NSNib+IDPExtension.m in Sources */,
 				69BD86FE1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.m in Sources */,
@@ -561,12 +608,15 @@
 				6926C1421A88F91800FEA821 /* main.m in Sources */,
 				691EF7D81A94E551004E3777 /* IDPMailPreviewView.m in Sources */,
 				691EF7D21A94E551004E3777 /* IDPMailListTableCellView.m in Sources */,
+				69BC7A871A95D99D003FD7CD /* DTError.m in Sources */,
 				691EF7D41A94E551004E3777 /* IDPMailListView.m in Sources */,
 				691EF7D61A94E551004E3777 /* IDPMailPreviewTableCell.m in Sources */,
+				69BC7A891A95D99D003FD7CD /* DTTimePeriodChain.m in Sources */,
 				691EF7DA1A94E551004E3777 /* IDPScrollView.m in Sources */,
 				691EF7CD1A94E551004E3777 /* IDPMailHistoryChainModel.m in Sources */,
 				691EF7E01A94E894004E3777 /* NSColor+IDPExtension.m in Sources */,
 				6926C1401A88F91800FEA821 /* AppDelegate.m in Sources */,
+				69BC7A8A1A95D99D003FD7CD /* DTTimePeriodCollection.m in Sources */,
 				69B652791A9489BE00C5B346 /* NSViewController+IDPExtension.m in Sources */,
 				691EF7D01A94E551004E3777 /* IDPBaseTableCell.m in Sources */,
 				691EF7DC1A94E551004E3777 /* IDPMailViewCell.m in Sources */,
@@ -575,7 +625,9 @@
 				691EF7CF1A94E551004E3777 /* IDPTableCacheObject.m in Sources */,
 				6926C1921A89047C00FEA821 /* README.md in Sources */,
 				691EF7D51A94E551004E3777 /* IDPMailPreviewViewController.m in Sources */,
+				69BC7A8C1A95D99D003FD7CD /* NSDate+DateTools.m in Sources */,
 				69B7B2611A8B437B00B3FFD2 /* NSTableView+IDPExtension.m in Sources */,
+				69BC7A881A95D99D003FD7CD /* DTTimePeriod.m in Sources */,
 				691EF7CE1A94E551004E3777 /* IDPMailMessageModel.m in Sources */,
 				69EE2FC41A8BB3360058045D /* NSView+IDPExtension.m in Sources */,
 			);

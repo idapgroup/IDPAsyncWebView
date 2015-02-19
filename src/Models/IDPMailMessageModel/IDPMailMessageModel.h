@@ -28,4 +28,6 @@
 - (NSString *)senderString;
 - (NSString *)recipientsString;
 
+- (NSString *)shortFromattedDate;
+
 @end

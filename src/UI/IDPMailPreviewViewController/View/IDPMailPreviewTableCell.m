@@ -46,7 +46,7 @@
         self.model = mailMessage;
         self.senderTextField.stringValue = [mailMessage senderString];
         self.subjectTextField.stringValue = [mailMessage subject];
-        self.dateTextField.stringValue = mailMessage.formattedDate;
+        self.dateTextField.stringValue = [mailMessage shortFromattedDate];
         self.content.stringValue = mailMessage.previewContent;
         self.avatarImageView.image = [NSImage imageNamed:mailMessage.senderAvater];
         self.avatarImageView.backgroundViewColor = [NSColor whiteColor];
