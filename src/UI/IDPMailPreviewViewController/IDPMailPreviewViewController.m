@@ -112,7 +112,14 @@
 }
 
 - (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row {
-    return [IDPTableRowView new];
+    static NSString* const kRowIdentifier = @"IDPTableRowView";
+    IDPTableRowView* rowView = [tableView makeViewWithIdentifier:kRowIdentifier owner:nil];
+    if (!rowView) {
+        rowView = [IDPTableRowView new];
+        rowView.identifier = kRowIdentifier;
+    }
+    
+    return rowView;
 }
 
 @end
