@@ -19,6 +19,8 @@
 @property (nonatomic, strong) IBOutlet NSTextField  *content;
 @property (nonatomic, strong) IBOutlet NSView       *containerView;
 @property (nonatomic, strong) IBOutlet NSImageView  *avatarImageView;
+@property (nonatomic, strong) IBOutlet NSView       *readMarkView;
+@property (nonatomic, strong) IBOutlet NSView       *readMarkLabel;
 
 @property (nonatomic, strong, readonly) IDPMailMessageModel   *model;
 

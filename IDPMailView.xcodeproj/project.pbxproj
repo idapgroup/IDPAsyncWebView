@@ -53,7 +53,8 @@
 		69BC7A8B1A95D99D003FD7CD /* DTTimePeriodGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC7A831A95D99D003FD7CD /* DTTimePeriodGroup.m */; };
 		69BC7A8C1A95D99D003FD7CD /* NSDate+DateTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC7A851A95D99D003FD7CD /* NSDate+DateTools.m */; };
 		69BC7A911A95E76D003FD7CD /* IDPTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC7A901A95E76D003FD7CD /* IDPTableRowView.m */; };
-		69BD86FE1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BD86FD1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.m */; };
+		69BC7A9A1A96088F003FD7CD /* NSMutableArray+IDPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC7A951A96088F003FD7CD /* NSMutableArray+IDPExtensions.m */; };
+		69BC7A9B1A96088F003FD7CD /* IDPKeyPathObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC7A981A96088F003FD7CD /* IDPKeyPathObserver.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		69C0174F1A8E008B0024FD97 /* test-2.html in Resources */ = {isa = PBXBuildFile; fileRef = 69C0174E1A8E008B0024FD97 /* test-2.html */; };
 		69C018241A8E48770024FD97 /* html files in Resources */ = {isa = PBXBuildFile; fileRef = 69C018231A8E48770024FD97 /* html files */; };
 		69EE2FC41A8BB3360058045D /* NSView+IDPExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 69EE2FC31A8BB3360058045D /* NSView+IDPExtension.m */; };
@@ -153,8 +154,11 @@
 		69BC7A851A95D99D003FD7CD /* NSDate+DateTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateTools.m"; sourceTree = "<group>"; };
 		69BC7A8F1A95E76D003FD7CD /* IDPTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPTableRowView.h; sourceTree = "<group>"; };
 		69BC7A901A95E76D003FD7CD /* IDPTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPTableRowView.m; sourceTree = "<group>"; };
-		69BD86FC1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+IDPExtensions.h"; sourceTree = "<group>"; };
-		69BD86FD1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+IDPExtensions.m"; sourceTree = "<group>"; };
+		69BC7A941A96088F003FD7CD /* NSMutableArray+IDPExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+IDPExtensions.h"; sourceTree = "<group>"; };
+		69BC7A951A96088F003FD7CD /* NSMutableArray+IDPExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+IDPExtensions.m"; sourceTree = "<group>"; };
+		69BC7A971A96088F003FD7CD /* IDPKeyPathObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPKeyPathObserver.h; sourceTree = "<group>"; };
+		69BC7A981A96088F003FD7CD /* IDPKeyPathObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPKeyPathObserver.m; sourceTree = "<group>"; };
+		69BC7A991A96088F003FD7CD /* IDPPropertyMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPPropertyMacros.h; sourceTree = "<group>"; };
 		69C0174E1A8E008B0024FD97 /* test-2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "test-2.html"; sourceTree = "<group>"; };
 		69C018231A8E48770024FD97 /* html files */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "html files"; path = "resources/html files"; sourceTree = "<group>"; };
 		69EE2FC21A8BB3360058045D /* NSView+IDPExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+IDPExtension.h"; sourceTree = "<group>"; };
@@ -402,7 +406,7 @@
 		6926C1831A89047C00FEA821 /* IDPKit */ = {
 			isa = PBXGroup;
 			children = (
-				69BD86FB1A93C5A700537B19 /* Fondation */,
+				69BC7A921A96088F003FD7CD /* FoundationKit */,
 				6926C1841A89047C00FEA821 /* AppKit */,
 			);
 			path = IDPKit;
@@ -490,13 +494,32 @@
 			path = IDPTableRowView;
 			sourceTree = "<group>";
 		};
-		69BD86FB1A93C5A700537B19 /* Fondation */ = {
+		69BC7A921A96088F003FD7CD /* FoundationKit */ = {
 			isa = PBXGroup;
 			children = (
-				69BD86FC1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.h */,
-				69BD86FD1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.m */,
+				69BC7A931A96088F003FD7CD /* Categories */,
+				69BC7A961A96088F003FD7CD /* IDPKeyPathObserver */,
+				69BC7A991A96088F003FD7CD /* IDPPropertyMacros.h */,
 			);
-			path = Fondation;
+			path = FoundationKit;
+			sourceTree = "<group>";
+		};
+		69BC7A931A96088F003FD7CD /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				69BC7A941A96088F003FD7CD /* NSMutableArray+IDPExtensions.h */,
+				69BC7A951A96088F003FD7CD /* NSMutableArray+IDPExtensions.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		69BC7A961A96088F003FD7CD /* IDPKeyPathObserver */ = {
+			isa = PBXGroup;
+			children = (
+				69BC7A971A96088F003FD7CD /* IDPKeyPathObserver.h */,
+				69BC7A981A96088F003FD7CD /* IDPKeyPathObserver.m */,
+			);
+			path = IDPKeyPathObserver;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -617,9 +640,9 @@
 				691EF7D91A94E551004E3777 /* IDPMailTableView.m in Sources */,
 				6926C1931A89047C00FEA821 /* NSNib+IDPExtension.m in Sources */,
 				69BC7A911A95E76D003FD7CD /* IDPTableRowView.m in Sources */,
-				69BD86FE1A93C5BF00537B19 /* NSMutableArray+IDPExtensions.m in Sources */,
 				691EF7CB1A94E551004E3777 /* IDPCellHeightCalculator.m in Sources */,
 				6926C1421A88F91800FEA821 /* main.m in Sources */,
+				69BC7A9B1A96088F003FD7CD /* IDPKeyPathObserver.m in Sources */,
 				691EF7D81A94E551004E3777 /* IDPMailPreviewView.m in Sources */,
 				691EF7D21A94E551004E3777 /* IDPMailListTableCellView.m in Sources */,
 				69BC7A871A95D99D003FD7CD /* DTError.m in Sources */,
@@ -640,6 +663,7 @@
 				6926C1921A89047C00FEA821 /* README.md in Sources */,
 				691EF7D51A94E551004E3777 /* IDPMailPreviewViewController.m in Sources */,
 				69BC7A8C1A95D99D003FD7CD /* NSDate+DateTools.m in Sources */,
+				69BC7A9A1A96088F003FD7CD /* NSMutableArray+IDPExtensions.m in Sources */,
 				69B7B2611A8B437B00B3FFD2 /* NSTableView+IDPExtension.m in Sources */,
 				69BC7A881A95D99D003FD7CD /* DTTimePeriod.m in Sources */,
 				691EF7CE1A94E551004E3777 /* IDPMailMessageModel.m in Sources */,

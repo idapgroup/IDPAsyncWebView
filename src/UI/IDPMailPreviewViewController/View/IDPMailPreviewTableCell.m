@@ -11,10 +11,12 @@
 #import "NSView+IDPExtension.h"
 #import "IDPMailMessageModel.h"
 #import "NSColor+IDPExtension.h"
+#import "IDPKeyPathObserver.h"
 
-@interface IDPMailPreviewTableCell ()
+@interface IDPMailPreviewTableCell () <IDPKeyPathObserverDelegate>
 
 @property (nonatomic, strong) IDPMailMessageModel   *model;
+@property (nonatomic, strong) IDPKeyPathObserver    *keyPathObserver;
 
 @end
 
@@ -24,12 +26,14 @@
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    
+    [self.keyPathObserver stopObserving];
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.containerView.backgroundViewColor = [NSColor whiteColor];
+    self.readMarkView.backgroundViewColor = [NSColor colorWithIntRed:0 green:161 blue:244 alpha:255];
+    [self.readMarkView round];
     [self roundWithValue:3];
 }
 
@@ -38,6 +42,8 @@
 
 - (void)prepareForReuse {
     [super prepareForReuse];
+    [self.keyPathObserver stopObserving];
+    self.keyPathObserver = nil;
     self.model = nil;
 }
 
@@ -53,12 +59,29 @@
         self.avatarImageView.image = [NSImage imageNamed:mailMessage.senderAvater];
         self.avatarImageView.backgroundViewColor = [NSColor whiteColor];
         [self.avatarImageView round];
+        self.readMarkView.hidden = mailMessage.isRead;
         
         self.senderTextField.textColor = mailMessage.previewTextColor;
         self.subjectTextField.textColor = mailMessage.previewTextColor;
         self.dateTextField.textColor = mailMessage.previewTextColor;
         self.content.textColor = mailMessage.previewTextColor;
         
+        self.keyPathObserver = [[IDPKeyPathObserver alloc] initWithObservedObject:mailMessage observerObject:self];
+        self.keyPathObserver.observedKeyPathsArray = @[@"read"];
+        [self.keyPathObserver startObserving];
+    }
+}
+
+#pragma mark -
+#pragma mark IDPKeyPathObserverDelegate
+
+- (void)keyPathObserver:(IDPKeyPathObserver *)observer
+        didCatchChanges:(NSDictionary *)changes
+              inKeyPath:(NSString *)keyPath
+               ofObject:(id<NSObject>)observedObject {
+    if (observedObject == self.model) {
+        IDPMailMessageModel *model = (IDPMailMessageModel *)observedObject;
+        self.readMarkView.hidden = model.isRead;
     }
 }
 

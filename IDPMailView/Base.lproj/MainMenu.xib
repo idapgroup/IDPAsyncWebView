@@ -686,18 +686,18 @@
         <window title="IDPMailView" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="321" y="336" width="1100" height="450"/>
+            <rect key="contentRect" x="321" y="336" width="1320" height="620"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
-            <value key="minSize" type="size" width="1100" height="450"/>
+            <value key="minSize" type="size" width="1320" height="620"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="1100" height="450"/>
+                <rect key="frame" x="0.0" y="0.0" width="1320" height="620"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="lMo-8P-kta" userLabel="Mail List View" customClass="IDPMailListView">
-                        <rect key="frame" x="0.0" y="0.0" width="220" height="450"/>
+                        <rect key="frame" x="0.0" y="0.0" width="220" height="620"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XeC-nI-YHY">
-                                <rect key="frame" x="0.0" y="0.0" width="220" height="450"/>
+                                <rect key="frame" x="0.0" y="0.0" width="220" height="620"/>
                                 <clipView key="contentView" id="QCP-Q5-awY">
                                     <rect key="frame" x="1" y="17" width="238" height="117"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -771,10 +771,10 @@
                         </connections>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="a0Y-Yc-DY5" userLabel="Mail Preview View" customClass="IDPMailPreviewView">
-                        <rect key="frame" x="219" y="0.0" width="305" height="450"/>
+                        <rect key="frame" x="219" y="0.0" width="305" height="620"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="83" horizontalPageScroll="10" verticalLineScroll="83" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSS-93-Gs0">
-                                <rect key="frame" x="0.0" y="0.0" width="307" height="450"/>
+                                <rect key="frame" x="0.0" y="0.0" width="307" height="620"/>
                                 <clipView key="contentView" id="A6G-S7-MLR">
                                     <rect key="frame" x="1" y="17" width="238" height="117"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -848,10 +848,10 @@
                         </connections>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="dZA-Uh-1CY" customClass="IDPMailTableView">
-                        <rect key="frame" x="525" y="0.0" width="575" height="450"/>
+                        <rect key="frame" x="525" y="0.0" width="795" height="620"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="65" horizontalPageScroll="10" verticalLineScroll="65" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zo-8E-RxU" customClass="IDPScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="575" height="450"/>
+                                <rect key="frame" x="0.0" y="0.0" width="795" height="620"/>
                                 <clipView key="contentView" id="csE-PK-LCf">
                                     <rect key="frame" x="1" y="17" width="238" height="117"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -862,7 +862,7 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="553" minWidth="100" maxWidth="10000" id="en7-Ll-Rmo">
+                                                <tableColumn width="773" minWidth="100" maxWidth="10000" id="en7-Ll-Rmo">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -876,7 +876,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="hjk-Xu-wmc">
-                                                            <rect key="frame" x="10" y="7" width="553" height="17"/>
+                                                            <rect key="frame" x="10" y="7" width="773" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rRh-Sk-dVX">
@@ -936,7 +936,7 @@
                     <constraint firstAttribute="trailing" secondItem="dZA-Uh-1CY" secondAttribute="trailing" id="zMV-CX-T6G"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="372" y="194"/>
+            <point key="canvasLocation" x="417" y="135"/>
         </window>
     </objects>
 </document>
