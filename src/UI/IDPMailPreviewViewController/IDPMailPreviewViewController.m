@@ -14,6 +14,7 @@
 #import "IDPMailMessageModel.h"
 #import "IDPConstants.h"
 #import "IDPMailHistoryChainModel.h"
+#import "IDPTableRowView.h"
 
 @interface IDPMailPreviewViewController ()
 
@@ -109,6 +110,10 @@
         NSInteger index = self.myView.tableView.selectedRow;
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_SELECTED_MAIL object:@(index)];
     }
+}
+
+- (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row {
+    return [IDPTableRowView new];
 }
 
 @end

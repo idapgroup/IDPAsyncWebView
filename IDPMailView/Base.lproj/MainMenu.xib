@@ -773,7 +773,7 @@
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="a0Y-Yc-DY5" userLabel="Mail Preview View" customClass="IDPMailPreviewView">
                         <rect key="frame" x="219" y="0.0" width="305" height="450"/>
                         <subviews>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="82" horizontalPageScroll="10" verticalLineScroll="82" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSS-93-Gs0">
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="83" horizontalPageScroll="10" verticalLineScroll="83" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSS-93-Gs0">
                                 <rect key="frame" x="0.0" y="0.0" width="307" height="450"/>
                                 <clipView key="contentView" id="A6G-S7-MLR">
                                     <rect key="frame" x="1" y="17" width="238" height="117"/>
@@ -781,11 +781,11 @@
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="77" viewBased="YES" id="OGB-qv-laC">
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <size key="intercellSpacing" width="3" height="5"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                            <size key="intercellSpacing" width="6" height="6"/>
+                                            <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="gridColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="302" minWidth="40" maxWidth="1000" id="dxh-SB-3GH">
+                                                <tableColumn width="299" minWidth="40" maxWidth="1000" id="dxh-SB-3GH">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -799,7 +799,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="IJm-bq-Kdf">
-                                                            <rect key="frame" x="1" y="2" width="302" height="17"/>
+                                                            <rect key="frame" x="3" y="3" width="299" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hi9-Nd-g4a">
