@@ -23,7 +23,7 @@
 @property (nonatomic, strong) IBOutlet NSView       *headerView;
 @property (nonatomic, strong) IBOutlet NSView       *contentView;
 @property (nonatomic, strong) IBOutlet NSView       *containerView;
-@property (nonatomic, strong) IBOutlet NSView       *separatorView;
+@property (nonatomic, strong) IBOutlet NSImageView  *avatarImageView;
 
 @property (nonatomic, strong, readonly) IDPMailMessageModel   *model;
 

@@ -29,10 +29,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.containerView.backgroundViewColor = [NSColor whiteColor];
-    self.separatorView.backgroundViewColor = [NSColor blackColor];
     [self roundWithValue:5];
     [self borderWidthValue:2.5];
     [self borderViewColor:[NSColor colorWithIntRed:247 green:247 blue:247 alpha:255]];
+    [self.avatarImageView borderWidthValue:1];
+    [self.avatarImageView borderViewColor:[NSColor grayColor]];
 }
 
 #pragma mark -
@@ -58,8 +59,10 @@
         self.senderTextField.stringValue = [mailMessage senderString];
         self.recipientsTextField.stringValue = [mailMessage recipientsString];
         self.subjectTextField.stringValue = [mailMessage subject];
-        self.dateTextField.stringValue = mailMessage.formattedDate;
+        self.dateTextField.stringValue = [mailMessage shortFromattedDate];
         self.content.policyDelegate = self;
+        self.avatarImageView.image = [NSImage imageNamed:mailMessage.senderAvater];
+        [self.avatarImageView round];
         
         [[self.content mainFrame] loadHTMLString:mailMessage.content baseURL:mailMessage.urlForContentResources];
         
