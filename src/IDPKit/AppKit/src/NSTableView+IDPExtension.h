@@ -8,11 +8,23 @@
 
 #import <Cocoa/Cocoa.h>
 
+typedef enum {
+    IDPTableViewScrollPositionNone,
+    // Not supported yet
+//    IDPTableViewScrollPositionTop,
+    IDPTableViewScrollPositionMiddle,
+    // Not supported yet
+//    IDPTableViewScrollPositionBottom
+} IDPTableViewScrollPosition;
+
 @interface NSTableView (IDPExtension)
 
 - (NSArray *)visibleRows;
 - (NSArray *)visibleCells;
 - (NSTableCellView *)firstVisibleViewCell;
 - (NSTableCellView *)firstVisibleViewCellMakeIfNecessary;
+
+- (void)scrollToRow:(NSInteger)indexRow
+              atScrollPosition:(IDPTableViewScrollPosition)scrollPosition;
 
 @end

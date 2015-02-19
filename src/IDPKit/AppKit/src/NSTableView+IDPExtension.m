@@ -44,6 +44,32 @@
     return [self firstVisibleViewCellMakeIfNecessary:YES];
 }
 
+- (void)scrollToRow:(NSInteger)indexRow
+   atScrollPosition:(IDPTableViewScrollPosition)scrollPosition
+{
+    NSScrollView *scrollView = [self enclosingScrollView];
+    NSRect rect = [self rectOfRow:indexRow];
+    NSRect frame = scrollView.frame;
+    CGFloat halfFrameHeight = NSHeight(frame) / 2;
+    NSRect bounds = self.bounds;
+    NSPoint origin = [scrollView documentVisibleRect].origin;
+    CGFloat y = rect.origin.y;
+    
+    BOOL userDefaultScrollToVisibleRow = YES;
+    
+    if (scrollPosition == IDPTableViewScrollPositionMiddle && y+halfFrameHeight < NSHeight(bounds) && y - halfFrameHeight > 0 ) {
+        y = rect.origin.y - halfFrameHeight;
+        userDefaultScrollToVisibleRow = NO;
+    }
+    
+    if (userDefaultScrollToVisibleRow) {
+        [self scrollRowToVisible:indexRow];
+    } else {
+        origin.y = y;
+        [[scrollView documentView] scrollPoint:origin];
+    }
+}
+
 #pragma mark -
 #pragma mark Private methods
 

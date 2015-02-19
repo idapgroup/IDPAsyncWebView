@@ -15,6 +15,7 @@
 #import "IDPConstants.h"
 #import "IDPMailHistoryChainModel.h"
 #import "IDPTableRowView.h"
+#import "NSTableView+IDPExtension.h"
 
 @interface IDPMailPreviewViewController ()
 
@@ -78,7 +79,7 @@
 - (void)updateSelectedCellAccordingToScrolling:(NSNotification *)notification {
     NSInteger row = [notification.object integerValue];
     self.disableRowSelectionNotification = YES;
-    [self.myView.tableView scrollRowToVisible:row];
+    [self.myView.tableView scrollToRow:row atScrollPosition:IDPTableViewScrollPositionMiddle];
     [self.myView.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
     self.disableRowSelectionNotification = NO;
 }
