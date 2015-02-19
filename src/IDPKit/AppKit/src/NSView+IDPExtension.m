@@ -27,8 +27,27 @@ static char __backgroundViewColor;
     return color;
 }
 
+#pragma mark -
+#pragma mark Public methods
+
 - (void)round {
-    self.layer.cornerRadius = MIN(NSWidth(self.frame) / 2, NSHeight(self.frame) / 2);
+    [self roundWithValue:MIN(NSWidth(self.frame) / 2, NSHeight(self.frame) / 2)];
+}
+
+- (void)roundWithValue:(CGFloat)value {
+    self.wantsLayer = YES;
+    self.layer.masksToBounds = YES;
+    self.layer.cornerRadius = value;
+}
+
+- (void)borderWidthValue:(CGFloat)value {
+    self.wantsLayer = YES;
+    self.layer.borderWidth = value;
+}
+
+- (void)borderViewColor:(NSColor *)color {
+    self.wantsLayer = YES;
+    self.layer.borderColor = [color CGColor];
 }
 
 @end

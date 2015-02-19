@@ -9,6 +9,7 @@
 #import "IDPMailViewCell.h"
 #import "IDPMailMessageModel.h"
 #import "NSView+IDPExtension.h"
+#import "NSColor+IDPExtension.h"
 
 @interface IDPMailViewCell ()
 
@@ -29,7 +30,9 @@
     [super awakeFromNib];
     self.containerView.backgroundViewColor = [NSColor whiteColor];
     self.separatorView.backgroundViewColor = [NSColor blackColor];
-    
+    [self roundWithValue:5];
+    [self borderWidthValue:2.5];
+    [self borderViewColor:[NSColor colorWithIntRed:247 green:247 blue:247 alpha:255]];
 }
 
 #pragma mark -

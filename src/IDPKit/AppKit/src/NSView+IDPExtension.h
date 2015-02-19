@@ -13,5 +13,8 @@
 @property (nonatomic, strong) NSColor *backgroundViewColor;
 
 - (void)round;
+- (void)roundWithValue:(CGFloat)value;
+- (void)borderWidthValue:(CGFloat)value;
+- (void)borderViewColor:(NSColor *)color;
 
 @end

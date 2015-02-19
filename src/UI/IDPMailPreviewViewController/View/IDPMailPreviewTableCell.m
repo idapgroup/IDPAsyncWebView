@@ -10,6 +10,7 @@
 #import "IDPMailMessageModel.h"
 #import "NSView+IDPExtension.h"
 #import "IDPMailMessageModel.h"
+#import "NSColor+IDPExtension.h"
 
 @interface IDPMailPreviewTableCell ()
 
@@ -29,6 +30,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.containerView.backgroundViewColor = [NSColor whiteColor];
+    [self roundWithValue:3];
 }
 
 #pragma mark -

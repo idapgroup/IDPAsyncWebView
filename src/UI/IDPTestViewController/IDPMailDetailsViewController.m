@@ -56,7 +56,6 @@ static CGFloat   const kCellDefaultHeight = 190;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.myView.tableView.backgroundColor = [NSColor grayColor];
     self.cellHeightCalculator.cellHeight = 97;
     self.cellHeightCalculator.cellContentWidth = 500;
     self.myView.cellHeightCalculator = self.cellHeightCalculator;

@@ -34,7 +34,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.myView.tableView.backgroundColor = [NSColor grayColor];
     NSString *identifier = NSStringFromClass([IDPMailPreviewTableCell class]);
     [self.myView.tableView registerNib:[[NSNib alloc] initWithNibNamed:identifier bundle:nil] forIdentifier:identifier];
     [self subscribeOnNitifications];
