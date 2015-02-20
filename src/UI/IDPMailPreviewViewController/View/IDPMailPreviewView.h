@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 IDAP Group. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "IDPBaseView.h"
 
-@interface IDPMailPreviewView : NSView
+@interface IDPMailPreviewView : IDPBaseView
 
 @property (nonatomic, strong) IBOutlet NSTableView  *tableView;
 @property (nonatomic, strong) IBOutlet NSScrollView *scrollView;

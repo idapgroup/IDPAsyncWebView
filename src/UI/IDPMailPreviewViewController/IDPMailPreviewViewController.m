@@ -17,6 +17,7 @@
 #import "IDPTableRowView.h"
 #import "NSTableView+IDPExtension.h"
 #import "NSView+IDPExtension.h"
+#import <QuartzCore/QuartzCore.h>
 
 static CGFloat const kIDPAnimationDuration = 1;
 
@@ -39,6 +40,10 @@ static CGFloat const kIDPAnimationDuration = 1;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.myView.backgroundViewColor = [NSColor whiteColor];
+    self.myView.scrollView.drawsBackground = NO;
+    self.myView.scrollView.backgroundColor = [NSColor clearColor];
+    self.myView.tableView.backgroundColor = [NSColor clearColor];
     NSString *identifier = NSStringFromClass([IDPMailPreviewTableCell class]);
     [self.myView.tableView registerNib:[[NSNib alloc] initWithNibNamed:identifier bundle:nil] forIdentifier:identifier];
     [self subscribeOnNitifications];
@@ -80,7 +85,6 @@ static CGFloat const kIDPAnimationDuration = 1;
     
     NSRect frame = self.myView.scrollView.frame;
     NSRect startFrame = frame;
-    NSRect endFrame = frame;
     
     startFrame.origin.y = index < self.selectedRowIndex ? NSHeight(self.myView.frame) : -NSHeight(self.myView.frame);
     
@@ -92,16 +96,42 @@ static CGFloat const kIDPAnimationDuration = 1;
     [self.myView.tableView scrollRowToVisible:0];
     [self.myView.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
     
-    self.selectedRowIndex = index;
-    self.myView.imageView.alphaValue = 1;
-    self.myView.scrollView.frame = startFrame;
-    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
-        context.duration = kIDPAnimationDuration;
-        [self.myView.scrollView animator].frame = endFrame;
-        [self.myView.imageView animator].alphaValue = 0;
-    } completionHandler:^{
-        
+    
+    self.myView.wantsLayer = YES;
+    
+    CATransform3D transfrom = self.myView.scrollView.layer.transform;
+    CATransform3D translateStart = CATransform3DMakeTranslation(0, startFrame.origin.y, 0);
+    translateStart = CATransform3DConcat(transfrom, translateStart);
+
+    CABasicAnimation *animation1 = [CABasicAnimation animationWithKeyPath:@"transform"];
+    animation1.duration = kIDPAnimationDuration;
+    animation1.fromValue = [NSValue valueWithCATransform3D:translateStart];
+    animation1.toValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+    animation1.removedOnCompletion = YES;
+    
+    CABasicAnimation *animation2 = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    animation2.duration = kIDPAnimationDuration;
+    animation2.fromValue = @(0);
+    animation2.toValue = @(1);
+    animation2.removedOnCompletion = YES;
+    
+    CABasicAnimation *animation3 = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    animation3.duration = kIDPAnimationDuration;
+    animation3.fromValue = @(1);
+    animation3.toValue = @(0);
+    animation3.removedOnCompletion = YES;
+    
+    self.myView.imageView.hidden = NO;
+    [CATransaction begin];
+    [CATransaction setCompletionBlock:^{
+        self.myView.imageView.hidden = YES;
     }];
+    [self.myView.scrollView.layer addAnimation:animation1 forKey:@"animation1"];
+    [self.myView.scrollView.layer addAnimation:animation2 forKey:@"animation2"];
+    [self.myView.imageView.layer addAnimation:animation3 forKey:@"animation3"];
+    [CATransaction commit];
+
+    self.selectedRowIndex = index;
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_UPDATE_MAIL_DETAILS object:self userInfo:@{kIDPNCObject:model, kIDPNCRowIndex:@(index)}];
 }
 
