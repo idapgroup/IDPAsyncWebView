@@ -50,7 +50,7 @@ static CGFloat   const kCellDefaultHeight = 190;
 
 - (void)baseInit {
     self.cellHeightCalculator = [IDPWebViewCellHeightCalculator new];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedNewMail:) name:NOTIFICATION_CENTER_DID_SELECTED_MAIL_CHAIN object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedNewMail:) name:NOTIFICATION_CENTER_DID_UPDATE_MAIL_DETAILS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedMail:) name:NOTIFICATION_CENTER_DID_SELECTED_MAIL object:nil];
 }
 

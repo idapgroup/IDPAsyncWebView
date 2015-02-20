@@ -54,6 +54,7 @@ static CGFloat const kIDPAnimationDuration = 1.5;
     return nil;
 }
 
+
 #pragma mark -
 #pragma mark Private methods
 
@@ -93,7 +94,9 @@ static CGFloat const kIDPAnimationDuration = 1.5;
         context.duration = kIDPAnimationDuration;
         [self.myView.scrollView animator].frame = endFrame;
         [self.myView.imageView animator].alphaValue = 0;
-    } completionHandler:nil];
+    } completionHandler:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_UPDATE_MAIL_DETAILS object:model userInfo:nil];
+    }];
 }
 
 - (void)reloadData {
