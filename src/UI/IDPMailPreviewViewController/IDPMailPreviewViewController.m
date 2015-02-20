@@ -18,7 +18,7 @@
 #import "NSTableView+IDPExtension.h"
 #import "NSView+IDPExtension.h"
 
-static CGFloat const kIDPAnimationDuration = 1.5;
+static CGFloat const kIDPAnimationDuration = 1;
 
 @interface IDPMailPreviewViewController ()
 
@@ -71,6 +71,10 @@ static CGFloat const kIDPAnimationDuration = 1.5;
 - (void)didSelectedNewMail:(NSNotification *)notification {
     NSDictionary *userInfo = notification.userInfo;
     NSInteger index = [[userInfo objectForKey:kIDPNCRowIndex] integerValue];
+    IDPMailHistoryChainModel *model = [userInfo objectForKey:kIDPNCObject];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_WILL_UPDATE_MAIL_DETAILS object:self userInfo:@{kIDPNCObject:model, kIDPNCRowIndex:@(index)}];
+    
     NSImage *image = [self.myView imageFromView];
     self.myView.imageView.image = image;
     
@@ -80,10 +84,11 @@ static CGFloat const kIDPAnimationDuration = 1.5;
     
     startFrame.origin.y = index < self.selectedRowIndex ? NSHeight(self.myView.frame) : -NSHeight(self.myView.frame);
     
-    IDPMailHistoryChainModel *model = [userInfo objectForKey:kIDPNCObject];
+    
     self.dataSourceObjects = model.mailMessages;
     self.disableRowSelectionNotification = NO;
     [self reloadData];
+    
     [self.myView.tableView scrollRowToVisible:0];
     [self.myView.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
     
@@ -95,8 +100,9 @@ static CGFloat const kIDPAnimationDuration = 1.5;
         [self.myView.scrollView animator].frame = endFrame;
         [self.myView.imageView animator].alphaValue = 0;
     } completionHandler:^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_UPDATE_MAIL_DETAILS object:self userInfo:@{kIDPNCObject:model}];
+        
     }];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_UPDATE_MAIL_DETAILS object:self userInfo:@{kIDPNCObject:model, kIDPNCRowIndex:@(index)}];
 }
 
 - (void)reloadData {
