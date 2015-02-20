@@ -81,7 +81,7 @@ static CGFloat   const kCellDefaultHeight = 190;
     self.blockActiveCellUpdatingNotification = NO;
     [self.cellHeightCalculator cancel];
     [self.myView resetAllData];
-    IDPMailHistoryChainModel *model = notification.object;
+    IDPMailHistoryChainModel *model = [notification.userInfo objectForKey:kIDPNCObject];
     self.objects = [NSMutableArray array];
     NSInteger firstUnreadMail = [model indexOfFirstUnreadMail];
     firstUnreadMail = NSNotFound == firstUnreadMail ? 0 : firstUnreadMail;
@@ -97,7 +97,7 @@ static CGFloat   const kCellDefaultHeight = 190;
 }
 
 - (void)didSelectedMail:(NSNotification *)notification {
-    NSInteger scrollToIndex = [notification.object integerValue];
+    NSInteger scrollToIndex = [[notification.userInfo objectForKey:kIDPNCRowIndex] integerValue];
     self.blockActiveCellUpdatingNotification = YES;
     [self.myView scrollToTopOfRow:scrollToIndex];
     self.blockActiveCellUpdatingNotification = NO;
@@ -134,7 +134,7 @@ static CGFloat   const kCellDefaultHeight = 190;
 
 - (void)mailTableView:(IDPMailTableView *)tableView didDispalyRowAtIndex:(NSInteger)rowIndex {
     if (!self.blockActiveCellUpdatingNotification) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_UPDATE_ACTIVE_PREVIEW_CELL object:@(rowIndex)];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_UPDATE_ACTIVE_PREVIEW_CELL object:self userInfo:@{kIDPNCRowIndex: @(rowIndex)}];
     }
 }
 

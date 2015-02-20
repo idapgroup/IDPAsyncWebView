@@ -70,7 +70,7 @@ static CGFloat const kIDPAnimationDuration = 1.5;
 
 - (void)didSelectedNewMail:(NSNotification *)notification {
     NSDictionary *userInfo = notification.userInfo;
-    NSInteger index = [[userInfo objectForKey:kIDPRowIndex] integerValue];
+    NSInteger index = [[userInfo objectForKey:kIDPNCRowIndex] integerValue];
     NSImage *image = [self.myView imageFromView];
     self.myView.imageView.image = image;
     
@@ -80,7 +80,7 @@ static CGFloat const kIDPAnimationDuration = 1.5;
     
     startFrame.origin.y = index < self.selectedRowIndex ? NSHeight(self.myView.frame) : -NSHeight(self.myView.frame);
     
-    IDPMailHistoryChainModel *model = notification.object;
+    IDPMailHistoryChainModel *model = [userInfo objectForKey:kIDPNCObject];
     self.dataSourceObjects = model.mailMessages;
     self.disableRowSelectionNotification = NO;
     [self reloadData];
@@ -95,7 +95,7 @@ static CGFloat const kIDPAnimationDuration = 1.5;
         [self.myView.scrollView animator].frame = endFrame;
         [self.myView.imageView animator].alphaValue = 0;
     } completionHandler:^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_UPDATE_MAIL_DETAILS object:model userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_UPDATE_MAIL_DETAILS object:self userInfo:@{kIDPNCObject:model}];
     }];
 }
 
@@ -104,7 +104,7 @@ static CGFloat const kIDPAnimationDuration = 1.5;
 }
 
 - (void)updateSelectedCellAccordingToScrolling:(NSNotification *)notification {
-    NSInteger row = [notification.object integerValue];
+    NSInteger row = [[notification.userInfo objectForKey:kIDPNCRowIndex] integerValue];
     self.disableRowSelectionNotification = YES;
     [self.myView.tableView scrollToRow:row atScrollPosition:IDPTableViewScrollPositionMiddle];
     [self.myView.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
@@ -135,7 +135,7 @@ static CGFloat const kIDPAnimationDuration = 1.5;
 - (void)tableViewSelectionDidChange:(NSNotification *)notification {
     if (notification.object == self.myView.tableView && self.disableRowSelectionNotification == NO) {
         NSInteger index = self.myView.tableView.selectedRow;
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_SELECTED_MAIL object:@(index)];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_SELECTED_MAIL object:self userInfo:@{kIDPNCRowIndex:@(index)}];
     }
 }
 

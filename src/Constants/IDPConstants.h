@@ -16,6 +16,11 @@
 #define NOTIFICATION_CENTER_DID_UPDATE_ACTIVE_PREVIEW_CELL @"NOTIFICATION_CENTER_DID_UPDATE_ACTIVE_PREVIEW_CELL"
 #define NOTIFICATION_CENTER_DID_UPDATE_MAIL_DETAILS @"NOTIFICATION_CENTER_DID_UPDATE_MAIL_DETAILS"
 
-static NSString *const kIDPRowIndex = @"rowIndex";
+//Notification user info key
+
+#define KEYNC(name) static NSString *const kIDPNC##name = @#name
+
+KEYNC(RowIndex);
+KEYNC(Object);
 
 #endif /* defined(__IDPMailView__IDPConstants__) */
