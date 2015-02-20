@@ -16,6 +16,7 @@
 #import "IDPWebViewCellHeightCalculator.h"
 #import "NSView+IDPExtension.h"
 #import "NSTableView+IDPExtension.h"
+#import <QuartzCore/QuartzCore.h>
 
 static CGFloat   const kCellDefaultHeight = 190;
 static CGFloat const kIDPAnimationDuration = 1.5;
@@ -117,6 +118,7 @@ static CGFloat const kIDPAnimationDuration = 1.5;
     self.myView.animationImageView.alphaValue = 1;
     self.myView.scrollView.frame = startFrame;
     [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
         context.duration = kIDPAnimationDuration;
         [self.myView.scrollView animator].frame = endFrame;
         [self.myView.animationImageView animator].alphaValue = 0;

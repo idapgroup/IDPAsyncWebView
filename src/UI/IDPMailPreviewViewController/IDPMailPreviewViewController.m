@@ -106,18 +106,21 @@ static CGFloat const kIDPAnimationDuration = 1;
     animation1.fromValue = [NSValue valueWithCATransform3D:translateStart];
     animation1.toValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
     animation1.removedOnCompletion = YES;
+    animation1.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     
     CABasicAnimation *animation2 = [CABasicAnimation animationWithKeyPath:@"opacity"];
     animation2.duration = kIDPAnimationDuration;
     animation2.fromValue = @(0);
     animation2.toValue = @(1);
     animation2.removedOnCompletion = YES;
+    animation2.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     
     CABasicAnimation *animation3 = [CABasicAnimation animationWithKeyPath:@"opacity"];
     animation3.duration = kIDPAnimationDuration;
     animation3.fromValue = @(1);
     animation3.toValue = @(0);
     animation3.removedOnCompletion = YES;
+    animation3.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     
     self.myView.imageView.hidden = NO;
     [CATransaction begin];
