@@ -18,7 +18,7 @@
 #import "NSTableView+IDPExtension.h"
 
 static CGFloat   const kCellDefaultHeight = 190;
-static CGFloat const kIDPAnimationDuration = 1.2;
+static CGFloat const kIDPAnimationDuration = 1.5;
 
 @interface IDPMailDetailsViewController ()
 

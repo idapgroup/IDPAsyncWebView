@@ -40,6 +40,7 @@ static CGFloat const kIDPAnimationDuration = 1;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.myView.wantsLayer = YES;
     self.myView.backgroundViewColor = [NSColor whiteColor];
     self.myView.scrollView.drawsBackground = NO;
     self.myView.scrollView.backgroundColor = [NSColor clearColor];
@@ -95,9 +96,6 @@ static CGFloat const kIDPAnimationDuration = 1;
     
     [self.myView.tableView scrollRowToVisible:0];
     [self.myView.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
-    
-    
-    self.myView.wantsLayer = YES;
     
     CATransform3D transfrom = self.myView.scrollView.layer.transform;
     CATransform3D translateStart = CATransform3DMakeTranslation(0, startFrame.origin.y, 0);
