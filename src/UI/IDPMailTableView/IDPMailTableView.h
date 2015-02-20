@@ -35,6 +35,7 @@
 
 @property (nonatomic, strong) IBOutlet NSTableView  *tableView;
 @property (nonatomic, strong) IBOutlet IDPScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet NSImageView   *animationImageView;
 
 /**
  Set this delegate instead of tableView delegate.

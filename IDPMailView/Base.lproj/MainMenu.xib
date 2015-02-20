@@ -773,6 +773,10 @@
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="a0Y-Yc-DY5" userLabel="Mail Preview View" customClass="IDPMailPreviewView">
                         <rect key="frame" x="219" y="0.0" width="305" height="620"/>
                         <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="leI-Sm-4Lz">
+                                <rect key="frame" x="0.0" y="0.0" width="307" height="620"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="TnW-OE-1QZ"/>
+                            </imageView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="83" horizontalPageScroll="10" verticalLineScroll="83" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSS-93-Gs0">
                                 <rect key="frame" x="0.0" y="0.0" width="307" height="620"/>
                                 <clipView key="contentView" id="A6G-S7-MLR">
@@ -839,17 +843,27 @@
                         <constraints>
                             <constraint firstItem="xSS-93-Gs0" firstAttribute="leading" secondItem="a0Y-Yc-DY5" secondAttribute="leading" id="7Hs-3E-lG0"/>
                             <constraint firstItem="xSS-93-Gs0" firstAttribute="top" secondItem="a0Y-Yc-DY5" secondAttribute="top" id="80O-Bu-YF2"/>
+                            <constraint firstAttribute="bottom" secondItem="leI-Sm-4Lz" secondAttribute="bottom" id="HFe-t9-xDa"/>
                             <constraint firstAttribute="trailing" secondItem="xSS-93-Gs0" secondAttribute="trailing" constant="-2" id="LLd-n8-VWM"/>
                             <constraint firstAttribute="bottom" secondItem="xSS-93-Gs0" secondAttribute="bottom" id="LXA-py-Ece"/>
+                            <constraint firstItem="leI-Sm-4Lz" firstAttribute="leading" secondItem="a0Y-Yc-DY5" secondAttribute="leading" id="Smc-bn-biA"/>
+                            <constraint firstAttribute="trailing" secondItem="leI-Sm-4Lz" secondAttribute="trailing" constant="-2" id="aop-a5-dR3"/>
+                            <constraint firstItem="leI-Sm-4Lz" firstAttribute="top" secondItem="a0Y-Yc-DY5" secondAttribute="top" id="jLk-dl-K1B"/>
                             <constraint firstAttribute="width" constant="305" id="t8I-Qk-S8G"/>
                         </constraints>
                         <connections>
+                            <outlet property="imageView" destination="leI-Sm-4Lz" id="4K3-cg-UiB"/>
+                            <outlet property="scrollView" destination="xSS-93-Gs0" id="fCo-wK-WII"/>
                             <outlet property="tableView" destination="OGB-qv-laC" id="UxI-LN-VRV"/>
                         </connections>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="dZA-Uh-1CY" customClass="IDPMailTableView">
                         <rect key="frame" x="525" y="0.0" width="795" height="620"/>
                         <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bff-Cg-tCG">
+                                <rect key="frame" x="0.0" y="0.0" width="795" height="620"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="G53-AV-zwe"/>
+                            </imageView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="65" horizontalPageScroll="10" verticalLineScroll="65" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zo-8E-RxU" customClass="IDPScrollView">
                                 <rect key="frame" x="0.0" y="0.0" width="795" height="620"/>
                                 <clipView key="contentView" id="csE-PK-LCf">
@@ -899,6 +913,7 @@
                                     </subviews>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
+                                <animations/>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ZlW-jf-SOO">
                                     <rect key="frame" x="1" y="119" width="223" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -911,11 +926,16 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="4zo-8E-RxU" secondAttribute="bottom" id="038-Jw-sKH"/>
+                            <constraint firstItem="Bff-Cg-tCG" firstAttribute="leading" secondItem="dZA-Uh-1CY" secondAttribute="leading" id="446-AS-cyI"/>
+                            <constraint firstAttribute="trailing" secondItem="Bff-Cg-tCG" secondAttribute="trailing" id="6b8-Up-5gs"/>
+                            <constraint firstItem="Bff-Cg-tCG" firstAttribute="top" secondItem="dZA-Uh-1CY" secondAttribute="top" id="C0g-uj-G6t"/>
+                            <constraint firstAttribute="bottom" secondItem="Bff-Cg-tCG" secondAttribute="bottom" id="OFv-ka-lqk"/>
                             <constraint firstItem="4zo-8E-RxU" firstAttribute="top" secondItem="dZA-Uh-1CY" secondAttribute="top" id="Xjs-t4-6UA"/>
                             <constraint firstItem="4zo-8E-RxU" firstAttribute="leading" secondItem="dZA-Uh-1CY" secondAttribute="leading" id="dK8-0V-Tvw"/>
                             <constraint firstAttribute="trailing" secondItem="4zo-8E-RxU" secondAttribute="trailing" id="l6a-xK-T24"/>
                         </constraints>
                         <connections>
+                            <outlet property="animationImageView" destination="Bff-Cg-tCG" id="VwR-LC-SGO"/>
                             <outlet property="dataSource" destination="cfK-wA-dDo" id="2Hl-fH-QEg"/>
                             <outlet property="delegate" destination="cfK-wA-dDo" id="2B8-W3-7F5"/>
                             <outlet property="scrollView" destination="4zo-8E-RxU" id="0IS-rQ-fbN"/>

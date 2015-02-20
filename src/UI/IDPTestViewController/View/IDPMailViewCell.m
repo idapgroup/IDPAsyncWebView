@@ -29,9 +29,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.containerView.backgroundViewColor = [NSColor whiteColor];
-    [self roundWithValue:5];
-    [self borderWidthValue:2.5];
-    [self borderViewColor:[NSColor colorWithIntRed:247 green:247 blue:247 alpha:255]];
+    [self.containerView roundWithValue:5];
+    [self.containerView borderWidthValue:2.5];
+    [self.containerView borderViewColor:[NSColor colorWithIntRed:247 green:247 blue:247 alpha:255]];
     [self.avatarImageView borderWidthValue:1];
     [self.avatarImageView borderViewColor:[NSColor grayColor]];
 }

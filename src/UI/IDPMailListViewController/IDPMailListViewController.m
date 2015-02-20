@@ -87,7 +87,7 @@
     if (tableView == self.myView.tableView) {
         NSInteger index = tableView.selectedRow;
         IDPMailHistoryChainModel *model = [self.mailObjects objectAtIndex:index];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_SELECTED_MAIL_CHAIN object:model];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_SELECTED_MAIL_CHAIN object:self userInfo:@{kIDPNCRowIndex:@(index), kIDPNCObject:model}];
     }
 }
 

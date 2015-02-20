@@ -16,11 +16,15 @@
 #import "IDPMailHistoryChainModel.h"
 #import "IDPTableRowView.h"
 #import "NSTableView+IDPExtension.h"
+#import "NSView+IDPExtension.h"
+
+static CGFloat const kIDPAnimationDuration = 1;
 
 @interface IDPMailPreviewViewController ()
 
 @property (nonatomic, strong) IDPMailPreviewView    *myView;
 @property (nonatomic, assign) BOOL disableRowSelectionNotification;
+@property (nonatomic, assign) NSInteger selectedRowIndex;
 
 @end
 
@@ -50,6 +54,7 @@
     return nil;
 }
 
+
 #pragma mark -
 #pragma mark Private methods
 
@@ -64,12 +69,40 @@
 }
 
 - (void)didSelectedNewMail:(NSNotification *)notification {
-    IDPMailHistoryChainModel *model = notification.object;
+    NSDictionary *userInfo = notification.userInfo;
+    NSInteger index = [[userInfo objectForKey:kIDPNCRowIndex] integerValue];
+    IDPMailHistoryChainModel *model = [userInfo objectForKey:kIDPNCObject];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_WILL_UPDATE_MAIL_DETAILS object:self userInfo:@{kIDPNCObject:model, kIDPNCRowIndex:@(index)}];
+    
+    NSImage *image = [self.myView imageFromView];
+    self.myView.imageView.image = image;
+    
+    NSRect frame = self.myView.scrollView.frame;
+    NSRect startFrame = frame;
+    NSRect endFrame = frame;
+    
+    startFrame.origin.y = index < self.selectedRowIndex ? NSHeight(self.myView.frame) : -NSHeight(self.myView.frame);
+    
+    
     self.dataSourceObjects = model.mailMessages;
     self.disableRowSelectionNotification = NO;
     [self reloadData];
+    
     [self.myView.tableView scrollRowToVisible:0];
     [self.myView.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+    
+    self.selectedRowIndex = index;
+    self.myView.imageView.alphaValue = 1;
+    self.myView.scrollView.frame = startFrame;
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        context.duration = kIDPAnimationDuration;
+        [self.myView.scrollView animator].frame = endFrame;
+        [self.myView.imageView animator].alphaValue = 0;
+    } completionHandler:^{
+        
+    }];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_UPDATE_MAIL_DETAILS object:self userInfo:@{kIDPNCObject:model, kIDPNCRowIndex:@(index)}];
 }
 
 - (void)reloadData {
@@ -77,7 +110,7 @@
 }
 
 - (void)updateSelectedCellAccordingToScrolling:(NSNotification *)notification {
-    NSInteger row = [notification.object integerValue];
+    NSInteger row = [[notification.userInfo objectForKey:kIDPNCRowIndex] integerValue];
     self.disableRowSelectionNotification = YES;
     [self.myView.tableView scrollToRow:row atScrollPosition:IDPTableViewScrollPositionMiddle];
     [self.myView.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
@@ -108,7 +141,7 @@
 - (void)tableViewSelectionDidChange:(NSNotification *)notification {
     if (notification.object == self.myView.tableView && self.disableRowSelectionNotification == NO) {
         NSInteger index = self.myView.tableView.selectedRow;
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_SELECTED_MAIL object:@(index)];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_SELECTED_MAIL object:self userInfo:@{kIDPNCRowIndex:@(index)}];
     }
 }
 

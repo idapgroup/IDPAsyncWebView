@@ -18,6 +18,7 @@
 #import "NSTableView+IDPExtension.h"
 
 static CGFloat   const kCellDefaultHeight = 190;
+static CGFloat const kIDPAnimationDuration = 1.2;
 
 @interface IDPMailDetailsViewController ()
 
@@ -26,6 +27,7 @@ static CGFloat   const kCellDefaultHeight = 190;
 @property (nonatomic, strong) NSMutableArray    *objects;
 @property (nonatomic, strong) IDPWebViewCellHeightCalculator   *cellHeightCalculator;
 @property (nonatomic, assign) BOOL blockActiveCellUpdatingNotification;
+@property (nonatomic, assign) NSInteger curIndex;
 
 @end
 
@@ -50,8 +52,9 @@ static CGFloat   const kCellDefaultHeight = 190;
 
 - (void)baseInit {
     self.cellHeightCalculator = [IDPWebViewCellHeightCalculator new];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedNewMail:) name:NOTIFICATION_CENTER_DID_SELECTED_MAIL_CHAIN object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didUpdateMailDetails:) name:NOTIFICATION_CENTER_DID_UPDATE_MAIL_DETAILS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedMail:) name:NOTIFICATION_CENTER_DID_SELECTED_MAIL object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willUpdateMailDetails:) name:NOTIFICATION_CENTER_WILL_UPDATE_MAIL_DETAILS object:nil];
 }
 
 - (void)awakeFromNib {
@@ -77,11 +80,25 @@ static CGFloat   const kCellDefaultHeight = 190;
 #pragma mark -
 #pragma mark Private methods
 
-- (void)didSelectedNewMail:(NSNotification *)notification {
+- (void)willUpdateMailDetails:(NSNotification *)notification {
+    NSImage *image = [self.myView imageFromView];
+    self.myView.animationImageView.image = image;
+}
+
+- (void)didUpdateMailDetails:(NSNotification *)notification {
+    NSDictionary *userInfo = notification.userInfo;
+    NSInteger index = [[userInfo objectForKey:kIDPNCRowIndex] integerValue];
+    
+    NSRect frame = self.myView.scrollView.frame;
+    NSRect startFrame = frame;
+    NSRect endFrame = frame;
+    
+    startFrame.origin.y = index < self.curIndex ? NSHeight(self.myView.frame) : -NSHeight(self.myView.frame);
+    
     self.blockActiveCellUpdatingNotification = NO;
     [self.cellHeightCalculator cancel];
     [self.myView resetAllData];
-    IDPMailHistoryChainModel *model = notification.object;
+    IDPMailHistoryChainModel *model = [userInfo objectForKey:kIDPNCObject];
     self.objects = [NSMutableArray array];
     NSInteger firstUnreadMail = [model indexOfFirstUnreadMail];
     firstUnreadMail = NSNotFound == firstUnreadMail ? 0 : firstUnreadMail;
@@ -94,10 +111,20 @@ static CGFloat   const kCellDefaultHeight = 190;
     self.myView.dataSourceObjects = self.objects;
     [self.myView reloadData];
     [self.myView scrollRowToVisible:firstUnreadMail];
+    
+    self.curIndex = index;
+    
+    self.myView.animationImageView.alphaValue = 1;
+    self.myView.scrollView.frame = startFrame;
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        context.duration = kIDPAnimationDuration;
+        [self.myView.scrollView animator].frame = endFrame;
+        [self.myView.animationImageView animator].alphaValue = 0;
+    } completionHandler:nil];
 }
 
 - (void)didSelectedMail:(NSNotification *)notification {
-    NSInteger scrollToIndex = [notification.object integerValue];
+    NSInteger scrollToIndex = [[notification.userInfo objectForKey:kIDPNCRowIndex] integerValue];
     self.blockActiveCellUpdatingNotification = YES;
     [self.myView scrollToTopOfRow:scrollToIndex];
     self.blockActiveCellUpdatingNotification = NO;
@@ -134,7 +161,7 @@ static CGFloat   const kCellDefaultHeight = 190;
 
 - (void)mailTableView:(IDPMailTableView *)tableView didDispalyRowAtIndex:(NSInteger)rowIndex {
     if (!self.blockActiveCellUpdatingNotification) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_UPDATE_ACTIVE_PREVIEW_CELL object:@(rowIndex)];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_UPDATE_ACTIVE_PREVIEW_CELL object:self userInfo:@{kIDPNCRowIndex: @(rowIndex)}];
     }
 }
 
