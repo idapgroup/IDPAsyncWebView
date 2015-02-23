@@ -120,13 +120,13 @@ static CGFloat const kIDPAnimationDuration = 1.5;
 //    self.myView.animationImageView.alphaValue = 1;
 //    self.myView.scrollView.frame = startFrame;
     
-    CATransition *transition = [CATransition animation];
-    transition.duration = kIDPAnimationDuration;
-    transition.subtype = index < self.curIndex ? kCATransitionFromTop : kCATransitionFromBottom;
-    transition.type = kCATransitionMoveIn;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    
-    [self.myView.clipView.layer addAnimation:transition forKey:nil];
+//    CATransition *transition = [CATransition animation];
+//    transition.duration = kIDPAnimationDuration;
+//    transition.subtype = index < self.curIndex ? kCATransitionFromTop : kCATransitionFromBottom;
+//    transition.type = kCATransitionMoveIn;
+//    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//    
+//    [self.myView.clipView.layer addAnimation:transition forKey:nil];
     
     self.curIndex = index;
     
