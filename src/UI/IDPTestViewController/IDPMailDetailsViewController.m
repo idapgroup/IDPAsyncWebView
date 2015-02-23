@@ -20,7 +20,7 @@
 
 static CGFloat   const kCellDefaultHeight = 190;
 static CGFloat   const kCellContentHeight = 153;
-static CGFloat const kIDPAnimationDuration = 1.5;
+static CGFloat const kIDPAnimationDuration = 1.1;
 
 @interface IDPMailDetailsViewController ()
 
