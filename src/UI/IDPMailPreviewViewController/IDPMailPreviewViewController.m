@@ -19,7 +19,7 @@
 #import "NSView+IDPExtension.h"
 #import <QuartzCore/QuartzCore.h>
 
-static CGFloat const kIDPAnimationDuration = 1;
+static CGFloat const kIDPAnimationDuration = 0.7;
 
 @interface IDPMailPreviewViewController ()
 
