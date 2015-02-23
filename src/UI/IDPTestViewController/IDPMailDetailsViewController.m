@@ -89,31 +89,31 @@ static CGFloat const kIDPAnimationDuration = 1.5;
 }
 
 - (void)didUpdateMailDetails:(NSNotification *)notification {
-    NSDictionary *userInfo = notification.userInfo;
-    NSInteger index = [[userInfo objectForKey:kIDPNCRowIndex] integerValue];
-    
-    NSRect frame = self.myView.scrollView.frame;
-    NSRect startFrame = frame;
-    NSRect endFrame = frame;
-    
-    startFrame.origin.y = index < self.curIndex ? NSHeight(self.myView.frame) : -NSHeight(self.myView.frame);
-    
-    self.blockActiveCellUpdatingNotification = NO;
-    [self.cellHeightCalculator cancel];
-    [self.myView resetAllData];
-    IDPMailHistoryChainModel *model = [userInfo objectForKey:kIDPNCObject];
-    self.objects = [NSMutableArray array];
-    NSInteger firstUnreadMail = [model indexOfFirstUnreadMail];
-    firstUnreadMail = NSNotFound == firstUnreadMail ? 0 : firstUnreadMail;
-    for (IDPMailMessageModel *mailMessage in model.mailMessages) {
-        IDPTableCacheObject *object = [IDPTableCacheObject new];
-        object.cellHeight = kCellDefaultHeight;
-        object.model = mailMessage;
-        [self.objects addObject:object];
-    }
-    self.myView.dataSourceObjects = self.objects;
-    [self.myView reloadData];
-    [self.myView scrollRowToVisible:firstUnreadMail];
+//    NSDictionary *userInfo = notification.userInfo;
+//    NSInteger index = [[userInfo objectForKey:kIDPNCRowIndex] integerValue];
+//    
+//    NSRect frame = self.myView.scrollView.frame;
+//    NSRect startFrame = frame;
+//    NSRect endFrame = frame;
+//    
+//    startFrame.origin.y = index < self.curIndex ? NSHeight(self.myView.frame) : -NSHeight(self.myView.frame);
+//    
+//    self.blockActiveCellUpdatingNotification = NO;
+//    [self.cellHeightCalculator cancel];
+//    [self.myView resetAllData];
+//    IDPMailHistoryChainModel *model = [userInfo objectForKey:kIDPNCObject];
+//    self.objects = [NSMutableArray array];
+//    NSInteger firstUnreadMail = [model indexOfFirstUnreadMail];
+//    firstUnreadMail = NSNotFound == firstUnreadMail ? 0 : firstUnreadMail;
+//    for (IDPMailMessageModel *mailMessage in model.mailMessages) {
+//        IDPTableCacheObject *object = [IDPTableCacheObject new];
+//        object.cellHeight = kCellDefaultHeight;
+//        object.model = mailMessage;
+//        [self.objects addObject:object];
+//    }
+//    self.myView.dataSourceObjects = self.objects;
+//    [self.myView reloadData];
+//    [self.myView scrollRowToVisible:firstUnreadMail];
     
     
     
@@ -128,7 +128,7 @@ static CGFloat const kIDPAnimationDuration = 1.5;
 //    
 //    [self.myView.clipView.layer addAnimation:transition forKey:nil];
     
-    self.curIndex = index;
+//    self.curIndex = index;
     
 //    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
 //        context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];

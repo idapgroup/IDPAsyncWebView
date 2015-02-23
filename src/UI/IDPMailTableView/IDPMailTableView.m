@@ -412,15 +412,17 @@ static CGFloat const kIDPResizeDelta = 15;
 
 - (void)updateActiveCellIndex {
     NSArray *visibleRows = [self.tableView visibleRows];
-    NSInteger visibleRow = [[visibleRows firstObject] integerValue];
-    NSView *cell = [self.tableView viewAtColumn:kColumnIndex row:visibleRow makeIfNecessary:NO];
-    NSRect frame = cell.frame;
-    frame = [self.tableView convertRect:frame fromView:cell];
-    NSPoint origin = [self.scrollView documentVisibleRect].origin;
-    if (frame.origin.y + NSHeight(frame) / 2 < origin.y) {
-        visibleRow = visibleRows.count > 1 ? visibleRow + 1 : visibleRow;
+    if (visibleRows.count > 0) {
+        NSInteger visibleRow = [[visibleRows firstObject] integerValue];
+        NSView *cell = [self.tableView viewAtColumn:kColumnIndex row:visibleRow makeIfNecessary:NO];
+        NSRect frame = cell.frame;
+        frame = [self.tableView convertRect:frame fromView:cell];
+        NSPoint origin = [self.scrollView documentVisibleRect].origin;
+        if (frame.origin.y + NSHeight(frame) / 2 < origin.y) {
+            visibleRow = visibleRows.count > 1 ? visibleRow + 1 : visibleRow;
+        }
+        self.currentActiveCellIndex = visibleRow;
     }
-    self.currentActiveCellIndex = visibleRow;
 }
 
 - (void)checksIsStopCellHeightCalculation {
