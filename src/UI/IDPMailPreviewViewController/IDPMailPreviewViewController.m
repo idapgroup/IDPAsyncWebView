@@ -41,7 +41,6 @@ static CGFloat const kIDPAnimationDuration = 1;
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.myView.wantsLayer = YES;
-    self.myView.layer.shouldRasterize = YES;
     self.myView.backgroundViewColor = [NSColor whiteColor];
     self.myView.scrollView.drawsBackground = NO;
     self.myView.scrollView.backgroundColor = [NSColor clearColor];

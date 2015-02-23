@@ -39,6 +39,11 @@
 @property (nonatomic, strong) IBOutlet NSClipView   *clipView;
 
 /**
+ By default set to NO
+ */
+@property (nonatomic, assign) BOOL rowHeightResizeAnimated;
+
+/**
  Set this delegate instead of tableView delegate.
  */
 @property (nonatomic, weak) IBOutlet id<IDPMailTableViewDelegate>   delegate;

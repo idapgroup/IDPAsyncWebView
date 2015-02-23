@@ -123,6 +123,7 @@ static CGFloat const kIDPResizeDelta = 15;
 
 - (void)baseInit {
     [self addNotificationObsevers];
+    self.rowHeightResizeAnimated = NO;
     self.prevViewWidth = NSWidth(self.frame);
     self.pausedObjectHeightLoadingArray = [NSMutableArray array];
     self.objecstInQueueToLoadHeight = [NSMutableArray array];
@@ -361,7 +362,7 @@ static CGFloat const kIDPResizeDelta = 15;
 - (void)updateCellHeightForRow:(NSInteger)row visibleRow:(NSInteger)visibleRow object:(IDPTableCacheObject *)object completionHandler:(void (^)(void))completionHandler {
     [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
         context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-        context.duration = [self animateRowReloading:row] ? kDefaultAnimationDuration : 0;
+        context.duration = self.rowHeightResizeAnimated && [self animateRowReloading:row] ? kDefaultAnimationDuration : 0;
         [[self.tableView animator] noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
         if (visibleRow > row) {
             NSPoint origin = [self.scrollView documentVisibleRect].origin;
