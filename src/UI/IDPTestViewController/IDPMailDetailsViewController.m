@@ -20,7 +20,7 @@
 
 static CGFloat   const kCellDefaultHeight = 190;
 static CGFloat   const kCellContentHeight = 153;
-static CGFloat const kIDPAnimationDuration = 0.8;
+static CGFloat const kIDPAnimationDuration = 0.55;
 
 @interface IDPMailDetailsViewController ()
 
@@ -62,7 +62,6 @@ static CGFloat const kIDPAnimationDuration = 0.8;
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.myView.scrollView.wantsLayer = YES;
-//    self.myView.scrollView.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
     self.cellHeightCalculator.cellHeight = 97;
     self.cellHeightCalculator.cellContentWidth = 500;
     self.myView.cellHeightCalculator = self.cellHeightCalculator;
