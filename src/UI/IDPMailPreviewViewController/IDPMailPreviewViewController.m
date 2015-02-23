@@ -17,8 +17,9 @@
 #import "IDPTableRowView.h"
 #import "NSTableView+IDPExtension.h"
 #import "NSView+IDPExtension.h"
+#import <QuartzCore/QuartzCore.h>
 
-static CGFloat const kIDPAnimationDuration = 1;
+static CGFloat const kIDPAnimationDuration = 0.45;
 
 @interface IDPMailPreviewViewController ()
 
@@ -39,6 +40,11 @@ static CGFloat const kIDPAnimationDuration = 1;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.myView.wantsLayer = YES;
+    self.myView.backgroundViewColor = [NSColor whiteColor];
+    self.myView.scrollView.drawsBackground = NO;
+    self.myView.scrollView.backgroundColor = [NSColor clearColor];
+    self.myView.tableView.backgroundColor = [NSColor clearColor];
     NSString *identifier = NSStringFromClass([IDPMailPreviewTableCell class]);
     [self.myView.tableView registerNib:[[NSNib alloc] initWithNibNamed:identifier bundle:nil] forIdentifier:identifier];
     [self subscribeOnNitifications];
@@ -75,16 +81,6 @@ static CGFloat const kIDPAnimationDuration = 1;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_WILL_UPDATE_MAIL_DETAILS object:self userInfo:@{kIDPNCObject:model, kIDPNCRowIndex:@(index)}];
     
-    NSImage *image = [self.myView imageFromView];
-    self.myView.imageView.image = image;
-    
-    NSRect frame = self.myView.scrollView.frame;
-    NSRect startFrame = frame;
-    NSRect endFrame = frame;
-    
-    startFrame.origin.y = index < self.selectedRowIndex ? NSHeight(self.myView.frame) : -NSHeight(self.myView.frame);
-    
-    
     self.dataSourceObjects = model.mailMessages;
     self.disableRowSelectionNotification = NO;
     [self reloadData];
@@ -92,16 +88,17 @@ static CGFloat const kIDPAnimationDuration = 1;
     [self.myView.tableView scrollRowToVisible:0];
     [self.myView.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
     
+    [self.myView.clipView.layer removeAllAnimations];
+    
+    CATransition *transition = [CATransition animation];
+    transition.duration = kIDPAnimationDuration;
+    transition.subtype = index < self.selectedRowIndex ? kCATransitionFromTop : kCATransitionFromBottom;
+    transition.type = kCATransitionMoveIn;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    
+    [self.myView.clipView.layer addAnimation:transition forKey:nil];
+    
     self.selectedRowIndex = index;
-    self.myView.imageView.alphaValue = 1;
-    self.myView.scrollView.frame = startFrame;
-    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
-        context.duration = kIDPAnimationDuration;
-        [self.myView.scrollView animator].frame = endFrame;
-        [self.myView.imageView animator].alphaValue = 0;
-    } completionHandler:^{
-        
-    }];
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_DID_UPDATE_MAIL_DETAILS object:self userInfo:@{kIDPNCObject:model, kIDPNCRowIndex:@(index)}];
 }
 

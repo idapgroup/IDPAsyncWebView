@@ -45,6 +45,7 @@
 		69B7B2611A8B437B00B3FFD2 /* NSTableView+IDPExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B7B2601A8B437B00B3FFD2 /* NSTableView+IDPExtension.m */; };
 		69B7B2671A8B810800B3FFD2 /* testEmailFile.html in Resources */ = {isa = PBXBuildFile; fileRef = 69B7B2661A8B810800B3FFD2 /* testEmailFile.html */; };
 		69B7B2691A8B828100B3FFD2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69B7B2681A8B828100B3FFD2 /* WebKit.framework */; };
+		69BA30001A974A8F00425004 /* IDPBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BA2FFF1A974A8F00425004 /* IDPBaseView.m */; };
 		69BC7A861A95D99D003FD7CD /* DateTools.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 69BC7A771A95D99D003FD7CD /* DateTools.bundle */; };
 		69BC7A871A95D99D003FD7CD /* DTError.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC7A7B1A95D99D003FD7CD /* DTError.m */; };
 		69BC7A881A95D99D003FD7CD /* DTTimePeriod.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BC7A7D1A95D99D003FD7CD /* DTTimePeriod.m */; };
@@ -137,6 +138,8 @@
 		69B7B2601A8B437B00B3FFD2 /* NSTableView+IDPExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTableView+IDPExtension.m"; sourceTree = "<group>"; };
 		69B7B2661A8B810800B3FFD2 /* testEmailFile.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = testEmailFile.html; sourceTree = "<group>"; };
 		69B7B2681A8B828100B3FFD2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		69BA2FFE1A974A8F00425004 /* IDPBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPBaseView.h; sourceTree = "<group>"; };
+		69BA2FFF1A974A8F00425004 /* IDPBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPBaseView.m; sourceTree = "<group>"; };
 		69BC27901A8A5FC700F30FC0 /* IDPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPConstants.h; sourceTree = "<group>"; };
 		69BC7A771A95D99D003FD7CD /* DateTools.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DateTools.bundle; sourceTree = "<group>"; };
 		69BC7A781A95D99D003FD7CD /* DateTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTools.h; sourceTree = "<group>"; };
@@ -238,6 +241,7 @@
 		691EF7A81A94E551004E3777 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				69BA2FFD1A974A8000425004 /* IDPBaseView */,
 				69BC7A8E1A95E766003FD7CD /* IDPTableRowView */,
 				691EF7A91A94E551004E3777 /* IDPBaseTableCell */,
 				691EF7AC1A94E551004E3777 /* IDPMailListViewController */,
@@ -458,6 +462,15 @@
 			path = resources;
 			sourceTree = "<group>";
 		};
+		69BA2FFD1A974A8000425004 /* IDPBaseView */ = {
+			isa = PBXGroup;
+			children = (
+				69BA2FFE1A974A8F00425004 /* IDPBaseView.h */,
+				69BA2FFF1A974A8F00425004 /* IDPBaseView.m */,
+			);
+			path = IDPBaseView;
+			sourceTree = "<group>";
+		};
 		69BC278E1A8A5FB400F30FC0 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -642,6 +655,7 @@
 				691EF7DB1A94E551004E3777 /* IDPMailDetailsViewController.m in Sources */,
 				69BC7A8B1A95D99D003FD7CD /* DTTimePeriodGroup.m in Sources */,
 				691EF7D91A94E551004E3777 /* IDPMailTableView.m in Sources */,
+				69BA30001A974A8F00425004 /* IDPBaseView.m in Sources */,
 				6926C1931A89047C00FEA821 /* NSNib+IDPExtension.m in Sources */,
 				69BC7A911A95E76D003FD7CD /* IDPTableRowView.m in Sources */,
 				691EF7CB1A94E551004E3777 /* IDPCellHeightCalculator.m in Sources */,

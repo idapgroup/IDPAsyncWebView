@@ -123,6 +123,7 @@ static CGFloat const kIDPResizeDelta = 15;
 
 - (void)baseInit {
     [self addNotificationObsevers];
+    self.rowHeightResizeAnimated = NO;
     self.prevViewWidth = NSWidth(self.frame);
     self.pausedObjectHeightLoadingArray = [NSMutableArray array];
     self.objecstInQueueToLoadHeight = [NSMutableArray array];
@@ -361,7 +362,7 @@ static CGFloat const kIDPResizeDelta = 15;
 - (void)updateCellHeightForRow:(NSInteger)row visibleRow:(NSInteger)visibleRow object:(IDPTableCacheObject *)object completionHandler:(void (^)(void))completionHandler {
     [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
         context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-        context.duration = [self animateRowReloading:row] ? kDefaultAnimationDuration : 0;
+        context.duration = self.rowHeightResizeAnimated && [self animateRowReloading:row] ? kDefaultAnimationDuration : 0;
         [[self.tableView animator] noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
         if (visibleRow > row) {
             NSPoint origin = [self.scrollView documentVisibleRect].origin;
@@ -412,15 +413,17 @@ static CGFloat const kIDPResizeDelta = 15;
 
 - (void)updateActiveCellIndex {
     NSArray *visibleRows = [self.tableView visibleRows];
-    NSInteger visibleRow = [[visibleRows firstObject] integerValue];
-    NSView *cell = [self.tableView viewAtColumn:kColumnIndex row:visibleRow makeIfNecessary:NO];
-    NSRect frame = cell.frame;
-    frame = [self.tableView convertRect:frame fromView:cell];
-    NSPoint origin = [self.scrollView documentVisibleRect].origin;
-    if (frame.origin.y + NSHeight(frame) / 2 < origin.y) {
-        visibleRow = visibleRows.count > 1 ? visibleRow + 1 : visibleRow;
+    if (visibleRows.count > 0) {
+        NSInteger visibleRow = [[visibleRows firstObject] integerValue];
+        NSView *cell = [self.tableView viewAtColumn:kColumnIndex row:visibleRow makeIfNecessary:NO];
+        NSRect frame = cell.frame;
+        frame = [self.tableView convertRect:frame fromView:cell];
+        NSPoint origin = [self.scrollView documentVisibleRect].origin;
+        if (frame.origin.y + NSHeight(frame) / 2 < origin.y) {
+            visibleRow = visibleRows.count > 1 ? visibleRow + 1 : visibleRow;
+        }
+        self.currentActiveCellIndex = visibleRow;
     }
-    self.currentActiveCellIndex = visibleRow;
 }
 
 - (void)checksIsStopCellHeightCalculation {

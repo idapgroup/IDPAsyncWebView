@@ -36,6 +36,12 @@
 @property (nonatomic, strong) IBOutlet NSTableView  *tableView;
 @property (nonatomic, strong) IBOutlet IDPScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSImageView   *animationImageView;
+@property (nonatomic, strong) IBOutlet NSClipView   *clipView;
+
+/**
+ By default set to NO
+ */
+@property (nonatomic, assign) BOOL rowHeightResizeAnimated;
 
 /**
  Set this delegate instead of tableView delegate.

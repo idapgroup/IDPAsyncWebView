@@ -16,9 +16,11 @@
 #import "IDPWebViewCellHeightCalculator.h"
 #import "NSView+IDPExtension.h"
 #import "NSTableView+IDPExtension.h"
+#import <QuartzCore/QuartzCore.h>
 
 static CGFloat   const kCellDefaultHeight = 190;
-static CGFloat const kIDPAnimationDuration = 1.2;
+static CGFloat   const kCellContentHeight = 153;
+static CGFloat const kIDPAnimationDuration = 0.55;
 
 @interface IDPMailDetailsViewController ()
 
@@ -59,6 +61,7 @@ static CGFloat const kIDPAnimationDuration = 1.2;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.myView.scrollView.wantsLayer = YES;
     self.cellHeightCalculator.cellHeight = 97;
     self.cellHeightCalculator.cellContentWidth = 500;
     self.myView.cellHeightCalculator = self.cellHeightCalculator;
@@ -89,12 +92,6 @@ static CGFloat const kIDPAnimationDuration = 1.2;
     NSDictionary *userInfo = notification.userInfo;
     NSInteger index = [[userInfo objectForKey:kIDPNCRowIndex] integerValue];
     
-    NSRect frame = self.myView.scrollView.frame;
-    NSRect startFrame = frame;
-    NSRect endFrame = frame;
-    
-    startFrame.origin.y = index < self.curIndex ? NSHeight(self.myView.frame) : -NSHeight(self.myView.frame);
-    
     self.blockActiveCellUpdatingNotification = NO;
     [self.cellHeightCalculator cancel];
     [self.myView resetAllData];
@@ -108,19 +105,27 @@ static CGFloat const kIDPAnimationDuration = 1.2;
         object.model = mailMessage;
         [self.objects addObject:object];
     }
+    self.myView.rowHeightResizeAnimated = NO;
     self.myView.dataSourceObjects = self.objects;
     [self.myView reloadData];
     [self.myView scrollRowToVisible:firstUnreadMail];
     
-    self.curIndex = index;
+    [self.myView.clipView.layer removeAllAnimations];
     
-    self.myView.animationImageView.alphaValue = 1;
-    self.myView.scrollView.frame = startFrame;
-    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
-        context.duration = kIDPAnimationDuration;
-        [self.myView.scrollView animator].frame = endFrame;
-        [self.myView.animationImageView animator].alphaValue = 0;
-    } completionHandler:nil];
+    CATransition *transition = [CATransition animation];
+    transition.duration = kIDPAnimationDuration;
+    transition.subtype = index < self.curIndex ? kCATransitionFromTop : kCATransitionFromBottom;
+    transition.type = kCATransitionMoveIn;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    
+    [CATransaction begin];
+    [CATransaction setCompletionBlock:^{
+        self.myView.rowHeightResizeAnimated = YES;
+    }];
+    [self.myView.clipView.layer addAnimation:transition forKey:nil];
+    [CATransaction commit];
+    
+    self.curIndex = index;
 }
 
 - (void)didSelectedMail:(NSNotification *)notification {
@@ -153,7 +158,8 @@ static CGFloat const kIDPAnimationDuration = 1.2;
 }
 
 - (void)mailTableView:(IDPMailTableView *)tableView updateCellHeightCalculatorContentWidth:(IDPCellHeightCalculator *)cellHeightCalculator {
-    IDPMailViewCell *cell = (IDPMailViewCell *)[tableView.tableView firstVisibleViewCellMakeIfNecessary];
+    IDPMailViewCell *cell = (IDPMailViewCell *)[tableView.tableView firstVisibleViewCell];
+    cellHeightCalculator.cellContentWidth = kCellContentHeight;
     if (cell) {
         cellHeightCalculator.cellContentWidth = [cell contentWidth];
     }
