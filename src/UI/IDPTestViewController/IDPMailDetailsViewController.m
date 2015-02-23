@@ -60,6 +60,8 @@ static CGFloat const kIDPAnimationDuration = 1.5;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+//    self.myView.scrollView.wantsLayer = YES;
+//    self.myView.tableView.wantsLayer = YES;
     self.cellHeightCalculator.cellHeight = 97;
     self.cellHeightCalculator.cellContentWidth = 500;
     self.myView.cellHeightCalculator = self.cellHeightCalculator;
@@ -113,16 +115,27 @@ static CGFloat const kIDPAnimationDuration = 1.5;
     [self.myView reloadData];
     [self.myView scrollRowToVisible:firstUnreadMail];
     
+    
+    
+//    self.myView.animationImageView.alphaValue = 1;
+//    self.myView.scrollView.frame = startFrame;
+    
+    CATransition *transition = [CATransition animation];
+    transition.duration = kIDPAnimationDuration;
+    transition.subtype = index < self.curIndex ? kCATransitionFromTop : kCATransitionFromBottom;
+    transition.type = kCATransitionMoveIn;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    
+    [self.myView.clipView.layer addAnimation:transition forKey:nil];
+    
     self.curIndex = index;
     
-    self.myView.animationImageView.alphaValue = 1;
-    self.myView.scrollView.frame = startFrame;
-    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
-        context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-        context.duration = kIDPAnimationDuration;
-        [self.myView.scrollView animator].frame = endFrame;
-        [self.myView.animationImageView animator].alphaValue = 0;
-    } completionHandler:nil];
+//    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+//        context.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+//        context.duration = kIDPAnimationDuration;
+//        [self.myView.scrollView animator].frame = endFrame;
+//        [self.myView.animationImageView animator].alphaValue = 0;
+//    } completionHandler:nil];
 }
 
 - (void)didSelectedMail:(NSNotification *)notification {
