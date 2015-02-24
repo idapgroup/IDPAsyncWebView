@@ -19,8 +19,9 @@
 #import <QuartzCore/QuartzCore.h>
 
 static CGFloat   const kCellDefaultHeight = 190;
-static CGFloat   const kCellContentHeight = 153;
-static CGFloat const kIDPAnimationDuration = 0.55;
+static CGFloat   const kCellDefaultContentWidth = 526;
+static CGFloat   const kIDPAnimationDuration = 0.55;
+static CGFloat   const kIDPCellHeightExeptContent = 97;
 
 @interface IDPMailDetailsViewController ()
 
@@ -62,8 +63,8 @@ static CGFloat const kIDPAnimationDuration = 0.55;
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.myView.scrollView.wantsLayer = YES;
-    self.cellHeightCalculator.cellHeight = 97;
-    self.cellHeightCalculator.cellContentWidth = 500;
+    self.cellHeightCalculator.cellHeight = kIDPCellHeightExeptContent;
+    self.cellHeightCalculator.cellContentWidth = kCellDefaultContentWidth;
     self.myView.cellHeightCalculator = self.cellHeightCalculator;
     NSString *identifier = NSStringFromClass([IDPMailViewCell class]);
     self.objects = [NSMutableArray array];
@@ -159,10 +160,11 @@ static CGFloat const kIDPAnimationDuration = 0.55;
 
 - (void)mailTableView:(IDPMailTableView *)tableView updateCellHeightCalculatorContentWidth:(IDPCellHeightCalculator *)cellHeightCalculator {
     IDPMailViewCell *cell = (IDPMailViewCell *)[tableView.tableView firstVisibleViewCell];
-    cellHeightCalculator.cellContentWidth = kCellContentHeight;
+    CGFloat cellContentWidth = kCellDefaultContentWidth;
     if (cell) {
-        cellHeightCalculator.cellContentWidth = [cell contentWidth];
+        cellContentWidth = [cell contentWidth];
     }
+    cellHeightCalculator.cellContentWidth = cellContentWidth;
 }
 
 - (void)mailTableView:(IDPMailTableView *)tableView didDispalyRowAtIndex:(NSInteger)rowIndex {
